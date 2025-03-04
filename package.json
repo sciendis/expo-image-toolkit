@@ -1,0 +1,48 @@
+{
+  "name": "@sciendis/expo-image-toolkit",
+  "author": "sciendis",
+  "version": "1.0.0",
+  "description": "A reusable Image Editor for React Native projects",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "@expo-google-fonts/poppins": "^0.2.3",
+    "expo": "~51.0.28",
+    "expo-constants": "~16.0.2",
+    "expo-file-system": "^17.0.1",
+    "expo-image-manipulator": "^12.0.5",
+    "expo-image-picker": "^15.0.7",
+    "lucide-react-native": "^0.475.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-gesture-handler": "^2.20.0",
+    "react-native-paper": "^5.12.5",
+    "react-native-reanimated": "~3.10.1"
+  },
+  "devDependencies": {
+    "@types/react": "~18.2.45",
+    "typescript": "~5.3.3"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-native": "^0.74.5",
+    "expo": ">=51.0.0"
+  },
+  "homepage": "https://github.com/sciendis/expo-image-toolkit#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sciendis/expo-image-toolkit"
+  },
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  }
+}
