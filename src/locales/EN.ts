@@ -2,8 +2,8 @@ export const EN = {
   EDITOR_TITLE: "Image editor",
 
   // buttons
-  SET: "done",
-  CANCEL: "cancel",
+  SET: "Done",
+  CANCEL: "Cancel",
 
   // hint
   ROTATE_HINT: "Hint: Rotating the image will reset the zoom.",

@@ -1,10 +1,10 @@
-import { EditorModes } from "@/constants";
-import { useMoveCropFrame, useZoomGesture } from "@/hooks";
 import { Animated } from "react-native";
 import {
   GestureDetector,
   GestureHandlerRootView,
 } from "react-native-gesture-handler";
+import { EditorModes } from "../../constants";
+import { useMoveCropFrame, useZoomGesture } from "../../hooks";
 import { CropFrame } from "../cropFrame";
 import { Hint } from "../hint";
 import { useImageEditorContext } from "../imageEditor/useImageEditorContext";

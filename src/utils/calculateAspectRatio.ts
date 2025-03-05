@@ -1,5 +1,5 @@
-import { LayoutDimensions } from "@/types";
 import * as ImageManipulator from "expo-image-manipulator";
+import { LayoutDimensions } from "../types";
 
 type Props = {
   image: string;

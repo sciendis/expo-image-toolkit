@@ -1,10 +1,10 @@
-import { DefaultLayoutState } from "@/constants";
-import { useMoveRotateRangeBar } from "@/hooks";
-import { Colors } from "@/styles";
-import { LayoutDimensions } from "@/types";
 import { useCallback, useState } from "react";
 import { LayoutChangeEvent, StyleSheet, TextInput, View } from "react-native";
 import Animated, { useSharedValue } from "react-native-reanimated";
+import { DefaultLayoutState } from "../../constants";
+import { useMoveRotateRangeBar } from "../../hooks";
+import { Colors } from "../../styles";
+import { LayoutDimensions } from "../../types";
 
 const AnimatedText = Animated.createAnimatedComponent(TextInput);
 

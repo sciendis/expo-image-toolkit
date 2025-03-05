@@ -1,10 +1,10 @@
+import { StyleSheet, View } from "react-native";
 import {
   useSetInitialPositionCropFrame,
   useSwitchEditor,
   useUpdateImageLayout,
-} from "@/hooks";
-import { Colors } from "@/styles";
-import { StyleSheet, View } from "react-native";
+} from "../../hooks";
+import { Colors } from "../../styles";
 import { ImageEditorContents } from "../imageEditorContents";
 import { ImageEditorHeader } from "../imageEditorHeader";
 import { LoadingIndicator } from "../loadingIndicator";

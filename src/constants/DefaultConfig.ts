@@ -1,5 +1,5 @@
-import { EN } from "@/locales";
-import { Config } from "@/types";
+import { EN } from "../locales";
+import { Config } from "../types";
 
 export const DefaultConfig: Config = {
   locale: "en",
@@ -7,7 +7,6 @@ export const DefaultConfig: Config = {
   maxZoom: 10,
   labels: EN,
   defaultEditor: "CROP",
-  // enableCrop: true,
   enableZoom: true,
   enableRotate: true,
 } as const;

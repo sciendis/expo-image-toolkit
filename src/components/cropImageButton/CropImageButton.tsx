@@ -1,6 +1,6 @@
-import { useCropImage } from "@/hooks";
-import { Colors } from "@/styles";
 import { StyleSheet, TouchableOpacity } from "react-native";
+import { useCropImage } from "../../hooks";
+import { Colors } from "../../styles";
 import { CustomText } from "../customText";
 import { ImageEditorProps } from "../imageEditor/ImageEditor";
 import { useImageEditorContext } from "../imageEditor/useImageEditorContext";

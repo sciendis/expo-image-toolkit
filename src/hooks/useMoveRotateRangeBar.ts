@@ -1,5 +1,3 @@
-import { useImageEditorContext } from "@/components/imageEditor/useImageEditorContext";
-import { LayoutDimensions } from "@/types";
 import { TextInputProps } from "react-native";
 import { Gesture } from "react-native-gesture-handler";
 import {
@@ -11,6 +9,8 @@ import {
   useDerivedValue,
   useSharedValue,
 } from "react-native-reanimated";
+import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
+import { LayoutDimensions } from "../types";
 
 type Props = {
   currentX: SharedValue<number>;

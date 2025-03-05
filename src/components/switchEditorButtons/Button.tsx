@@ -1,7 +1,7 @@
-import { EditorModes } from '@/constants';
-import { Colors } from '@/styles';
-import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import React from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { EditorModes } from "../../constants";
+import { Colors } from "../../styles";
 type Props = {
   activeEditor: EditorModes | null;
   editorName: EditorModes;
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
     width: 55,
     height: 55,
     aspectRatio: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   active: {
     backgroundColor: Colors.lightGrayTransparent,

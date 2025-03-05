@@ -1,10 +1,10 @@
-import { Colors } from '@/styles';
-import { resetZoomState } from '@/utils';
-import { FlipHorizontal, FlipVertical } from 'lucide-react-native';
-import React from 'react';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
-import { Button } from './Button';
-import { withTiming } from 'react-native-reanimated';
+import { FlipHorizontal, FlipVertical } from "lucide-react-native";
+import React from "react";
+import { withTiming } from "react-native-reanimated";
+import { Colors } from "../../styles";
+import { resetZoomState } from "../../utils";
+import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
+import { Button } from "./Button";
 
 export const FlipButtons = function () {
   const { flipX, flipY, zoom, imagePosition } = useImageEditorContext();

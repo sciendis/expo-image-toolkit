@@ -3,11 +3,11 @@ import {
   useResizeFromBottomRight,
   useResizeFromTopLeft,
   useResizeFromTopRight,
-} from '@/hooks/useResizeCropFrame';
-import { Colors } from '@/styles';
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { GestureDetector } from 'react-native-gesture-handler';
+} from "../../hooks/useResizeCropFrame";
+import { Colors } from "../../styles";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { GestureDetector } from "react-native-gesture-handler";
 
 export const Corners = function () {
   const topLeftCornerGesture = useResizeFromTopLeft();
@@ -35,7 +35,7 @@ export const Corners = function () {
 
 const styles = StyleSheet.create({
   corner: {
-    position: 'absolute',
+    position: "absolute",
     height: 45,
     width: 45,
     borderColor: Colors.white,

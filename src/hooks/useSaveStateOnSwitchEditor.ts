@@ -1,11 +1,11 @@
-import { useImageEditorContext } from '@/components/imageEditor/useImageEditorContext';
 import {
   Action,
   FlipType,
   manipulateAsync,
   SaveFormat,
-} from 'expo-image-manipulator';
-import { useCallback } from 'react';
+} from "expo-image-manipulator";
+import { useCallback } from "react";
+import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
 
 export const useSaveStateOnSwitchEditor = function () {
   const { rotate, zoom, image, setImage, setPreviousRotate, flipX, flipY } =
@@ -28,7 +28,7 @@ export const useSaveStateOnSwitchEditor = function () {
         const result = await manipulateAsync(image, actions, format);
         setImage(result.uri);
       } catch (error) {
-        console.error('Error saving rotated image:', error);
+        console.error("Error saving rotated image:", error);
       }
 
       // Reset rest values

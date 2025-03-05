@@ -1,4 +1,4 @@
-import { LayoutDimensions } from "@/types";
+import { LayoutDimensions } from "../types";
 import { calculateAspectRatio } from "./calculateAspectRatio";
 import { calculateOffsets } from "./calculateOffsets";
 

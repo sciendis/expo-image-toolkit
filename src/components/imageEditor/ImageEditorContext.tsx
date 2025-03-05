@@ -1,8 +1,8 @@
-import { EditorModes } from "@/constants";
-import { Config, Dimensions, LayoutDimensions, Position } from "@/types";
 import { createContext, Dispatch, RefObject, SetStateAction } from "react";
 import { View } from "react-native";
 import { SharedValue } from "react-native-reanimated";
+import { EditorModes } from "../../constants";
+import { Config, Dimensions, LayoutDimensions, Position } from "../../types";
 
 type ImageEditorContextType = {
   config: Config;

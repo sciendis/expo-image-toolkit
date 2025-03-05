@@ -1,15 +1,15 @@
-import { ImageEditorProps } from '@/components/imageEditor/ImageEditor';
-import { useImageEditorContext } from '@/components/imageEditor/useImageEditorContext';
-import { calculateImageOffset } from '@/utils';
 import {
   Action,
   ActionCrop,
   FlipType,
   manipulateAsync,
   SaveFormat,
-} from 'expo-image-manipulator';
+} from "expo-image-manipulator";
+import { ImageEditorProps } from "../components/imageEditor/ImageEditor";
+import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
+import { calculateImageOffset } from "../utils";
 
-type Props = Pick<ImageEditorProps, 'onCrop'>;
+type Props = Pick<ImageEditorProps, "onCrop">;
 
 export const useCropImage = function ({ onCrop }: Props) {
   const {
@@ -67,7 +67,7 @@ export const useCropImage = function ({ onCrop }: Props) {
     const relativeY =
       relativeOffsetY / zoom.value - focalOffsetY + relativeScaleY;
 
-    const cropData: ActionCrop['crop'] = {
+    const cropData: ActionCrop["crop"] = {
       originX: relativeX * scaleX,
       originY: relativeY * scaleY,
       width: croppedWidth / zoom.value,
@@ -89,7 +89,7 @@ export const useCropImage = function ({ onCrop }: Props) {
         rotate: rotate.value,
       });
     } catch (error) {
-      console.error('Wrong Crop Data:', error);
+      console.error("Wrong Crop Data:", error);
     }
   };
 

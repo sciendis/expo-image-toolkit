@@ -1,6 +1,6 @@
-import { useImageEditorContext } from '@/components/imageEditor/useImageEditorContext';
-import { calculateImageOffset } from '@/utils';
-import { useEffect } from 'react';
+import { useEffect } from "react";
+import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
+import { calculateImageOffset } from "../utils";
 
 /**
  * Step 3: Calculate CropFrame scale and position based on ImageLayout and
@@ -27,7 +27,7 @@ export const useSetInitialPositionCropFrame = function () {
         }
       );
     } catch (error) {
-      console.error('Failed to calculate image aspect ratio:', error);
+      console.error("Failed to calculate image aspect ratio:", error);
     }
     // Here, I only need to set the scale and position for the first time.
     // The position and scale can change when the user edits the image.

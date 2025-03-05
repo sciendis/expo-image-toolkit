@@ -1,6 +1,6 @@
-import { Colors } from "@/styles";
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
+import { Colors } from "../../styles";
 
 type Props = {
   onPress: () => void;

@@ -1,11 +1,15 @@
-import { Colors } from '@/styles';
-import { getNextLeftAngle, getNextRightAngle, resetZoomState } from '@/utils';
-import { RotateCcw, RotateCw } from 'lucide-react-native';
-import { StyleSheet, View } from 'react-native';
-import { useDerivedValue, withTiming } from 'react-native-reanimated';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
-import { Button } from './Button';
-import { FlipButtons } from './FlipButtons';
+import { RotateCcw, RotateCw } from "lucide-react-native";
+import { StyleSheet, View } from "react-native";
+import { useDerivedValue, withTiming } from "react-native-reanimated";
+import { Colors } from "../../styles";
+import {
+  getNextLeftAngle,
+  getNextRightAngle,
+  resetZoomState,
+} from "../../utils";
+import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
+import { Button } from "./Button";
+import { FlipButtons } from "./FlipButtons";
 
 export const RotateButtons = function () {
   const { rotate, previousRotate, zoom, imagePosition } =
@@ -43,13 +47,13 @@ export const RotateButtons = function () {
 
 export const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     paddingHorizontal: 8,
-    position: 'absolute',
+    position: "absolute",
     bottom: 40,
     left: 0,
-    width: '100%',
-    flexWrap: 'wrap',
+    width: "100%",
+    flexWrap: "wrap",
   },
 });

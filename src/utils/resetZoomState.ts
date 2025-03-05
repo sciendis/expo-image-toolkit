@@ -1,5 +1,5 @@
-import { Position } from "@/types";
 import { SharedValue, withTiming } from "react-native-reanimated";
+import { Position } from "../types";
 
 export const resetZoomState = function (
   zoom: SharedValue<number>,

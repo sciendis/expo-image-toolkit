@@ -1,7 +1,7 @@
-import { Colors } from "@/styles";
-import { getExpoConstants } from "@/utils";
 import { LayoutChangeEvent, StyleSheet, View } from "react-native";
 import { Surface, Title } from "react-native-paper";
+import { Colors } from "../../styles";
+import { getExpoConstants } from "../../utils";
 import { CancelButton } from "../cancelButton";
 import { CropImageButton } from "../cropImageButton";
 import { ImageEditorProps } from "../imageEditor/ImageEditor";
@@ -52,9 +52,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerCenter: {
-    padding: 0,
+    paddingVertical: 0,
     borderRadius: 20,
     backgroundColor: Colors.lightGrayTransparent,
+    flex: 1.5,
   },
   headerRight: {
     alignItems: "flex-end",

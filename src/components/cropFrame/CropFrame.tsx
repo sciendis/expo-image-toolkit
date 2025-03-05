@@ -1,10 +1,10 @@
-import { Colors } from '@/styles';
-import { StyleSheet, View } from 'react-native';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
-import { Aim } from './Aim';
-import { Corners } from './Corners';
-import { ExtraBorders } from './ExtraBorders';
+import { StyleSheet, View } from "react-native";
+import Animated, { useAnimatedStyle } from "react-native-reanimated";
+import { Colors } from "../../styles";
+import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
+import { Aim } from "./Aim";
+import { Corners } from "./Corners";
+import { ExtraBorders } from "./ExtraBorders";
 
 export const CropFrame = function () {
   const { boxPosition, boxScale } = useImageEditorContext();
@@ -34,15 +34,15 @@ export const CropFrame = function () {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
+    position: "absolute",
     borderWidth: 1,
     borderColor: Colors.white,
     backgroundColor: Colors.lightGrayTransparent,
-    pointerEvents: 'box-none',
+    pointerEvents: "box-none",
     opacity: 0,
   },
   box: {
-    height: '100%',
-    width: '100%',
+    height: "100%",
+    width: "100%",
   },
 });

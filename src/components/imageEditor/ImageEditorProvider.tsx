@@ -1,21 +1,21 @@
+import { ReactNode, useRef, useState } from "react";
+import { useSharedValue } from "react-native-reanimated";
 import {
   DefaultConfig,
   DefaultDimensionState,
   DefaultLayoutState,
   DefaultPositionState,
   EditorModes,
-} from "@/constants";
+} from "../../constants";
+import { DE } from "../../locales";
 import {
   Config,
   Dimensions,
   LayoutDimensions,
   Position,
   UserConfig,
-} from "@/types";
-import { ReactNode, useRef, useState } from "react";
-import { useSharedValue } from "react-native-reanimated";
+} from "../../types";
 import { ImageEditorContext } from "./ImageEditorContext";
-import { DE, EN } from "@/locales";
 
 type Props = {
   image: string;
@@ -59,7 +59,12 @@ export const ImageEditorProvider = function ({
   const locale = userConfig?.locale ?? DefaultConfig.locale;
   let labels = { ...DefaultConfig.labels };
   if (locale === "de") labels = { ...DE };
-  const config: Config = { ...DefaultConfig, labels, ...userConfig };
+  const mergedLabels = { ...labels, ...(userConfig?.labels || {}) };
+  const config: Config = {
+    ...DefaultConfig,
+    ...userConfig,
+    labels: mergedLabels,
+  };
 
   const value = {
     config,

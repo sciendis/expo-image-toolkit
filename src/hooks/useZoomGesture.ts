@@ -1,8 +1,8 @@
-import { useImageEditorContext } from "@/components/imageEditor/useImageEditorContext";
-import { Position } from "@/types";
-import { clamp, getBoundingLimitation } from "@/utils";
 import { Gesture } from "react-native-gesture-handler";
 import { useSharedValue, withTiming } from "react-native-reanimated";
+import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
+import { Position } from "../types";
+import { clamp, getBoundingLimitation } from "../utils";
 
 export const useZoomGesture = function () {
   const { zoom, focalPoint, imagePosition, exactImageDimensions, config } =

@@ -1,5 +1,5 @@
-import { Colors } from '@/styles';
-import { ActivityIndicator, Animated, StyleSheet } from 'react-native';
+import { ActivityIndicator, Animated, StyleSheet } from "react-native";
+import { Colors } from "../../styles";
 
 type Props = {
   opacity?: Animated.Value;
@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
   contianer: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: Colors.black,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     zIndex: 1000,
   },
 });

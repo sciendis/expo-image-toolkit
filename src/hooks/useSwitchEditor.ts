@@ -1,6 +1,6 @@
-import { useImageEditorContext } from "@/components/imageEditor/useImageEditorContext";
-import { EditorModes } from "@/constants";
 import { useCallback, useEffect, useState } from "react";
+import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
+import { EditorModes } from "../constants";
 import { useFadeTransition } from "./useFadeTransition";
 import { useSaveStateOnSwitchEditor } from "./useSaveStateOnSwitchEditor";
 

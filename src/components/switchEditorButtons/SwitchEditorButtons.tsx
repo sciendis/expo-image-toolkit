@@ -1,9 +1,9 @@
-import { EditorModes } from "@/constants";
-import { Colors } from "@/styles";
 import { Crop, RotateCcw, ZoomIn } from "lucide-react-native";
 import { StyleSheet, View } from "react-native";
-import { Button } from "./Button";
+import { EditorModes } from "../../constants";
+import { Colors } from "../../styles";
 import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
+import { Button } from "./Button";
 
 type Props = {
   activeEditor: EditorModes | null;

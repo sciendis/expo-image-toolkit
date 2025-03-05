@@ -1,8 +1,8 @@
-import { useImageEditorContext } from "@/components/imageEditor/useImageEditorContext";
-import { CropFrameOffset, DefaultPositionState } from "@/constants";
-import { Position } from "@/types";
 import { Gesture } from "react-native-gesture-handler";
 import { useSharedValue } from "react-native-reanimated";
+import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
+import { CropFrameOffset, DefaultPositionState } from "../constants";
+import { Position } from "../types";
 import { useInitialEditorState } from "./useInitialEditorState";
 
 export const useMoveCropFrame = function () {

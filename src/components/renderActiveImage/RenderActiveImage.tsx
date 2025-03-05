@@ -1,14 +1,14 @@
-import { EditorModes } from '@/constants';
-import { useGetActiveImageStyles, useUpdateImageDimensions } from '@/hooks';
-import { setLayoutDimensions } from '@/utils';
-import { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { useEffect } from "react";
+import { StyleSheet } from "react-native";
 import Animated, {
   useAnimatedReaction,
   useAnimatedStyle,
   useSharedValue,
-} from 'react-native-reanimated';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+} from "react-native-reanimated";
+import { EditorModes } from "../../constants";
+import { useGetActiveImageStyles, useUpdateImageDimensions } from "../../hooks";
+import { setLayoutDimensions } from "../../utils";
+import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
 
 type Props = {
   activeEditor: EditorModes | null;
@@ -75,7 +75,7 @@ export const RenderActiveImage = function ({ activeEditor }: Props) {
   });
 
   const animatedOverflowStyle = useAnimatedStyle(() => ({
-    overflow: isOverflowVisible.value ? 'visible' : 'hidden',
+    overflow: isOverflowVisible.value ? "visible" : "hidden",
   }));
 
   return (
@@ -103,21 +103,21 @@ export const RenderActiveImage = function ({ activeEditor }: Props) {
 const styles = StyleSheet.create({
   container: {
     zIndex: -1,
-    width: '100%',
-    height: '100%',
-    maxHeight: '70%',
+    width: "100%",
+    height: "100%",
+    maxHeight: "70%",
   },
   imageContainer: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   imageMovingContainer: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain',
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
   },
 });

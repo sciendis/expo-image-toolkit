@@ -1,6 +1,3 @@
-import { useImageEditorContext } from "@/components/imageEditor/useImageEditorContext";
-import { LayoutDimensions } from "@/types";
-import { clamp, getBoundingLimitation } from "@/utils";
 import { TextInputProps } from "react-native";
 import { Gesture } from "react-native-gesture-handler";
 import {
@@ -12,6 +9,9 @@ import {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
+import { LayoutDimensions } from "../types";
+import { clamp, getBoundingLimitation } from "../utils";
 
 type Props = {
   currentX: SharedValue<number>;

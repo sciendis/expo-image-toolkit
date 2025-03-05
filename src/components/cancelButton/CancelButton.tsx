@@ -1,5 +1,5 @@
-import { Colors } from "@/styles";
 import { StyleSheet, TouchableOpacity } from "react-native";
+import { Colors } from "../../styles";
 import { CustomText } from "../customText";
 import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
 

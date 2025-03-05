@@ -1,5 +1,5 @@
-import { CropFrameOffset, DefaultCropFrameState } from '@/constants';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
+import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
+import { CropFrameOffset, DefaultCropFrameState } from "../constants";
 
 export const useInitialEditorState = function () {
   const { offset, containerLayout, imageLayout } = useImageEditorContext();

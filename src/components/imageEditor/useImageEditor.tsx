@@ -1,12 +1,12 @@
-import { DefaultDimensionState } from "@/constants";
-import { SavedImageInfo, UserConfig } from "@/types";
+import { useState } from "react";
+import { Modal } from "react-native";
+import { DefaultDimensionState } from "../../constants";
+import { SavedImageInfo, UserConfig } from "../../types";
 import {
   createPickImageLibrary,
   createSaveCroppedImage,
   createTakePhotoCamera,
-} from "@/utils";
-import { useState } from "react";
-import { Modal } from "react-native";
+} from "../../utils";
 import { ImageEditor } from "./ImageEditor";
 
 export const useImageEditor = function (userConfig?: UserConfig) {

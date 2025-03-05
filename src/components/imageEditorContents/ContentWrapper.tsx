@@ -1,6 +1,6 @@
-import { Colors } from '@/styles';
-import React from 'react';
-import { StyleSheet, Animated } from 'react-native';
+import React from "react";
+import { Animated, StyleSheet } from "react-native";
+import { Colors } from "../../styles";
 
 type Props = {
   opacity: Animated.Value;
@@ -18,9 +18,9 @@ export const ContentWrapper = function ({ opacity, children }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: Colors.background,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
 });

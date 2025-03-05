@@ -1,5 +1,5 @@
-import { Colors } from '@/styles';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from "react-native";
+import { Colors } from "../../styles";
 
 export const Aim = function () {
   return (
@@ -13,8 +13,8 @@ export const Aim = function () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   aim: {
     borderRadius: 2,
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   verticalLine: {
     width: 25,
-    position: 'absolute',
+    position: "absolute",
   },
   horizontalLine: {
     height: 25,

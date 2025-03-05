@@ -1,8 +1,8 @@
-import { useImageEditorContext } from "@/components/imageEditor/useImageEditorContext";
-import { DefaultDimensionState } from "@/constants";
-import { Dimensions } from "@/types";
-import { calculateImageOffset } from "@/utils";
 import { useEffect, useState } from "react";
+import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
+import { DefaultDimensionState } from "../constants";
+import { Dimensions } from "../types";
+import { calculateImageOffset } from "../utils";
 
 /**
  * Step 4: Calculate the exact image dimensions to remove the offset around the image.

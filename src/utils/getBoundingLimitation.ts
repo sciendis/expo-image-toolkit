@@ -1,5 +1,5 @@
-import { Dimensions, Position } from "@/types";
 import { SharedValue } from "react-native-reanimated";
+import { Dimensions, Position } from "../types";
 
 export const getBoundingLimitation = function (
   { width, height }: Dimensions,

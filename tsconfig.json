@@ -15,10 +15,7 @@
     "jsx": "react-native",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "isolatedModules": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "isolatedModules": true
   },
   "typeRoots": ["./src/types", "./node_modules/@types"],
   "exclude": ["node_modules", "dist"],
