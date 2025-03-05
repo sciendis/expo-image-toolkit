@@ -1,27 +1,20 @@
-import { DefaultLayoutState } from '@/constants';
-import { useMoveZoomRangeBar } from '@/hooks';
-import { Colors } from '@/styles';
-import React, { useCallback, useState } from 'react';
-import { LayoutChangeEvent, StyleSheet, TextInput, View } from 'react-native';
+import { DefaultLayoutState } from "@/constants";
+import { useMoveZoomRangeBar } from "@/hooks";
+import { Colors } from "@/styles";
+import { LayoutDimensions } from "@/types";
+import React, { useCallback, useState } from "react";
+import { LayoutChangeEvent, StyleSheet, TextInput, View } from "react-native";
 import {
   GestureDetector,
   GestureHandlerRootView,
-} from 'react-native-gesture-handler';
-import Animated, { useSharedValue } from 'react-native-reanimated';
+} from "react-native-gesture-handler";
+import Animated, { useSharedValue } from "react-native-reanimated";
 
 const AnimatedText = Animated.createAnimatedComponent(TextInput);
 
-type ZoomConfig = {
-  minZoom: number;
-  maxZoom: number;
-};
-
-type Props = {
-  zoomConfig: ZoomConfig;
-};
-
-export const ZoomRange = function ({ zoomConfig }: Props) {
-  const [rangeLayout, setRangeLayout] = useState(DefaultLayoutState);
+export const ZoomRange = function () {
+  const [rangeLayout, setRangeLayout] =
+    useState<LayoutDimensions>(DefaultLayoutState);
 
   const currentX = useSharedValue(1);
 
@@ -41,7 +34,7 @@ export const ZoomRange = function ({ zoomConfig }: Props) {
   );
 
   const { moveRangeBar, animatedTextProps, styledRangeAnimated, currentZoom } =
-    useMoveZoomRangeBar({ currentX, rangeLayout, zoomConfig });
+    useMoveZoomRangeBar({ currentX, rangeLayout });
 
   return (
     <View style={styles.container} onLayout={onRangeLayout}>
@@ -63,17 +56,17 @@ export const ZoomRange = function ({ zoomConfig }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    width: '90%',
+    width: "90%",
     height: 20,
     backgroundColor: Colors.secondary,
-    position: 'absolute',
-    bottom: '5%',
-    left: '5%',
+    position: "absolute",
+    bottom: "5%",
+    left: "5%",
     zIndex: 500,
     borderRadius: 20,
   },
   pointer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     width: 20,
@@ -83,15 +76,15 @@ const styles = StyleSheet.create({
     zIndex: 50,
   },
   text: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 25,
     left: -25 + 10, // -35 because of text box width: 70 / 2. 10 is because of the pointer width: 20 / 2
     backgroundColor: Colors.lightGray,
     borderRadius: 100,
-    overflow: 'hidden',
+    overflow: "hidden",
     padding: 4,
     width: 50,
     aspectRatio: 1,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });

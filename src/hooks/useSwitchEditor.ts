@@ -1,8 +1,8 @@
-import { useImageEditorContext } from '@/components/imageEditor/useImageEditorContext';
-import { EditorModes } from '@/constants';
-import { useCallback, useEffect, useState } from 'react';
-import { useFadeTransition } from './useFadeTransition';
-import { useSaveStateOnSwitchEditor } from './useSaveStateOnSwitchEditor';
+import { useImageEditorContext } from "@/components/imageEditor/useImageEditorContext";
+import { EditorModes } from "@/constants";
+import { useCallback, useEffect, useState } from "react";
+import { useFadeTransition } from "./useFadeTransition";
+import { useSaveStateOnSwitchEditor } from "./useSaveStateOnSwitchEditor";
 
 /**
  * Step 1: Switch to CROP editor useEffect after loading the image.
@@ -10,7 +10,8 @@ import { useSaveStateOnSwitchEditor } from './useSaveStateOnSwitchEditor';
  * the loadingIndicator is needed, I used useEffect here.
  */
 export const useSwitchEditor = function () {
-  const { image, setActiveEditor, activeEditor } = useImageEditorContext();
+  const { image, setActiveEditor, activeEditor, config } =
+    useImageEditorContext();
   const saveStateOnSwitchEditor = useSaveStateOnSwitchEditor();
   const { opacity, opacityReverse, fadeOut, fadeIn } = useFadeTransition();
 
@@ -39,7 +40,7 @@ export const useSwitchEditor = function () {
 
   useEffect(() => {
     if (activeEditor !== null) return;
-    switchEditor(EditorModes.CROP);
+    switchEditor(EditorModes[config.defaultEditor]);
   }, [activeEditor, image, switchEditor]);
 
   return { switchEditor, opacity, opacityReverse, isLoading, activeEditor };

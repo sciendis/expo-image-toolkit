@@ -1,15 +1,18 @@
-import { STATIC_TEXTS } from '@/constants';
-import { Colors } from '@/styles';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { CustomText } from '../customText';
+import { Colors } from "@/styles";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { CustomText } from "../customText";
+import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
 
 type Props = {
   onCancel: () => void;
 };
 export const CancelButton = function ({ onCancel }: Props) {
+  const { config } = useImageEditorContext();
+  const { labels } = config;
+
   return (
     <TouchableOpacity onPress={onCancel}>
-      <CustomText style={styles.title}>{STATIC_TEXTS.CANCEL}</CustomText>
+      <CustomText style={styles.title}>{labels.CANCEL}</CustomText>
     </TouchableOpacity>
   );
 };

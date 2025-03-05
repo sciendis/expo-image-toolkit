@@ -13,24 +13,16 @@ import {
   withTiming,
 } from "react-native-reanimated";
 
-type ZoomConfig = {
-  minZoom: number;
-  maxZoom: number;
-};
-
 type Props = {
   currentX: SharedValue<number>;
   rangeLayout: LayoutDimensions;
-  zoomConfig: ZoomConfig;
 };
 
-export const useMoveZoomRangeBar = function ({
-  currentX,
-  rangeLayout,
-  zoomConfig: { minZoom, maxZoom },
-}: Props) {
-  const { zoom, focalPoint, containerLayout, imagePosition } =
+export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }: Props) {
+  const { zoom, focalPoint, containerLayout, imagePosition, config } =
     useImageEditorContext();
+  const { minZoom, maxZoom } = config;
+
   const startX = useSharedValue(0);
 
   const zoomRange = maxZoom - minZoom;

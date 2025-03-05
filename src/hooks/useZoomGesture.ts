@@ -4,16 +4,10 @@ import { clamp, getBoundingLimitation } from "@/utils";
 import { Gesture } from "react-native-gesture-handler";
 import { useSharedValue, withTiming } from "react-native-reanimated";
 
-type ZoomConfig = {
-  minZoom: number;
-  maxZoom: number;
-};
-
-export const useZoomGesture = function (config: ZoomConfig) {
-  const { minZoom, maxZoom } = config;
-
-  const { zoom, focalPoint, imagePosition, exactImageDimensions } =
+export const useZoomGesture = function () {
+  const { zoom, focalPoint, imagePosition, exactImageDimensions, config } =
     useImageEditorContext();
+  const { minZoom, maxZoom } = config;
 
   const prevImagePosition = useSharedValue<Position>({ x: 0, y: 0 });
   const prevZoom = useSharedValue(1);

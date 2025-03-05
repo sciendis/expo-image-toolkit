@@ -27,15 +27,14 @@ You can configure the image editor with the following options:
 
 | Option           | Type         | Default  | Description                                       |
 | ---------------- | ------------ | -------- | ------------------------------------------------- |
-| `minZoom`        | number       | `1.0`    | Minimum zoom level allowed.                       |
-| `maxZoom`        | number       | `10.0`   | Maximum zoom level allowed.                       |
+| `locale`         | `'en'\|'de'` | `'en'`   | Language option                                   |
+| `minZoom`        | number       | `1`      | Minimum zoom level allowed.                       |
+| `maxZoom`        | number       | `10`     | Maximum zoom level allowed.                       |
 | `disabledRotate` | boolean      | false    | Rotate editor can be disabled                     |
 | `disabledZoom`   | boolean      | false    | Zoom editor can be disabled                       |
 | `disabledCrop`   | boolean      | false    | Crop editor can be disabled                       |
 | `defaultEditor`  | string       | `'crop'` | The initial editor when opening the image editor. |
-| `customIcons`    | object       | `{}`     | Custom icons for rotate, flip, and crop buttons.  |
-| `locale`         | `'en'\|'de'` | `'en'`   | Language option                                   |
-| `customTexts`    | object       | `{}`     | Override default texts like "Set" and "Cancel".   |
+| `labels`         | object       | `{}`     | Override default texts like "Set" and "Cancel".   |
 
 ## Usage Example
 

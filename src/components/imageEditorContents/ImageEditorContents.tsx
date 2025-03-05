@@ -1,53 +1,35 @@
-import { EditorModes, HINTS } from '@/constants';
-import { useMoveCropFrame, useZoomGesture } from '@/hooks';
-import { Animated } from 'react-native';
+import { EditorModes } from "@/constants";
+import { useMoveCropFrame, useZoomGesture } from "@/hooks";
+import { Animated } from "react-native";
 import {
   GestureDetector,
   GestureHandlerRootView,
-} from 'react-native-gesture-handler';
-import { CropFrame } from '../cropFrame';
-import { RenderActiveImage } from '../renderActiveImage';
-import { RotateActions } from '../rotateActions';
-import { ZoomRange } from '../zoomRange';
-import { ContentWrapper } from './ContentWrapper';
-import { Hint } from '../hint';
-
-const MIN_ZOOM = 1;
-const MAX_ZOOM = 10;
-
-type ZoomConfig = {
-  minZoom?: number;
-  maxZoom?: number;
-};
+} from "react-native-gesture-handler";
+import { CropFrame } from "../cropFrame";
+import { Hint } from "../hint";
+import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
+import { RenderActiveImage } from "../renderActiveImage";
+import { RotateActions } from "../rotateActions";
+import { ZoomRange } from "../zoomRange";
+import { ContentWrapper } from "./ContentWrapper";
 
 type Props = {
   activeEditor: EditorModes | null;
   opacity: Animated.Value;
-  zoomConfig?: ZoomConfig;
 };
 
-export const ImageEditorContents = function ({
-  activeEditor,
-  opacity,
-  zoomConfig,
-}: Props) {
-  const { minZoom, maxZoom } = {
-    minZoom: MIN_ZOOM,
-    maxZoom: MAX_ZOOM,
-    ...zoomConfig,
-  };
+export const ImageEditorContents = function ({ activeEditor, opacity }: Props) {
+  const { config } = useImageEditorContext();
+  const { labels, enableRotate, enableZoom } = config;
 
   const moveGesture = useMoveCropFrame();
-  const { zoomGesture } = useZoomGesture({
-    minZoom,
-    maxZoom,
-  });
+  const { zoomGesture } = useZoomGesture();
 
-  if (activeEditor === EditorModes.ROTATE) {
+  if (enableRotate && activeEditor === EditorModes.ROTATE) {
     return (
       <>
         <ContentWrapper opacity={opacity}>
-          <Hint message={HINTS.ROTATE} />
+          <Hint message={labels.ROTATE_HINT} />
           <RenderActiveImage activeEditor={activeEditor} />
           <RotateActions />
         </ContentWrapper>
@@ -55,22 +37,22 @@ export const ImageEditorContents = function ({
     );
   }
 
-  if (activeEditor === EditorModes.ZOOM) {
+  if (enableZoom && activeEditor === EditorModes.ZOOM) {
     return (
       <ContentWrapper opacity={opacity}>
-        <Hint message={HINTS.ZOOM} />
+        <Hint message={labels.ZOOM_HINT} />
         <GestureHandlerRootView
           style={{
             flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <GestureDetector gesture={zoomGesture}>
             <RenderActiveImage activeEditor={activeEditor} />
           </GestureDetector>
         </GestureHandlerRootView>
-        <ZoomRange zoomConfig={{ minZoom, maxZoom }} />
+        <ZoomRange />
       </ContentWrapper>
     );
   }

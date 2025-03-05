@@ -1,41 +1,49 @@
-import { Colors } from '@/styles';
-import { getExpoConstants } from '@/utils';
-import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
-import { Surface, Title } from 'react-native-paper';
+import { Colors } from "@/styles";
+import { getExpoConstants } from "@/utils";
+import { LayoutChangeEvent, StyleSheet, View } from "react-native";
+import { Surface, Title } from "react-native-paper";
+import { CancelButton } from "../cancelButton";
+import { CropImageButton } from "../cropImageButton";
+import { ImageEditorProps } from "../imageEditor/ImageEditor";
+import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
 
 type Props = {
-  title: string;
-  headerRight?: JSX.Element;
-  headerLeft?: JSX.Element;
+  onCancel: () => void;
   onLayout?: (event: LayoutChangeEvent) => void;
-};
+} & Pick<ImageEditorProps, "onCrop">;
 
 export const ImageEditorHeader = function ({
-  title,
-  headerLeft,
-  headerRight,
+  onCancel,
+  onCrop,
   onLayout,
 }: Props) {
   const { statusBarHeight } = getExpoConstants();
+  const { config } = useImageEditorContext();
+  const { labels } = config;
+
   return (
     <Surface
       onLayout={onLayout}
       style={[styles.container, { marginTop: statusBarHeight }]}
     >
-      <View style={styles.headerItem}>{headerLeft}</View>
-      <View style={[styles.headerItem, styles.headerCenter]}>
-        <Title style={styles.headerTitle}>{title}</Title>
+      <View style={styles.headerItem}>
+        <CancelButton onCancel={onCancel} />
       </View>
-      <View style={[styles.headerItem, styles.headerRight]}>{headerRight}</View>
+      <View style={[styles.headerItem, styles.headerCenter]}>
+        <Title style={styles.headerTitle}>{labels.EDITOR_TITLE}</Title>
+      </View>
+      <View style={[styles.headerItem, styles.headerRight]}>
+        <CropImageButton onCrop={onCrop} />
+      </View>
     </Surface>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
     backgroundColor: Colors.background,
   },
   headerItem: {
@@ -49,12 +57,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.lightGrayTransparent,
   },
   headerRight: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   headerTitle: {
     color: Colors.white,
     fontSize: 22,
-    fontWeight: '600',
-    textAlign: 'center',
+    fontWeight: "600",
+    textAlign: "center",
   },
 });

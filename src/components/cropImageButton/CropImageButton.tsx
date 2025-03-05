@@ -1,20 +1,20 @@
-import { STATIC_TEXTS } from '@/constants';
-import { useCropImage } from '@/hooks';
-import { Colors } from '@/styles';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { CustomText } from '../customText';
-import { ImageEditorProps } from '../imageEditor/ImageEditor';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { useCropImage } from "@/hooks";
+import { Colors } from "@/styles";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { CustomText } from "../customText";
+import { ImageEditorProps } from "../imageEditor/ImageEditor";
+import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
 
 export const CropImageButton = function ({
   onCrop,
-}: Pick<ImageEditorProps, 'onCrop'>) {
+}: Pick<ImageEditorProps, "onCrop">) {
   const cropImage = useCropImage({ onCrop });
-  const { isSaving } = useImageEditorContext();
+  const { isSaving, config } = useImageEditorContext();
+  const { labels } = config;
 
   return (
     <TouchableOpacity onPress={cropImage} disabled={isSaving}>
-      <CustomText style={styles.title}>{STATIC_TEXTS.SET}</CustomText>
+      <CustomText style={styles.title}>{labels.SET}</CustomText>
     </TouchableOpacity>
   );
 };

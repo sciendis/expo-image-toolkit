@@ -1,14 +1,16 @@
-import { DefaultLayoutState } from '@/constants';
-import { useMoveRotateRangeBar } from '@/hooks';
-import { Colors } from '@/styles';
-import { useCallback, useState } from 'react';
-import { LayoutChangeEvent, StyleSheet, TextInput, View } from 'react-native';
-import Animated, { useSharedValue } from 'react-native-reanimated';
+import { DefaultLayoutState } from "@/constants";
+import { useMoveRotateRangeBar } from "@/hooks";
+import { Colors } from "@/styles";
+import { LayoutDimensions } from "@/types";
+import { useCallback, useState } from "react";
+import { LayoutChangeEvent, StyleSheet, TextInput, View } from "react-native";
+import Animated, { useSharedValue } from "react-native-reanimated";
 
 const AnimatedText = Animated.createAnimatedComponent(TextInput);
 
 export const RotateRange = function () {
-  const [rangeLayout, setRangeLayout] = useState(DefaultLayoutState);
+  const [rangeLayout, setRangeLayout] =
+    useState<LayoutDimensions>(DefaultLayoutState);
 
   const currentX = useSharedValue(0);
 
@@ -46,24 +48,24 @@ export const RotateRange = function () {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
     height: 1,
-    position: 'absolute',
+    position: "absolute",
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
     bottom: 10,
     left: 0,
   },
   text: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     backgroundColor: Colors.lightGray,
     borderRadius: 100,
-    overflow: 'hidden',
+    overflow: "hidden",
     width: 40,
     height: 40,
-    textAlign: 'center',
+    textAlign: "center",
     color: Colors.black,
   },
 });
