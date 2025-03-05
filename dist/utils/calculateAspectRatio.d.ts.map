@@ -1,0 +1,1 @@
+{"version":3,"file":"calculateAspectRatio.d.ts","sourceRoot":"","sources":["../../src/utils/calculateAspectRatio.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,gBAAgB,EAAE,MAAM,UAAU,CAAC;AAE5C,KAAK,KAAK,GAAG;IACX,KAAK,EAAE,MAAM,CAAC;IACd,WAAW,EAAE,gBAAgB,CAAC;CAC/B,CAAC;AAEF,eAAO,MAAM,oBAAoB,4BAG9B,KAAK;;;;;EASP,CAAC"}

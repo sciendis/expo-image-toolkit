@@ -1,0 +1,1 @@
+{"version":3,"file":"calculateImageOffset.d.ts","sourceRoot":"","sources":["../../src/utils/calculateImageOffset.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,gBAAgB,EAAE,MAAM,UAAU,CAAC;AAI5C,MAAM,MAAM,yBAAyB,GAAG;IACtC,KAAK,EAAE,MAAM,CAAC;IACd,WAAW,EAAE,gBAAgB,CAAC;CAC/B,CAAC;AAEF,eAAO,MAAM,oBAAoB,4BAG9B,yBAAyB;;;;;;;EAW3B,CAAC"}
