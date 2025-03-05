@@ -1,5 +1,5 @@
-import { EditorModes } from "@/constants";
-import { EN } from "@/locales";
+import { EditorModes } from "../constants";
+import { EN } from "../locales";
 
 export type Config = {
   locale: "en" | "de";
@@ -7,10 +7,10 @@ export type Config = {
   maxZoom: number;
   enableRotate: boolean;
   enableZoom: boolean;
-  // enableCrop: boolean;
   defaultEditor: keyof typeof EditorModes;
   labels: Record<keyof typeof EN, string>;
-  // customIcons
 };
 
-export type UserConfig = Partial<Config>;
+export type UserConfig = Partial<Omit<Config, "labels">> & {
+  labels?: Partial<Config["labels"]>;
+};
