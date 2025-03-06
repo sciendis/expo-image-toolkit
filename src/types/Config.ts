@@ -3,7 +3,6 @@ import { EN } from "../locales";
 
 export type Config = {
   locale: "en" | "de";
-  minZoom: number;
   maxZoom: number;
   enableRotate: boolean;
   enableZoom: boolean;

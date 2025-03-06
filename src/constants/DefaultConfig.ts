@@ -3,7 +3,6 @@ import { Config } from "../types";
 
 export const DefaultConfig: Config = {
   locale: "en",
-  minZoom: 1,
   maxZoom: 10,
   labels: EN,
   defaultEditor: "CROP",

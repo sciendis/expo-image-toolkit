@@ -9,7 +9,7 @@ import {
 } from "../../utils";
 import { ImageEditor } from "./ImageEditor";
 
-export const useImageEditor = function (userConfig?: UserConfig) {
+export const useExpoImageToolkit = function (userConfig?: UserConfig) {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
   const [showEditor, setShowEditor] = useState(false);
 

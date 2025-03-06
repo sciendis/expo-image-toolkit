@@ -25,16 +25,14 @@ npm install @sciendis/expo-image-toolkit
 
 You can configure the image editor with the following options:
 
-| Option           | Type         | Default  | Description                                       |
-| ---------------- | ------------ | -------- | ------------------------------------------------- |
-| `locale`         | `'en'\|'de'` | `'en'`   | Language option                                   |
-| `minZoom`        | number       | `1`      | Minimum zoom level allowed.                       |
-| `maxZoom`        | number       | `10`     | Maximum zoom level allowed.                       |
-| `disabledRotate` | boolean      | false    | Rotate editor can be disabled                     |
-| `disabledZoom`   | boolean      | false    | Zoom editor can be disabled                       |
-| `disabledCrop`   | boolean      | false    | Crop editor can be disabled                       |
-| `defaultEditor`  | string       | `'crop'` | The initial editor when opening the image editor. |
-| `labels`         | object       | `{}`     | Override default texts like "Set" and "Cancel".   |
+| Option          | Type         | Default  | Description                                       |
+| --------------- | ------------ | -------- | ------------------------------------------------- |
+| `locale`        | `'en'\|'de'` | `'en'`   | Language option                                   |
+| `maxZoom`       | number       | `10`     | Maximum zoom level allowed.                       |
+| `enableRotate`  | boolean      | true     | Rotate editor can be disabled                     |
+| `enableZoom`    | boolean      | true     | Zoom editor can be disabled                       |
+| `defaultEditor` | string       | `'CROP'` | The initial editor when opening the image editor. |
+| `labels`        | object       | `{}`     | Override default texts like "Set" and "Cancel".   |
 
 ## Usage Example
 
@@ -46,7 +44,7 @@ import { Button, Image } from "react-native";
 
 const SelectImageComponent = function () {
   const { ImageEditorModal, pickImage, image, takePhoto, aspectRatio } =
-    useImageEditor();
+    useExpoImageToolkit();
 
   return (
     <>

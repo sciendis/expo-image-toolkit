@@ -5,3 +5,4 @@ export { DefaultDimensionState } from "./DefaultDimensionState";
 export { DefaultLayoutState } from "./DefaultLayoutState";
 export { DefaultPositionState } from "./DefaultPositionState";
 export { EditorModes } from "./EditorModes";
+export { MIN_ZOOM } from "./MinZoom";

@@ -3,11 +3,12 @@ import { useSharedValue, withTiming } from "react-native-reanimated";
 import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
 import { Position } from "../types";
 import { clamp, getBoundingLimitation } from "../utils";
+import { MIN_ZOOM } from "../constants";
 
 export const useZoomGesture = function () {
   const { zoom, focalPoint, imagePosition, exactImageDimensions, config } =
     useImageEditorContext();
-  const { minZoom, maxZoom } = config;
+  const { maxZoom } = config;
 
   const prevImagePosition = useSharedValue<Position>({ x: 0, y: 0 });
   const prevZoom = useSharedValue(1);
@@ -38,7 +39,7 @@ export const useZoomGesture = function () {
     })
     .onUpdate((event) => {
       const newScale = prevZoom.value * event.scale;
-      const newZoom = clamp(newScale, minZoom, maxZoom);
+      const newZoom = clamp(newScale, MIN_ZOOM, maxZoom);
 
       focalPoint.value = {
         x: prevZoom.value === 1 ? event.focalX : prevFocalPoint.value.x,

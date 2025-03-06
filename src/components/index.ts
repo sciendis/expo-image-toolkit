@@ -1,1 +1,1 @@
-export { useImageEditor } from "./imageEditor";
+export { useExpoImageToolkit } from "./imageEditor";

@@ -12,6 +12,7 @@ import {
 import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
 import { LayoutDimensions } from "../types";
 import { clamp, getBoundingLimitation } from "../utils";
+import { MIN_ZOOM } from "../constants";
 
 type Props = {
   currentX: SharedValue<number>;
@@ -21,23 +22,23 @@ type Props = {
 export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }: Props) {
   const { zoom, focalPoint, containerLayout, imagePosition, config } =
     useImageEditorContext();
-  const { minZoom, maxZoom } = config;
+  const { maxZoom } = config;
 
   const startX = useSharedValue(0);
 
-  const zoomRange = maxZoom - minZoom;
+  const zoomRange = maxZoom - MIN_ZOOM;
 
   const pointerWidth = 20;
   const effectiveWidth = rangeLayout.width - pointerWidth;
 
   const calculateZoom = (currentPosition: number) => {
     "worklet";
-    return minZoom + (currentPosition / effectiveWidth) * zoomRange;
+    return MIN_ZOOM + (currentPosition / effectiveWidth) * zoomRange;
   };
 
   const calculatePosition = (currentZoom: number) => {
     "worklet";
-    return ((currentZoom - minZoom) / zoomRange) * effectiveWidth;
+    return ((currentZoom - MIN_ZOOM) / zoomRange) * effectiveWidth;
   };
 
   useAnimatedReaction(
