@@ -19,7 +19,7 @@ export const createTakePhotoCamera = function ({
     }
 
     const result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ['images'],
       allowsEditing: false,
       aspect: [4, 3],
       quality: 1,

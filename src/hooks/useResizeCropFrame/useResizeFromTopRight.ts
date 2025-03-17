@@ -1,9 +1,9 @@
-import { Gesture } from "react-native-gesture-handler";
-import { useSharedValue } from "react-native-reanimated";
-import { useImageEditorContext } from "../../components/imageEditor/useImageEditorContext";
-import { DefaultPositionState } from "../../constants";
-import { Position } from "../../types";
-import { useInitialEditorState } from "../useInitialEditorState";
+import { Gesture } from 'react-native-gesture-handler';
+import { useSharedValue } from 'react-native-reanimated';
+import { useImageEditorContext } from '../../components/imageEditor/useImageEditorContext';
+import { DefaultPositionState } from '../../constants';
+import { Position } from '../../types';
+import { useInitialEditorState } from '../useInitialEditorState';
 
 export const useResizeFromTopRight = () => {
   const { boxPosition, boxScale } = useImageEditorContext();
@@ -14,27 +14,31 @@ export const useResizeFromTopRight = () => {
 
   return Gesture.Pan()
     .onStart(() => {
-      startPosition.value = { ...boxPosition.value };
-      startScale.value = { ...boxScale.value };
+      startPosition.set({ ...boxPosition.get() });
+      startScale.set({ ...boxScale.get() });
     })
     .onUpdate((event) => {
-      const newY = Math.max(startPosition.value.y + event.translationY, minY);
+      const startPosVal = startPosition.get();
+      const startScaleVal = startScale.get();
+      const boxPosVal = boxPosition.get();
+
+      const newY = Math.max(startPosVal.y + event.translationY, minY);
       const newWidth = Math.min(
-        Math.max(startScale.value.x + event.translationX, minWidth),
-        maxX - boxPosition.value.x
+        Math.max(startScaleVal.x + event.translationX, minWidth),
+        maxX - boxPosVal.x
       );
       const newHeight = Math.max(
-        startScale.value.y - (newY - startPosition.value.y),
+        startScaleVal.y - (newY - startPosVal.y),
         minHeight
       );
 
-      boxPosition.value = {
-        x: boxPosition.value.x,
-        y: startPosition.value.y + startScale.value.y - newHeight,
-      };
-      boxScale.value = {
+      boxPosition.set({
+        x: boxPosVal.x,
+        y: startPosVal.y + startScaleVal.y - newHeight,
+      });
+      boxScale.set({
         x: newWidth,
         y: newHeight,
-      };
+      });
     });
 };

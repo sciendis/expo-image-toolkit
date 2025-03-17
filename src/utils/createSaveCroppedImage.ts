@@ -1,6 +1,6 @@
-import * as FileSystem from "expo-file-system";
-import { Dispatch, SetStateAction } from "react";
-import { SavedImageInfo } from "../types";
+import * as FileSystem from 'expo-file-system';
+import { Dispatch, SetStateAction } from 'react';
+import { SavedImageInfo } from '../types';
 
 type Props = {
   setDimensions: Dispatch<SetStateAction<SavedImageInfo>>;

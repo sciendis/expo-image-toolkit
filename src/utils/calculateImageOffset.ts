@@ -1,6 +1,6 @@
-import { LayoutDimensions } from "../types";
-import { calculateAspectRatio } from "./calculateAspectRatio";
-import { calculateOffsets } from "./calculateOffsets";
+import { LayoutDimensions } from '../types';
+import { calculateAspectRatio } from './calculateAspectRatio';
+import { calculateOffsets } from './calculateOffsets';
 
 export type CalculateImageOffsetProps = {
   image: string;

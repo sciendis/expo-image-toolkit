@@ -1,21 +1,21 @@
-import { ReactNode, useRef, useState } from "react";
-import { useSharedValue } from "react-native-reanimated";
+import { ReactNode, useRef, useState } from 'react';
+import { useSharedValue } from 'react-native-reanimated';
 import {
   DefaultConfig,
   DefaultDimensionState,
   DefaultLayoutState,
   DefaultPositionState,
   EditorModes,
-} from "../../constants";
-import { DE } from "../../locales";
+} from '../../constants';
+import { DE } from '../../locales';
 import {
   Config,
   Dimensions,
   LayoutDimensions,
   Position,
   UserConfig,
-} from "../../types";
-import { ImageEditorContext } from "./ImageEditorContext";
+} from '../../types';
+import { ImageEditorContext } from './ImageEditorContext';
 
 type Props = {
   image: string;
@@ -28,14 +28,16 @@ export const ImageEditorProvider = function ({
   userConfig,
   children,
 }: Props) {
+  const initialBoxPosition = useSharedValue<Position>(DefaultPositionState);
+  const initialBoxScale = useSharedValue<Position>(DefaultPositionState);
   const boxScale = useSharedValue<Position>(DefaultPositionState);
   const boxPosition = useSharedValue<Position>(DefaultPositionState);
   const zoom = useSharedValue(1);
   const rotate = useSharedValue(0);
   const flipX = useSharedValue(0);
   const flipY = useSharedValue(0);
-  const focalPoint = useSharedValue<Position>({ x: 0, y: 0 });
-  const imagePosition = useSharedValue<Position>({ x: 0, y: 0 });
+  const focalPoint = useSharedValue<Position>(DefaultPositionState);
+  const imagePosition = useSharedValue<Position>(DefaultPositionState);
 
   const [offset, setOffset] = useState<Position>(DefaultPositionState);
   const [image, setImage] = useState(initialImage);
@@ -56,14 +58,23 @@ export const ImageEditorProvider = function ({
     DefaultDimensionState
   );
 
+  // locales
   const locale = userConfig?.locale ?? DefaultConfig.locale;
   let labels = { ...DefaultConfig.labels };
-  if (locale === "de") labels = { ...DE };
+  if (locale === 'de') labels = { ...DE };
   const mergedLabels = { ...labels, ...(userConfig?.labels || {}) };
+
+  // colors
+  const mergedColors = {
+    ...DefaultConfig.colors,
+    ...(userConfig?.colors || {}),
+  };
+
   const config: Config = {
     ...DefaultConfig,
     ...userConfig,
     labels: mergedLabels,
+    colors: mergedColors,
   };
 
   const value = {
@@ -71,6 +82,8 @@ export const ImageEditorProvider = function ({
     image,
     setImage,
     imageRef,
+    initialBoxScale,
+    initialBoxPosition,
     boxScale,
     boxPosition,
     rotate,

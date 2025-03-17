@@ -1,9 +1,9 @@
-import { Crop, RotateCcw, ZoomIn } from "lucide-react-native";
-import { StyleSheet, View } from "react-native";
-import { EditorModes } from "../../constants";
-import { Colors } from "../../styles";
-import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
-import { Button } from "./Button";
+import { Crop, ZoomIn } from 'lucide-react-native';
+import { StyleSheet, View } from 'react-native';
+import { EditorModes } from '../../constants';
+import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { Button } from './Button';
+import { RotateIcon } from './RotateIcon';
 
 type Props = {
   activeEditor: EditorModes | null;
@@ -14,33 +14,37 @@ export const SwitchEditorButtons = function ({
   activeEditor,
   switchEditor,
 }: Props) {
-  const { config } = useImageEditorContext();
+  const {
+    config: { enableRotate, enableZoom, colors },
+  } = useImageEditorContext();
 
   return (
     <View style={stylesScreens.container}>
-      <Button
-        activeEditor={activeEditor}
-        switchEditor={switchEditor}
-        editorName={EditorModes.CROP}
-      >
-        <Crop color={Colors.white} />
-      </Button>
-      {config.enableZoom && (
-        <Button
-          activeEditor={activeEditor}
-          switchEditor={switchEditor}
-          editorName={EditorModes.ZOOM}
-        >
-          <ZoomIn color={Colors.white} />
-        </Button>
-      )}
-      {config.enableRotate && (
+      {enableRotate && (
         <Button
           activeEditor={activeEditor}
           switchEditor={switchEditor}
           editorName={EditorModes.ROTATE}
         >
-          <RotateCcw color={Colors.white} />
+          <RotateIcon />
+        </Button>
+      )}
+      {enableZoom && (
+        <Button
+          activeEditor={activeEditor}
+          switchEditor={switchEditor}
+          editorName={EditorModes.ZOOM}
+        >
+          <ZoomIn color={colors.switchEditorIcon} />
+        </Button>
+      )}
+      {(enableRotate || enableZoom) && (
+        <Button
+          activeEditor={activeEditor}
+          switchEditor={switchEditor}
+          editorName={EditorModes.CROP}
+        >
+          <Crop color={colors.switchEditorIcon} />
         </Button>
       )}
     </View>
@@ -49,11 +53,11 @@ export const SwitchEditorButtons = function ({
 
 const stylesScreens = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 2,
-    position: "relative",
-    width: "100%",
-    justifyContent: "space-evenly",
+    position: 'relative',
+    width: '100%',
+    justifyContent: 'space-evenly',
     marginBottom: 20,
   },
 });

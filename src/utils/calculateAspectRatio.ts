@@ -1,5 +1,5 @@
-import * as ImageManipulator from "expo-image-manipulator";
-import { LayoutDimensions } from "../types";
+import { Image } from 'react-native';
+import { Dimensions, LayoutDimensions } from '../types';
 
 type Props = {
   image: string;
@@ -10,8 +10,8 @@ export const calculateAspectRatio = async function ({
   image,
   imageLayout,
 }: Props) {
-  const { width, height } = await ImageManipulator.manipulateAsync(image, [], {
-    base64: false,
+  const { width, height } = await new Promise<Dimensions>((resolve, reject) => {
+    Image.getSize(image, (width, height) => resolve({ width, height }), reject);
   });
 
   const imageAspectRatio = width / height;

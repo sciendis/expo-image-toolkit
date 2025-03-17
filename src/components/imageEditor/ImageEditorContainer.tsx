@@ -1,38 +1,49 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View } from 'react-native';
 import {
   useSetInitialPositionCropFrame,
   useSwitchEditor,
   useUpdateImageLayout,
-} from "../../hooks";
-import { Colors } from "../../styles";
-import { ImageEditorContents } from "../imageEditorContents";
-import { ImageEditorHeader } from "../imageEditorHeader";
-import { LoadingIndicator } from "../loadingIndicator";
-import { SwitchEditorButtons } from "../switchEditorButtons";
-import { ImageEditorProps } from "./ImageEditor";
-import { useImageEditorContext } from "./useImageEditorContext";
+} from '../../hooks';
+import { CropAlert } from '../cropAlert';
+import { ImageEditorContents } from '../imageEditorContents';
+import { ImageEditorHeader } from '../imageEditorHeader';
+import { LoadingIndicator } from '../loadingIndicator';
+import { SwitchEditorButtons } from '../switchEditorButtons';
+import { ImageEditorProps } from './ImageEditor';
+import { useImageEditorContext } from './useImageEditorContext';
 
 export const ImageEditorContainer = function ({
   onCancel,
   onCrop,
-}: Pick<ImageEditorProps, "onCrop" | "onCancel">) {
-  const { switchEditor, opacity, opacityReverse, isLoading, activeEditor } =
-    useSwitchEditor();
-  const { isSaving } = useImageEditorContext();
+}: Pick<ImageEditorProps, 'onCrop' | 'onCancel'>) {
+  const {
+    switchEditor,
+    opacity,
+    opacityReverse,
+    isLoading,
+    activeEditor,
+    showAlert,
+    handleAlertResponse,
+  } = useSwitchEditor();
+  const {
+    isSaving,
+    config: { colors },
+  } = useImageEditorContext();
+  const colorStylesContainer = { backgroundColor: colors.background };
 
   useSetInitialPositionCropFrame();
   useUpdateImageLayout();
 
   if (isSaving) {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, colorStylesContainer]}>
         <LoadingIndicator />
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, colorStylesContainer]}>
       {(isLoading || activeEditor === null) && (
         <LoadingIndicator opacity={opacityReverse} /> // This loading must be here to load indicator while other things being loaded
       )}
@@ -42,14 +53,17 @@ export const ImageEditorContainer = function ({
         activeEditor={activeEditor}
         switchEditor={switchEditor}
       />
+      <CropAlert
+        showAlert={showAlert}
+        handleAlertResponse={handleAlertResponse}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
+    position: 'relative',
     flex: 1,
-    backgroundColor: Colors.background,
   },
 });

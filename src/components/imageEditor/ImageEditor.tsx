@@ -1,9 +1,9 @@
-import { Poppins_400Regular, useFonts } from "@expo-google-fonts/poppins";
-import React from "react";
-import { UserConfig } from "../../types";
-import { SaveCroppedImageProps } from "../../utils";
-import { ImageEditorContainer } from "./ImageEditorContainer";
-import { ImageEditorProvider } from "./ImageEditorProvider";
+import { Poppins_400Regular, useFonts } from '@expo-google-fonts/poppins';
+import React from 'react';
+import { UserConfig } from '../../types';
+import { SaveCroppedImageProps } from '../../utils';
+import { ImageEditorContainer } from './ImageEditorContainer';
+import { ImageEditorProvider } from './ImageEditorProvider';
 
 export type ImageEditorProps = {
   image: string | null;

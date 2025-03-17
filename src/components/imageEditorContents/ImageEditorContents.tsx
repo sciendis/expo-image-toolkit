@@ -1,17 +1,17 @@
-import { Animated } from "react-native";
+import { Animated } from 'react-native';
 import {
   GestureDetector,
   GestureHandlerRootView,
-} from "react-native-gesture-handler";
-import { EditorModes } from "../../constants";
-import { useMoveCropFrame, useZoomGesture } from "../../hooks";
-import { CropFrame } from "../cropFrame";
-import { Hint } from "../hint";
-import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
-import { RenderActiveImage } from "../renderActiveImage";
-import { RotateActions } from "../rotateActions";
-import { ZoomRange } from "../zoomRange";
-import { ContentWrapper } from "./ContentWrapper";
+} from 'react-native-gesture-handler';
+import { EditorModes } from '../../constants';
+import { useMoveCropFrame, useZoomGesture } from '../../hooks';
+import { CropFrame } from '../cropFrame';
+import { Hint } from '../hint';
+import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { RenderActiveImage } from '../renderActiveImage';
+import { RotateActions } from '../rotateActions';
+import { ZoomRange } from '../zoomRange';
+import { ContentWrapper } from './ContentWrapper';
 
 type Props = {
   activeEditor: EditorModes | null;
@@ -27,13 +27,11 @@ export const ImageEditorContents = function ({ activeEditor, opacity }: Props) {
 
   if (enableRotate && activeEditor === EditorModes.ROTATE) {
     return (
-      <>
-        <ContentWrapper opacity={opacity}>
-          <Hint message={labels.ROTATE_HINT} />
-          <RenderActiveImage activeEditor={activeEditor} />
-          <RotateActions />
-        </ContentWrapper>
-      </>
+      <ContentWrapper opacity={opacity}>
+        <Hint message={labels.ROTATE_HINT} />
+        <RenderActiveImage activeEditor={activeEditor} />
+        <RotateActions />
+      </ContentWrapper>
     );
   }
 
@@ -44,8 +42,8 @@ export const ImageEditorContents = function ({ activeEditor, opacity }: Props) {
         <GestureHandlerRootView
           style={{
             flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <GestureDetector gesture={zoomGesture}>

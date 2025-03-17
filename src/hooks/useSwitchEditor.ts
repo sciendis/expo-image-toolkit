@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
-import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
-import { EditorModes } from "../constants";
-import { useFadeTransition } from "./useFadeTransition";
-import { useSaveStateOnSwitchEditor } from "./useSaveStateOnSwitchEditor";
+import { useCallback, useRef, useState } from 'react';
+import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
+import { EditorModes } from '../constants';
+import { useSetInitialEditor } from '../utils';
+import { useFadeTransition } from './useFadeTransition';
+import { useSaveStateOnSwitch } from './useSaveStateOnSwitch';
 
 /**
  * Step 1: Switch to CROP editor useEffect after loading the image.
@@ -10,12 +11,33 @@ import { useSaveStateOnSwitchEditor } from "./useSaveStateOnSwitchEditor";
  * the loadingIndicator is needed, I used useEffect here.
  */
 export const useSwitchEditor = function () {
-  const { image, setActiveEditor, activeEditor, config } =
-    useImageEditorContext();
-  const saveStateOnSwitchEditor = useSaveStateOnSwitchEditor();
+  const { setActiveEditor, activeEditor } = useImageEditorContext();
+  const { saveStateOnSwitch } = useSaveStateOnSwitch();
   const { opacity, opacityReverse, fadeOut, fadeIn } = useFadeTransition();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [pendingEditor, setPendingEditor] = useState<EditorModes | null>(null); // Store the next editor
+  const [showAlert, setShowAlert] = useState(false);
+
+  const initRender = useRef(false);
+
+  // continue the editor switch
+  const performSwitch = useCallback(
+    async (mode: EditorModes, needsTimeout?: boolean) => {
+      if (activeEditor === null && initRender.current) return;
+      initRender.current = true;
+
+      if (activeEditor === null || needsTimeout) {
+        await new Promise<void>((resolve) =>
+          requestAnimationFrame(() => setTimeout(resolve, 200))
+        );
+      }
+      setActiveEditor(mode);
+      await fadeIn(1000);
+      setIsLoading(false);
+    },
+    [activeEditor, setActiveEditor, fadeIn]
+  );
 
   const switchEditor = useCallback(
     async (mode: EditorModes) => {
@@ -23,25 +45,51 @@ export const useSwitchEditor = function () {
 
       setIsLoading(true);
       await fadeOut();
-      setActiveEditor(mode);
 
-      const needTimeout = await saveStateOnSwitchEditor();
-      if (needTimeout || activeEditor === null) {
-        await new Promise<void>((resolve) =>
-          requestAnimationFrame(() => setTimeout(resolve, 200))
-        );
+      // Check if we need to save state and show an alert
+      // pass boxPositin and boxScale rather than using from appContext to avoid re-rendering
+      const { needsConfirmation, needsTimeout } =
+        await saveStateOnSwitch(activeEditor);
+      if (needsConfirmation && activeEditor === EditorModes.CROP) {
+        // Pause switching and show alert
+        setPendingEditor(mode); // Save the intended editor
+        setShowAlert(true);
+        setIsLoading(false); // Stop loading while alert is shown
+        return;
       }
 
-      await fadeIn(1000);
-      setIsLoading(false);
+      // No alert needed
+      await performSwitch(mode, needsTimeout);
     },
-    [activeEditor, fadeOut, setActiveEditor, saveStateOnSwitchEditor, fadeIn]
+    [activeEditor, fadeOut, saveStateOnSwitch, performSwitch]
   );
 
-  useEffect(() => {
-    if (activeEditor !== null) return;
-    switchEditor(EditorModes[config.defaultEditor]);
-  }, [activeEditor, image, switchEditor]);
+  // alert confirmation
+  const handleAlertResponse = useCallback(
+    async (shouldCrop: boolean) => {
+      setShowAlert(false);
 
-  return { switchEditor, opacity, opacityReverse, isLoading, activeEditor };
+      if (!pendingEditor) return;
+      setIsLoading(true);
+      await fadeOut();
+      if (shouldCrop) {
+        await saveStateOnSwitch(activeEditor, true); // should crop
+      }
+      await performSwitch(pendingEditor);
+      setPendingEditor(null);
+    },
+    [pendingEditor, saveStateOnSwitch, activeEditor, performSwitch, fadeOut]
+  );
+
+  useSetInitialEditor(switchEditor);
+
+  return {
+    switchEditor,
+    opacity,
+    opacityReverse,
+    isLoading,
+    activeEditor,
+    showAlert,
+    handleAlertResponse,
+  };
 };

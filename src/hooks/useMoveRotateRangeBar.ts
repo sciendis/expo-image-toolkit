@@ -1,5 +1,5 @@
-import { TextInputProps } from "react-native";
-import { Gesture } from "react-native-gesture-handler";
+import { TextInputProps } from 'react-native';
+import { Gesture } from 'react-native-gesture-handler';
 import {
   AnimatedProps,
   SharedValue,
@@ -8,9 +8,9 @@ import {
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
-} from "react-native-reanimated";
-import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
-import { LayoutDimensions } from "../types";
+} from 'react-native-reanimated';
+import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
+import { LayoutDimensions } from '../types';
 
 type Props = {
   currentX: SharedValue<number>;
@@ -25,39 +25,45 @@ export const useMoveRotateRangeBar = function ({
   const startX = useSharedValue(0);
 
   const calculateRotate = (currentPosition: number, totalWidth: number) => {
-    "worklet";
+    'worklet';
     return Math.round((currentPosition / totalWidth) * 360);
   };
 
   const totalRotation = useDerivedValue(() => {
-    return previousRotate + rotate.value;
+    return previousRotate + rotate.get();
   });
 
   useAnimatedReaction(
-    () => totalRotation.value,
+    () => totalRotation.get(),
     (total) => {
-      currentX.value = (total / 360) * rangeLayout.width;
+      currentX.set((total / 360) * rangeLayout.width);
     }
   );
 
   const moveRangeBar = Gesture.Pan()
-    .onBegin(() => (startX.value = currentX.value))
+    .onBegin(() => startX.set(currentX.get()))
     .onUpdate((e) => {
-      const newX = startX.value + e.translationX;
+      const newX = startX.get() + e.translationX;
       const minX = Math.max(newX, 0);
-      currentX.value = Math.min(minX, rangeLayout.width);
+      currentX.set(Math.min(minX, rangeLayout.width));
 
-      const newRotation = calculateRotate(currentX.value, rangeLayout.width);
-      rotate.value = newRotation - previousRotate;
+      const newRotation = calculateRotate(currentX.get(), rangeLayout.width);
+      rotate.set(newRotation - previousRotate);
     });
 
-  const styledRangeAnimated = useAnimatedStyle(() => ({
-    left: currentX.value,
-  }));
+  const styledRangeAnimated = useAnimatedStyle(() => {
+    'worklet';
+    return {
+      left: currentX.get(),
+    };
+  });
 
-  const animatedTextProps = useAnimatedProps(() => ({
-    text: `${Math.round(totalRotation.value)}°`,
-  }));
+  const animatedTextProps = useAnimatedProps(() => {
+    'worklet';
+    return {
+      text: `${Math.round(totalRotation.get())}°`,
+    };
+  });
 
   return {
     moveRangeBar,
@@ -65,6 +71,6 @@ export const useMoveRotateRangeBar = function ({
     animatedTextProps: animatedTextProps as Partial<
       AnimatedProps<TextInputProps>
     >,
-    currentAngle: totalRotation.value,
+    currentAngle: totalRotation,
   };
 };

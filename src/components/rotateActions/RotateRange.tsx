@@ -1,45 +1,38 @@
-import { useCallback, useState } from "react";
-import { LayoutChangeEvent, StyleSheet, TextInput, View } from "react-native";
-import Animated, { useSharedValue } from "react-native-reanimated";
-import { DefaultLayoutState } from "../../constants";
-import { useMoveRotateRangeBar } from "../../hooks";
-import { Colors } from "../../styles";
-import { LayoutDimensions } from "../../types";
+import { useEffect, useState } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
+import Animated, { useSharedValue } from 'react-native-reanimated';
+import { useMoveRotateRangeBar, useSetViewLayout } from '../../hooks';
+import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 
 const AnimatedText = Animated.createAnimatedComponent(TextInput);
 
 export const RotateRange = function () {
-  const [rangeLayout, setRangeLayout] =
-    useState<LayoutDimensions>(DefaultLayoutState);
+  const {
+    config: { colors },
+  } = useImageEditorContext();
+  const colorStyles = {
+    backgroundColor: colors.rotateAngleBg,
+    color: colors.rotateAngleText,
+  };
 
   const currentX = useSharedValue(0);
 
-  const onRangeLayout = useCallback(
-    (event: LayoutChangeEvent) => {
-      const { layout } = event.nativeEvent;
-      if (
-        rangeLayout.x !== layout.x ||
-        rangeLayout.y !== layout.y ||
-        rangeLayout.width !== layout.width ||
-        rangeLayout.height !== layout.height
-      ) {
-        setRangeLayout(layout);
-      }
-    },
-    [rangeLayout]
-  );
+  const [rangeLayout, onRangeLayout] = useSetViewLayout();
 
   const { animatedTextProps, currentAngle } = useMoveRotateRangeBar({
     currentX,
     rangeLayout,
   });
 
+  const [currentAngleValue, setCurrentAngleValue] = useState(0);
+  useEffect(() => setCurrentAngleValue(currentAngle.get()), [currentAngle]);
+
   return (
     <View style={styles.container} onLayout={onRangeLayout}>
       <AnimatedText
         animatedProps={animatedTextProps}
-        style={styles.text}
-        value={`${currentAngle}°`}
+        style={[styles.text, colorStyles]}
+        value={`${currentAngleValue}°`}
         editable={false}
       />
     </View>
@@ -48,24 +41,22 @@ export const RotateRange = function () {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: '100%',
     height: 1,
-    position: "absolute",
+    position: 'absolute',
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
     bottom: 10,
     left: 0,
   },
   text: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
-    backgroundColor: Colors.lightGray,
     borderRadius: 100,
-    overflow: "hidden",
+    overflow: 'hidden',
     width: 40,
     height: 40,
-    textAlign: "center",
-    color: Colors.black,
+    textAlign: 'center',
   },
 });

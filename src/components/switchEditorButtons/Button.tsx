@@ -1,7 +1,7 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { EditorModes } from "../../constants";
-import { Colors } from "../../styles";
+import React from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { EditorModes } from '../../constants';
+import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 type Props = {
   activeEditor: EditorModes | null;
   editorName: EditorModes;
@@ -15,9 +15,19 @@ export const Button = function ({
   switchEditor,
   children,
 }: Props) {
+  const {
+    config: { colors },
+  } = useImageEditorContext();
+
   return (
     <TouchableOpacity
-      style={[styles.container, activeEditor === editorName && styles.active]}
+      style={[
+        styles.container,
+        { backgroundColor: colors.switchEditorIconBg },
+        activeEditor === editorName && {
+          backgroundColor: colors.switchEditorIconActive,
+        },
+      ]}
       onPress={() => switchEditor(editorName)}
     >
       {children}
@@ -27,15 +37,11 @@ export const Button = function ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.black,
     borderRadius: 100,
     width: 55,
     height: 55,
     aspectRatio: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  active: {
-    backgroundColor: Colors.lightGrayTransparent,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

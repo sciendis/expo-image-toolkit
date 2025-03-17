@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { Modal } from "react-native";
-import { DefaultDimensionState } from "../../constants";
-import { SavedImageInfo, UserConfig } from "../../types";
+import { useState } from 'react';
+import { Modal } from 'react-native';
+import { DefaultDimensionState } from '../../constants';
+import { SavedImageInfo, UserConfig } from '../../types';
 import {
   createPickImageLibrary,
   createSaveCroppedImage,
   createTakePhotoCamera,
-} from "../../utils";
-import { ImageEditor } from "./ImageEditor";
+} from '../../utils';
+import { ImageEditor } from './ImageEditor';
 
 export const useExpoImageToolkit = function (userConfig?: UserConfig) {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
@@ -40,21 +40,12 @@ export const useExpoImageToolkit = function (userConfig?: UserConfig) {
     </Modal>
   );
 
-  const calcAspectRatio = () => {
-    const { width, height, rotate } = dimensions;
-
-    const croppedDimensions = {
-      width: (rotate % 180 === 90 ? height : width) || 150,
-      height: (rotate % 180 === 90 ? width : height) || 150,
-    };
-    return croppedDimensions.width / croppedDimensions.height;
+  const { width, height, rotate } = dimensions;
+  const croppedDimensions = {
+    width: (rotate % 180 === 90 ? height : width) || 150,
+    height: (rotate % 180 === 90 ? width : height) || 150,
   };
+  const aspectRatio = croppedDimensions.width / croppedDimensions.height;
 
-  return {
-    pickImage,
-    image,
-    aspectRatio: calcAspectRatio(),
-    ImageEditorModal,
-    takePhoto,
-  };
+  return { pickImage, image, aspectRatio, ImageEditorModal, takePhoto };
 };

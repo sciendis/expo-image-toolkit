@@ -1,6 +1,6 @@
-import { useMemo } from "react";
-import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
-import { Dimensions } from "../types";
+import { useMemo } from 'react';
+import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
+import { Dimensions } from '../types';
 
 export const useGetActiveImageStyles = function (imageDimensions: Dimensions) {
   const { imageLayout, containerLayout } = useImageEditorContext();
@@ -19,9 +19,9 @@ export const useGetActiveImageStyles = function (imageDimensions: Dimensions) {
     const centerX = width / 2;
     const centerY = height / 2;
 
-    const exactImageDimensions = isImageLoaded ? { width, height } : null; // check isImageLoaded again to make sure width and height belong to activeImageDimensions
+    const calculatedImageDimensions = isImageLoaded ? { width, height } : null; // check isImageLoaded again to make sure width and height belong to activeImageDimensions
 
-    return { top, left, centerX, centerY, exactImageDimensions };
+    return { top, left, centerX, centerY, calculatedImageDimensions };
   }, [imageDimensions, containerLayout, imageLayout, isImageLoaded]);
 
   return dimensions;

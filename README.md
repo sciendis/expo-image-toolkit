@@ -25,22 +25,23 @@ npm install @sciendis/expo-image-toolkit
 
 You can configure the image editor with the following options:
 
-| Option          | Type         | Default  | Description                                       |
-| --------------- | ------------ | -------- | ------------------------------------------------- |
-| `locale`        | `'en'\|'de'` | `'en'`   | Language option                                   |
-| `maxZoom`       | number       | `10`     | Maximum zoom level allowed.                       |
-| `enableRotate`  | boolean      | true     | Rotate editor can be disabled                     |
-| `enableZoom`    | boolean      | true     | Zoom editor can be disabled                       |
-| `defaultEditor` | string       | `'CROP'` | The initial editor when opening the image editor. |
-| `labels`        | object       | `{}`     | Override default texts like "Set" and "Cancel".   |
+| Option          | Type         | Default    | Description                                       |
+| --------------- | ------------ | ---------- | ------------------------------------------------- |
+| `locale`        | `'en'\|'de'` | `'en'`     | Language option                                   |
+| `maxZoom`       | number       | `10`       | Maximum zoom level allowed.                       |
+| `enableRotate`  | boolean      | true       | Rotate editor can be disabled                     |
+| `enableZoom`    | boolean      | true       | Zoom editor can be disabled                       |
+| `defaultEditor` | string       | `'ROTATE'` | The initial editor when opening the image editor. |
+| `labels`        | object       | `{}`       | Override default texts like "Set" and "Cancel".   |
+| `colors`        | object       | `{}`       | Override default colors like "background".        |
 
 ## Usage Example
 
 ### Basic Usage
 
 ```tsx
-import { useImageEditor } from "expo-image-toolkit";
-import { Button, Image } from "react-native";
+import { useExpoImageToolkit } from '@sciendis/expo-image-toolkit';
+import { Button, Image } from 'react-native';
 
 const SelectImageComponent = function () {
   const { ImageEditorModal, pickImage, image, takePhoto, aspectRatio } =
@@ -54,7 +55,7 @@ const SelectImageComponent = function () {
         <Image
           style={styles.image}
           source={{ uri: image }}
-          resizeMode={isDefault ? "cover" : "contain"}
+          resizeMode={isDefault ? 'cover' : 'contain'}
         />
       </View>
       <ImageEditorModal />
@@ -65,17 +66,17 @@ const SelectImageComponent = function () {
 const styles = StyleSheet.create({
   imageContainer: {
     borderWidth: 1,
-    width: "100%",
-    maxHeight: "50%",
+    width: '100%',
+    maxHeight: '50%',
     shadowOffset: { width: 2, height: 2 },
-    shadowColor: Colors.black,
+    shadowColor: '#333333',
     shadowOpacity: 0.5,
     borderRadius: 10,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   image: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
 });
 ```

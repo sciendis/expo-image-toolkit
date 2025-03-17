@@ -1,11 +1,13 @@
-import { EN } from "../locales";
-import { Config } from "../types";
+import { EN } from '../locales';
+import { Colors } from '../styles';
+import { Config } from '../types';
 
 export const DefaultConfig: Config = {
-  locale: "en",
+  locale: 'en',
   maxZoom: 10,
   labels: EN,
-  defaultEditor: "CROP",
+  defaultEditor: 'ROTATE',
   enableZoom: true,
   enableRotate: true,
+  colors: Colors,
 } as const;
