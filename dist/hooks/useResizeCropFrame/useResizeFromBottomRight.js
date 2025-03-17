@@ -1,25 +1,25 @@
-import { Gesture } from "react-native-gesture-handler";
-import { useSharedValue } from "react-native-reanimated";
-import { useImageEditorContext } from "../../components/imageEditor/useImageEditorContext";
-import { CropFrameOffset } from "../../constants";
-import { useInitialEditorState } from "../useInitialEditorState";
+import { Gesture } from 'react-native-gesture-handler';
+import { useSharedValue } from 'react-native-reanimated';
+import { useImageEditorContext } from '../../components/imageEditor/useImageEditorContext';
+import { CropFrameOffset, DefaultPositionState } from '../../constants';
+import { useInitialEditorState } from '../useInitialEditorState';
 export const useResizeFromBottomRight = function () {
     const { boxPosition, boxScale } = useImageEditorContext();
     const { minWidth, minHeight, maxX, maxY } = useInitialEditorState();
-    const bottomRight = useSharedValue(Object.assign({}, boxScale.value));
+    const bottomRight = useSharedValue(DefaultPositionState);
     return Gesture.Pan()
-        .onBegin(() => {
-        bottomRight.value = boxScale.value;
-    })
+        .onBegin(() => bottomRight.set(boxScale.get()))
         .onUpdate((e) => {
-        const newWidth = bottomRight.value.x + e.translationX;
-        const newHeight = bottomRight.value.y + e.translationY;
+        const bottomRightVal = bottomRight.get();
+        const boxPosVal = boxPosition.get();
+        const newWidth = bottomRightVal.x + e.translationX;
+        const newHeight = bottomRightVal.y + e.translationY;
         const boundedMinX = Math.max(newWidth, minWidth);
         const boundedMinY = Math.max(newHeight, minHeight);
-        boxScale.value = {
-            x: Math.min(boundedMinX, maxX - boxPosition.value.x),
-            y: Math.min(boundedMinY, maxY - boxPosition.value.y - CropFrameOffset),
-        };
+        boxScale.set({
+            x: Math.min(boundedMinX, maxX - boxPosVal.x),
+            y: Math.min(boundedMinY, maxY - boxPosVal.y - CropFrameOffset),
+        });
     });
 };
 //# sourceMappingURL=useResizeFromBottomRight.js.map

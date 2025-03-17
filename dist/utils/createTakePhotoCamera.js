@@ -17,7 +17,7 @@ export const createTakePhotoCamera = function ({ setOriginalImage, setShowEditor
                 return;
             }
             const result = yield ImagePicker.launchCameraAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                mediaTypes: ['images'],
                 allowsEditing: false,
                 aspect: [4, 3],
                 quality: 1,

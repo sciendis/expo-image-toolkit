@@ -1,1 +1,0 @@
-{"version":3,"file":"StaticTexts.js","sourceRoot":"","sources":["../../src/constants/StaticTexts.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,YAAY,GAAG;IAC1B,YAAY,EAAE,YAAY;IAE1B,GAAG,EAAE,QAAQ;IACb,MAAM,EAAE,WAAW;CACX,CAAC;AAEX,MAAM,CAAC,MAAM,KAAK,GAAG;IACnB,MAAM,EAAE,+DAA+D;IACvE,IAAI,EAAE,kFAAkF;CACzF,CAAC"}

@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 type Props = {
     onPress: () => void;
     children: React.ReactNode;
+    disabled?: boolean;
 };
-export declare const Button: ({ children, onPress }: Props) => React.JSX.Element;
+export declare const Button: ({ children, onPress, disabled }: Props) => React.JSX.Element;
 export declare const styles: {
     item: {
         borderRadius: number;
         width: number;
         height: number;
-        backgroundColor: "#fff";
         justifyContent: "center";
         alignItems: "center";
     };

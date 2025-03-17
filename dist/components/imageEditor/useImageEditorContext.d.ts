@@ -4,6 +4,8 @@ export declare const useImageEditorContext: () => {
     image: string;
     setImage: import("react").Dispatch<import("react").SetStateAction<string>>;
     imageRef: import("react").RefObject<import("react-native").View>;
+    initialBoxPosition: import("react-native-reanimated").SharedValue<import("../..").Position>;
+    initialBoxScale: import("react-native-reanimated").SharedValue<import("../..").Position>;
     boxScale: import("react-native-reanimated").SharedValue<import("../..").Position>;
     boxPosition: import("react-native-reanimated").SharedValue<import("../..").Position>;
     rotate: import("react-native-reanimated").SharedValue<number>;

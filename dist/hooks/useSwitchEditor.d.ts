@@ -1,4 +1,4 @@
-import { EditorModes } from "../constants";
+import { EditorModes } from '../constants';
 /**
  * Step 1: Switch to CROP editor useEffect after loading the image.
  * By default, the editor can be set without using useEffect. However, since
@@ -10,5 +10,7 @@ export declare const useSwitchEditor: () => {
     opacityReverse: import("react-native").Animated.Value;
     isLoading: boolean;
     activeEditor: EditorModes | null;
+    showAlert: boolean;
+    handleAlertResponse: (shouldCrop: boolean) => Promise<void>;
 };
 //# sourceMappingURL=useSwitchEditor.d.ts.map

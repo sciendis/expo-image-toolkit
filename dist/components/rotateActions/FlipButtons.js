@@ -1,26 +1,26 @@
-import { FlipHorizontal, FlipVertical } from "lucide-react-native";
-import React from "react";
-import { withTiming } from "react-native-reanimated";
-import { Colors } from "../../styles";
-import { resetZoomState } from "../../utils";
-import { useImageEditorContext } from "../imageEditor/useImageEditorContext";
-import { Button } from "./Button";
+import { FlipHorizontal, FlipVertical } from 'lucide-react-native';
+import React from 'react';
+import { withTiming } from 'react-native-reanimated';
+import { resetZoomState } from '../../utils';
+import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { Button } from './Button';
 export const FlipButtons = function () {
-    const { flipX, flipY, zoom, imagePosition } = useImageEditorContext();
+    const { flipX, flipY, zoom, imagePosition, config } = useImageEditorContext();
+    const { colors } = config;
     const flipVertical = () => {
+        flipX.set((prevVal) => withTiming(prevVal === 180 ? 0 : 180));
         resetZoomState(zoom, imagePosition);
-        flipX.value = withTiming(flipX.value === 180 ? 0 : 180);
     };
     const flipHorizontal = () => {
+        flipY.set((prevVal) => withTiming(prevVal === 180 ? 0 : 180));
         resetZoomState(zoom, imagePosition);
-        flipY.value = withTiming(flipY.value === 180 ? 0 : 180);
     };
     return (<>
       <Button onPress={flipVertical}>
-        <FlipVertical color={Colors.black}/>
+        <FlipVertical color={colors.rotateActions}/>
       </Button>
       <Button onPress={flipHorizontal}>
-        <FlipHorizontal color={Colors.black}/>
+        <FlipHorizontal color={colors.rotateActions}/>
       </Button>
     </>);
 };

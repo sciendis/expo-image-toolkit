@@ -6,9 +6,11 @@ export { createPickImageLibrary } from './createPickImageLibrary';
 export { createSaveCroppedImage } from './createSaveCroppedImage';
 export { createTakePhotoCamera } from './createTakePhotoCamera';
 export { getBoundingLimitation } from './getBoundingLimitation';
+export { getCropData } from './getCropData';
 export { getExpoConstants } from './getExpoConstants';
 export { getNextLeftAngle } from './getNextLeftAngle';
 export { getNextRightAngle } from './getNextRightAngle';
 export { resetZoomState } from './resetZoomState';
 export { setLayoutDimensions } from './setLayoutDimensions';
+export { useSetInitialEditor } from './useSetInitialEditor';
 //# sourceMappingURL=index.js.map

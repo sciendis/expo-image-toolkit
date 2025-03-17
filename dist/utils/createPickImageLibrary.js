@@ -12,7 +12,7 @@ export const createPickImageLibrary = function ({ setOriginalImage, setShowEdito
     return function pickImageLibrary() {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                mediaTypes: ['images'],
                 allowsEditing: false,
                 aspect: [4, 3],
                 quality: 1,

@@ -1,13 +1,15 @@
-import { Dispatch, RefObject, SetStateAction } from "react";
-import { View } from "react-native";
-import { SharedValue } from "react-native-reanimated";
-import { EditorModes } from "../../constants";
-import { Config, Dimensions, LayoutDimensions, Position } from "../../types";
+import { Dispatch, RefObject, SetStateAction } from 'react';
+import { View } from 'react-native';
+import { SharedValue } from 'react-native-reanimated';
+import { EditorModes } from '../../constants';
+import { Config, Dimensions, LayoutDimensions, Position } from '../../types';
 type ImageEditorContextType = {
     config: Config;
     image: string;
     setImage: Dispatch<SetStateAction<string>>;
     imageRef: RefObject<View>;
+    initialBoxPosition: SharedValue<Position>;
+    initialBoxScale: SharedValue<Position>;
     boxScale: SharedValue<Position>;
     boxPosition: SharedValue<Position>;
     rotate: SharedValue<number>;

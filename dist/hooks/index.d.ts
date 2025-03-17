@@ -5,10 +5,12 @@ export { useInitialEditorState } from './useInitialEditorState';
 export { useMoveCropFrame } from './useMoveCropFrame';
 export { useMoveRotateRangeBar } from './useMoveRotateRangeBar';
 export { useMoveZoomRangeBar } from './useMoveZoomRangeBar';
-export { useSaveStateOnSwitchEditor } from './useSaveStateOnSwitchEditor';
+export { useSetExactImageDimensions } from './useSetExactImageDimensions';
 export { useSetInitialPositionCropFrame } from './useSetInitialPositionCropFrame';
+export { useSetInitialZoomAnimatedText } from './useSetInitialZoomAnimatedText';
+export { useSetViewLayout } from './useSetViewLayout';
 export { useSwitchEditor } from './useSwitchEditor';
+export { useUpdateImageDimensions } from './useUpdateImageDimensions';
 export { useUpdateImageLayout } from './useUpdateImageLayout';
 export { useZoomGesture } from './useZoomGesture';
-export { useUpdateImageDimensions } from './useUpdateImageDimensions';
 //# sourceMappingURL=index.d.ts.map

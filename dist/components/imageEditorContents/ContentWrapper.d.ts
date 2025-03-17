@@ -1,5 +1,5 @@
-import React from "react";
-import { Animated } from "react-native";
+import React from 'react';
+import { Animated } from 'react-native';
 type Props = {
     opacity: Animated.Value;
     children: React.ReactNode;

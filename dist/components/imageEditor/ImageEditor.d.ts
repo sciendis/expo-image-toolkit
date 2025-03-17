@@ -1,6 +1,6 @@
-import React from "react";
-import { UserConfig } from "../../types";
-import { SaveCroppedImageProps } from "../../utils";
+import React from 'react';
+import { UserConfig } from '../../types';
+import { SaveCroppedImageProps } from '../../utils';
 export type ImageEditorProps = {
     image: string | null;
     onCancel: () => void;

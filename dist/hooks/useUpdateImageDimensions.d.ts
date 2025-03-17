@@ -1,4 +1,4 @@
-import { Dimensions } from "../types";
+import { Dimensions } from '../types';
 /**
  * Step 4: Calculate the exact image dimensions to remove the offset around the image.
  * This offset occurs due to zooming. When the image is zoomed in, its width and height increase,

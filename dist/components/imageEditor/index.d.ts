@@ -1,2 +1,2 @@
-export { useImageEditor } from './useImageEditor';
+export { useExpoImageToolkit } from './useExpoImageToolkit';
 //# sourceMappingURL=index.d.ts.map

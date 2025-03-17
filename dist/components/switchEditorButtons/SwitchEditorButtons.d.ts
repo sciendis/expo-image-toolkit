@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { EditorModes } from "../../constants";
+import { EditorModes } from '../../constants';
 type Props = {
     activeEditor: EditorModes | null;
     switchEditor: (mode: EditorModes) => Promise<void>;

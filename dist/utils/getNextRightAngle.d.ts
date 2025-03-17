@@ -1,2 +1,2 @@
-export declare const getNextRightAngle: (currentAngle: number) => 360 | 270 | 90 | 180;
+export declare const getNextRightAngle: (currentAngle: number) => 0 | 360 | 270 | -270 | 180 | -180 | 90 | -90;
 //# sourceMappingURL=getNextRightAngle.d.ts.map

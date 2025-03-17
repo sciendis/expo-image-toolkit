@@ -1,8 +1,8 @@
-import { Gesture } from "react-native-gesture-handler";
-import { useSharedValue } from "react-native-reanimated";
-import { useImageEditorContext } from "../../components/imageEditor/useImageEditorContext";
-import { DefaultPositionState } from "../../constants";
-import { useInitialEditorState } from "../useInitialEditorState";
+import { Gesture } from 'react-native-gesture-handler';
+import { useSharedValue } from 'react-native-reanimated';
+import { useImageEditorContext } from '../../components/imageEditor/useImageEditorContext';
+import { DefaultPositionState } from '../../constants';
+import { useInitialEditorState } from '../useInitialEditorState';
 export const useResizeFromTopLeft = () => {
     const { boxPosition, boxScale } = useImageEditorContext();
     const { minWidth, minHeight, minX, minY } = useInitialEditorState();
@@ -10,22 +10,24 @@ export const useResizeFromTopLeft = () => {
     const startScale = useSharedValue(DefaultPositionState);
     return Gesture.Pan()
         .onStart(() => {
-        startPosition.value = Object.assign({}, boxPosition.value);
-        startScale.value = Object.assign({}, boxScale.value);
+        startPosition.set(Object.assign({}, boxPosition.get()));
+        startScale.set(Object.assign({}, boxScale.get()));
     })
         .onUpdate((event) => {
-        const newX = Math.max(startPosition.value.x + event.translationX, minX);
-        const newY = Math.max(startPosition.value.y + event.translationY, minY);
-        const newWidth = Math.max(startScale.value.x - (newX - startPosition.value.x), minWidth);
-        const newHeight = Math.max(startScale.value.y - (newY - startPosition.value.y), minHeight);
-        boxPosition.value = {
-            x: startPosition.value.x + startScale.value.x - newWidth,
-            y: startPosition.value.y + startScale.value.y - newHeight,
-        };
-        boxScale.value = {
+        const startPosVal = startPosition.get();
+        const startScaleVal = startScale.get();
+        const newX = Math.max(startPosVal.x + event.translationX, minX);
+        const newY = Math.max(startPosVal.y + event.translationY, minY);
+        const newWidth = Math.max(startScaleVal.x - (newX - startPosVal.x), minWidth);
+        const newHeight = Math.max(startScaleVal.y - (newY - startPosVal.y), minHeight);
+        boxPosition.set({
+            x: startPosVal.x + startScaleVal.x - newWidth,
+            y: startPosVal.y + startScaleVal.y - newHeight,
+        });
+        boxScale.set({
             x: newWidth,
             y: newHeight,
-        };
+        });
     });
 };
 //# sourceMappingURL=useResizeFromTopLeft.js.map

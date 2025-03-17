@@ -1,5 +1,5 @@
-import React from "react";
-import { EditorModes } from "../../constants";
+import React from 'react';
+import { EditorModes } from '../../constants';
 type Props = {
     activeEditor: EditorModes | null;
     editorName: EditorModes;

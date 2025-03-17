@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useImageEditorContext } from "../components/imageEditor/useImageEditorContext";
-import { DefaultDimensionState } from "../constants";
-import { calculateImageOffset } from "../utils";
+import { useEffect, useState } from 'react';
+import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
+import { DefaultDimensionState } from '../constants';
+import { calculateImageOffset } from '../utils';
 /**
  * Step 4: Calculate the exact image dimensions to remove the offset around the image.
  * This offset occurs due to zooming. When the image is zoomed in, its width and height increase,
@@ -24,7 +24,7 @@ export const useUpdateImageDimensions = function () {
             });
         }
         catch (error) {
-            console.error("Failed to calculate image dimensions:", error);
+            console.error('Failed to calculate image dimensions:', error);
         }
     }, [imageLayout, image, setOffset]);
     return imageDimensions;

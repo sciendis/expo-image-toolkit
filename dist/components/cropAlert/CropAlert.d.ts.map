@@ -1,0 +1,1 @@
+{"version":3,"file":"CropAlert.d.ts","sourceRoot":"","sources":["../../../src/components/cropAlert/CropAlert.tsx"],"names":[],"mappings":";AAaA,KAAK,KAAK,GAAG;IACX,SAAS,EAAE,OAAO,CAAC;IACnB,mBAAmB,EAAE,CAAC,UAAU,EAAE,OAAO,KAAK,OAAO,CAAC,IAAI,CAAC,CAAC;CAC7D,CAAC;AAEF,eAAO,MAAM,SAAS,uCAAiD,KAAK,gCAiE3E,CAAC"}

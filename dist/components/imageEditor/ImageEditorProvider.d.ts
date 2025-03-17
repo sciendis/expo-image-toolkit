@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { UserConfig } from "../../types";
+import { ReactNode } from 'react';
+import { UserConfig } from '../../types';
 type Props = {
     image: string;
     userConfig?: UserConfig;

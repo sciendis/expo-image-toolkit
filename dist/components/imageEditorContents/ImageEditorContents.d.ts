@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import { Animated } from "react-native";
-import { EditorModes } from "../../constants";
+import { Animated } from 'react-native';
+import { EditorModes } from '../../constants';
 type Props = {
     activeEditor: EditorModes | null;
     opacity: Animated.Value;

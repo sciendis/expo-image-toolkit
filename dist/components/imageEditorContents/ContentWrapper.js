@@ -1,18 +1,20 @@
-import React from "react";
-import { Animated, StyleSheet } from "react-native";
-import { Colors } from "../../styles";
+import React from 'react';
+import { Animated, StyleSheet } from 'react-native';
+import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 export const ContentWrapper = function ({ opacity, children }) {
-    return (<Animated.View style={[styles.container, { opacity }]}>
+    const { config: { colors }, } = useImageEditorContext();
+    const colorStylesContainer = { backgroundColor: colors.background };
+    // TODO: Apply opacity again with useAnimatedStyle to fix the problem
+    return (<Animated.View style={[styles.container, colorStylesContainer]}>
       {children}
     </Animated.View>);
 };
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: Colors.background,
-        flexDirection: "row",
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
     },
 });
 //# sourceMappingURL=ContentWrapper.js.map

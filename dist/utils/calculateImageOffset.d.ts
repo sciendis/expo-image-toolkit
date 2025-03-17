@@ -1,4 +1,4 @@
-import { LayoutDimensions } from "../types";
+import { LayoutDimensions } from '../types';
 export type CalculateImageOffsetProps = {
     image: string;
     imageLayout: LayoutDimensions;

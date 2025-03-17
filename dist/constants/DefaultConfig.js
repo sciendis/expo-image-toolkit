@@ -1,11 +1,12 @@
-import { EN } from "../locales";
+import { EN } from '../locales';
+import { Colors } from '../styles';
 export const DefaultConfig = {
-    locale: "en",
-    minZoom: 1,
+    locale: 'en',
     maxZoom: 10,
     labels: EN,
-    defaultEditor: "CROP",
+    defaultEditor: 'ROTATE',
     enableZoom: true,
     enableRotate: true,
+    colors: Colors,
 };
 //# sourceMappingURL=DefaultConfig.js.map

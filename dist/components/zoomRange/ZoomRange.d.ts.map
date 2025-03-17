@@ -1,1 +1,1 @@
-{"version":3,"file":"ZoomRange.d.ts","sourceRoot":"","sources":["../../../src/components/zoomRange/ZoomRange.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAgC,MAAM,OAAO,CAAC;AAcrD,eAAO,MAAM,SAAS,yBAwCrB,CAAC"}
+{"version":3,"file":"ZoomRange.d.ts","sourceRoot":"","sources":["../../../src/components/zoomRange/ZoomRange.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,OAAO,CAAC;AAgB1B,eAAO,MAAM,SAAS,yBA0CrB,CAAC"}

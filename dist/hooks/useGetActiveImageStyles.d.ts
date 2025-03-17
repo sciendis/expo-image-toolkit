@@ -1,10 +1,10 @@
-import { Dimensions } from "../types";
+import { Dimensions } from '../types';
 export declare const useGetActiveImageStyles: (imageDimensions: Dimensions) => {
     top: number;
     left: number;
     centerX: number;
     centerY: number;
-    exactImageDimensions: {
+    calculatedImageDimensions: {
         width: number;
         height: number;
     } | null;

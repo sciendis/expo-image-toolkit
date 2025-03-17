@@ -1,6 +1,6 @@
-import { TextInputProps } from "react-native";
-import { AnimatedProps, SharedValue } from "react-native-reanimated";
-import { LayoutDimensions } from "../types";
+import { TextInputProps } from 'react-native';
+import { AnimatedProps, SharedValue } from 'react-native-reanimated';
+import { LayoutDimensions } from '../types';
 type Props = {
     currentX: SharedValue<number>;
     rangeLayout: LayoutDimensions;
@@ -8,10 +8,9 @@ type Props = {
 export declare const useMoveZoomRangeBar: ({ currentX, rangeLayout }: Props) => {
     moveRangeBar: import("react-native-gesture-handler/lib/typescript/handlers/gestures/panGesture").PanGesture;
     styledRangeAnimated: {
-        left: number;
+        left: any;
     };
     animatedTextProps: Partial<AnimatedProps<TextInputProps>>;
-    currentZoom: number;
 };
 export {};
 //# sourceMappingURL=useMoveZoomRangeBar.d.ts.map

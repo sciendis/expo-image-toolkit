@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
-import { SavedImageInfo } from "../types";
+import { Dispatch, SetStateAction } from 'react';
+import { SavedImageInfo } from '../types';
 type Props = {
     setDimensions: Dispatch<SetStateAction<SavedImageInfo>>;
     setImage: Dispatch<SetStateAction<string | null>>;
