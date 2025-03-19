@@ -1,7 +1,7 @@
 {
   "name": "@sciendis/expo-image-toolkit",
   "author": "sciendis",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A reusable Image Editor for React Native projects",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,27 +11,28 @@
   },
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.3",
-    "expo": "~51.0.28",
-    "expo-constants": "~16.0.2",
-    "expo-file-system": "^17.0.1",
-    "expo-image-manipulator": "^12.0.5",
-    "expo-image-picker": "^15.0.7",
+    "expo": "^52.0.38",
+    "expo-constants": "~17.0.8",
+    "expo-file-system": "~18.0.11",
+    "expo-image-manipulator": "^13.0.6",
+    "expo-image-picker": "~16.0.6",
     "lucide-react-native": "^0.475.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-native": "0.74.5",
-    "react-native-gesture-handler": "^2.20.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-native": "^0.76.7",
+    "react-native-gesture-handler": "~2.20.2",
     "react-native-paper": "^5.12.5",
-    "react-native-reanimated": "~3.10.1"
+    "react-native-reanimated": "~3.16.1",
+    "react-native-svg": "^15.8.0"
   },
   "devDependencies": {
-    "@types/react": "~18.2.45",
+    "@types/react": "~18.3.12",
     "typescript": "~5.3.3"
   },
   "peerDependencies": {
     "react": "^18.0.0",
     "react-native": "^0.74.5",
-    "expo": ">=51.0.0"
+    "expo": ">=52.0.0"
   },
   "homepage": "https://github.com/sciendis/expo-image-toolkit#readme",
   "repository": {
