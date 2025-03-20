@@ -1,9 +1,4 @@
-import {
-  Action,
-  FlipType,
-  manipulateAsync,
-  SaveFormat,
-} from 'expo-image-manipulator';
+import { FlipType, ImageManipulator, SaveFormat } from 'expo-image-manipulator';
 import { ImageEditorProps } from '../components/imageEditor/ImageEditor';
 import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
 import { getCropData } from '../utils';
@@ -32,7 +27,6 @@ export const useCropImage = function ({ onCrop }: Props) {
 
     setIsSaving(true);
 
-    const actions: Action[] = [];
     const format = { format: SaveFormat.PNG };
 
     const cropData = await getCropData({
@@ -47,19 +41,22 @@ export const useCropImage = function ({ onCrop }: Props) {
       focalPoint,
     });
 
-    actions.push({ crop: cropData });
-
-    const rotateVal = rotate.get();
-
-    if (rotateVal !== 0) actions.push({ rotate: rotateVal });
-    if (flipX.get() === 180) actions.push({ flip: FlipType.Vertical });
-    if (flipY.get() === 180) actions.push({ flip: FlipType.Horizontal });
-
     try {
-      const result = await manipulateAsync(image, actions, format);
+      const rotateVal = rotate.get();
+
+      const manipulate = ImageManipulator.manipulate(image);
+      let manipulator = manipulate.rotate(rotateVal);
+      if (flipX.get() === 180)
+        manipulator = manipulator.flip(FlipType.Vertical);
+      if (flipY.get() === 180)
+        manipulator = manipulator.flip(FlipType.Horizontal);
+
+      manipulator = manipulator.crop(cropData);
+      const result = await manipulator.renderAsync();
+      const res = await result.saveAsync(format);
 
       onCrop({
-        uri: result.uri,
+        uri: res.uri,
         width: cropData.width,
         height: cropData.height,
         rotate: rotateVal,

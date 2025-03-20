@@ -4,21 +4,21 @@ type Props = {
 };
 export declare const useImageAnimatedTransform: ({ centerX, centerY, }: Props) => {
     transform: ({
-        translateX: any;
+        translateX: number;
         translateY?: undefined;
         scale?: undefined;
         rotateX?: undefined;
         rotateY?: undefined;
         rotate?: undefined;
     } | {
-        translateY: any;
+        translateY: number;
         translateX?: undefined;
         scale?: undefined;
         rotateX?: undefined;
         rotateY?: undefined;
         rotate?: undefined;
     } | {
-        scale: any;
+        scale: number;
         translateX?: undefined;
         translateY?: undefined;
         rotateX?: undefined;

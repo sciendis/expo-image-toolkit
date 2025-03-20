@@ -9,6 +9,8 @@ export type Config = {
     defaultEditor: keyof typeof EditorModes;
     labels: Record<keyof typeof EN, string>;
     colors: Record<keyof typeof Colors, string>;
+    onCancel?: () => void;
+    onSubmit?: (uri: string) => void;
 };
 export type UserConfig = Partial<Omit<Config, 'labels' | 'colors'>> & {
     labels?: Partial<Config['labels']>;

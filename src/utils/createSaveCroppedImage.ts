@@ -1,18 +1,11 @@
 import * as FileSystem from 'expo-file-system';
 import { Dispatch, SetStateAction } from 'react';
-import { SavedImageInfo } from '../types';
+import { OnSaveProps, SavedImageInfo } from '../types';
 
 type Props = {
   setDimensions: Dispatch<SetStateAction<SavedImageInfo>>;
   setImage: Dispatch<SetStateAction<string | null>>;
   setShowEditor: Dispatch<SetStateAction<boolean>>;
-};
-
-export type SaveCroppedImageProps = {
-  uri: string;
-  width: number;
-  height: number;
-  rotate: number;
 };
 
 export const createSaveCroppedImage = function ({
@@ -25,7 +18,7 @@ export const createSaveCroppedImage = function ({
     width,
     height,
     rotate,
-  }: SaveCroppedImageProps) {
+  }: OnSaveProps) {
     const fileName = `cropped_image_${Date.now()}.png`;
     const newUri = `${FileSystem.documentDirectory}${fileName}`;
 

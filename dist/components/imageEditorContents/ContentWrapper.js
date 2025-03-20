@@ -1,10 +1,9 @@
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
-export const ContentWrapper = function ({ opacity, children }) {
+export const ContentWrapper = function ({ children }) {
     const { config: { colors }, } = useImageEditorContext();
     const colorStylesContainer = { backgroundColor: colors.background };
-    // TODO: Apply opacity again with useAnimatedStyle to fix the problem
     return (<Animated.View style={[styles.container, colorStylesContainer]}>
       {children}
     </Animated.View>);

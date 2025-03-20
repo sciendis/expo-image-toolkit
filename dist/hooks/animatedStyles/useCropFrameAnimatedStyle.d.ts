@@ -5,10 +5,10 @@ export declare const useCropFrameAnimatedStyle: () => {
     top?: undefined;
     opacity?: undefined;
 } | {
-    width: any;
-    height: any;
-    left: any;
-    top: any;
+    width: number;
+    height: number;
+    left: number;
+    top: number;
     opacity: number;
 };
 //# sourceMappingURL=useCropFrameAnimatedStyle.d.ts.map

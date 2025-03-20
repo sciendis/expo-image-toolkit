@@ -8,10 +8,10 @@ type Props = {
 export declare const useMoveRotateRangeBar: ({ currentX, rangeLayout, }: Props) => {
     moveRangeBar: import("react-native-gesture-handler/lib/typescript/handlers/gestures/panGesture").PanGesture;
     styledRangeAnimated: {
-        left: any;
+        left: number;
     };
     animatedTextProps: Partial<AnimatedProps<TextInputProps>>;
-    currentAngle: Readonly<SharedValue<any>>;
+    currentAngle: import("react-native-reanimated").DerivedValue<number>;
 };
 export {};
 //# sourceMappingURL=useMoveRotateRangeBar.d.ts.map

@@ -1,4 +1,3 @@
-import { Animated } from 'react-native';
 import {
   GestureDetector,
   GestureHandlerRootView,
@@ -15,10 +14,9 @@ import { ContentWrapper } from './ContentWrapper';
 
 type Props = {
   activeEditor: EditorModes | null;
-  opacity: Animated.Value;
 };
 
-export const ImageEditorContents = function ({ activeEditor, opacity }: Props) {
+export const ImageEditorContents = function ({ activeEditor }: Props) {
   const { config } = useImageEditorContext();
   const { labels, enableRotate, enableZoom } = config;
 
@@ -27,7 +25,7 @@ export const ImageEditorContents = function ({ activeEditor, opacity }: Props) {
 
   if (enableRotate && activeEditor === EditorModes.ROTATE) {
     return (
-      <ContentWrapper opacity={opacity}>
+      <ContentWrapper>
         <Hint message={labels.ROTATE_HINT} />
         <RenderActiveImage activeEditor={activeEditor} />
         <RotateActions />
@@ -37,7 +35,7 @@ export const ImageEditorContents = function ({ activeEditor, opacity }: Props) {
 
   if (enableZoom && activeEditor === EditorModes.ZOOM) {
     return (
-      <ContentWrapper opacity={opacity}>
+      <ContentWrapper>
         <Hint message={labels.ZOOM_HINT} />
         <GestureHandlerRootView
           style={{
@@ -59,7 +57,7 @@ export const ImageEditorContents = function ({ activeEditor, opacity }: Props) {
   return (
     <GestureHandlerRootView>
       <GestureDetector gesture={moveGesture}>
-        <ContentWrapper opacity={opacity}>
+        <ContentWrapper>
           <CropFrame />
           <RenderActiveImage activeEditor={activeEditor} />
         </ContentWrapper>

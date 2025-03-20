@@ -8,20 +8,20 @@ import { RenderActiveImage } from '../renderActiveImage';
 import { RotateActions } from '../rotateActions';
 import { ZoomRange } from '../zoomRange';
 import { ContentWrapper } from './ContentWrapper';
-export const ImageEditorContents = function ({ activeEditor, opacity }) {
+export const ImageEditorContents = function ({ activeEditor }) {
     const { config } = useImageEditorContext();
     const { labels, enableRotate, enableZoom } = config;
     const moveGesture = useMoveCropFrame();
     const { zoomGesture } = useZoomGesture();
     if (enableRotate && activeEditor === EditorModes.ROTATE) {
-        return (<ContentWrapper opacity={opacity}>
+        return (<ContentWrapper>
         <Hint message={labels.ROTATE_HINT}/>
         <RenderActiveImage activeEditor={activeEditor}/>
         <RotateActions />
       </ContentWrapper>);
     }
     if (enableZoom && activeEditor === EditorModes.ZOOM) {
-        return (<ContentWrapper opacity={opacity}>
+        return (<ContentWrapper>
         <Hint message={labels.ZOOM_HINT}/>
         <GestureHandlerRootView style={{
                 flex: 1,
@@ -38,7 +38,7 @@ export const ImageEditorContents = function ({ activeEditor, opacity }) {
     // Crop editor
     return (<GestureHandlerRootView>
       <GestureDetector gesture={moveGesture}>
-        <ContentWrapper opacity={opacity}>
+        <ContentWrapper>
           <CropFrame />
           <RenderActiveImage activeEditor={activeEditor}/>
         </ContentWrapper>

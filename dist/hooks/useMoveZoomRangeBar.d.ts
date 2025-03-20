@@ -8,7 +8,7 @@ type Props = {
 export declare const useMoveZoomRangeBar: ({ currentX, rangeLayout }: Props) => {
     moveRangeBar: import("react-native-gesture-handler/lib/typescript/handlers/gestures/panGesture").PanGesture;
     styledRangeAnimated: {
-        left: any;
+        left: number;
     };
     animatedTextProps: Partial<AnimatedProps<TextInputProps>>;
 };

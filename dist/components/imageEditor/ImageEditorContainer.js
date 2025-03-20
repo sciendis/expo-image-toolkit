@@ -7,7 +7,7 @@ import { LoadingIndicator } from '../loadingIndicator';
 import { SwitchEditorButtons } from '../switchEditorButtons';
 import { useImageEditorContext } from './useImageEditorContext';
 export const ImageEditorContainer = function ({ onCancel, onCrop, }) {
-    const { switchEditor, opacity, opacityReverse, isLoading, activeEditor, showAlert, handleAlertResponse, } = useSwitchEditor();
+    const { switchEditor, opacityReverse, isLoading, activeEditor, showAlert, handleAlertResponse, } = useSwitchEditor();
     const { isSaving, config: { colors }, } = useImageEditorContext();
     const colorStylesContainer = { backgroundColor: colors.background };
     useSetInitialPositionCropFrame();
@@ -21,7 +21,7 @@ export const ImageEditorContainer = function ({ onCancel, onCrop, }) {
       {(isLoading || activeEditor === null) && (<LoadingIndicator opacity={opacityReverse}/> // This loading must be here to load indicator while other things being loaded
         )}
       <ImageEditorHeader onCancel={onCancel} onCrop={onCrop}/>
-      <ImageEditorContents activeEditor={activeEditor} opacity={opacity}/>
+      <ImageEditorContents activeEditor={activeEditor}/>
       <SwitchEditorButtons activeEditor={activeEditor} switchEditor={switchEditor}/>
       <CropAlert showAlert={showAlert} handleAlertResponse={handleAlertResponse}/>
     </View>);

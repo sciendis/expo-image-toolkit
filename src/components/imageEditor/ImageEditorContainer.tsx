@@ -18,7 +18,6 @@ export const ImageEditorContainer = function ({
 }: Pick<ImageEditorProps, 'onCrop' | 'onCancel'>) {
   const {
     switchEditor,
-    opacity,
     opacityReverse,
     isLoading,
     activeEditor,
@@ -48,7 +47,7 @@ export const ImageEditorContainer = function ({
         <LoadingIndicator opacity={opacityReverse} /> // This loading must be here to load indicator while other things being loaded
       )}
       <ImageEditorHeader onCancel={onCancel} onCrop={onCrop} />
-      <ImageEditorContents activeEditor={activeEditor} opacity={opacity} />
+      <ImageEditorContents activeEditor={activeEditor} />
       <SwitchEditorButtons
         activeEditor={activeEditor}
         switchEditor={switchEditor}

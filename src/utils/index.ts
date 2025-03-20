@@ -4,7 +4,6 @@ export { calculateOffsets } from './calculateOffsets';
 export { clamp } from './clamp';
 export { createPickImageLibrary } from './createPickImageLibrary';
 export { createSaveCroppedImage } from './createSaveCroppedImage';
-export type { SaveCroppedImageProps } from './createSaveCroppedImage';
 export { createTakePhotoCamera } from './createTakePhotoCamera';
 export { getBoundingLimitation } from './getBoundingLimitation';
 export { getCropData } from './getCropData';

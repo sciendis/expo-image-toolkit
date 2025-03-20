@@ -1,10 +1,9 @@
 import React from 'react';
-import { UserConfig } from '../../types';
-import { SaveCroppedImageProps } from '../../utils';
+import { OnSaveProps, UserConfig } from '../../types';
 export type ImageEditorProps = {
     image: string | null;
     onCancel: () => void;
-    onCrop: (props: SaveCroppedImageProps) => void;
+    onCrop: (props: OnSaveProps) => void;
     userConfig?: UserConfig;
 };
 export declare const ImageEditor: ({ image, onCrop, onCancel, userConfig, }: ImageEditorProps) => React.JSX.Element | null;

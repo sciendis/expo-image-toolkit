@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { FlipType, manipulateAsync, SaveFormat, } from 'expo-image-manipulator';
+import { FlipType, ImageManipulator, SaveFormat } from 'expo-image-manipulator';
 import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
 import { getCropData } from '../utils';
 export const useCropImage = function ({ onCrop }) {
@@ -16,7 +16,6 @@ export const useCropImage = function ({ onCrop }) {
         if (imageLayout.width <= 0 || imageLayout.height <= 0)
             return;
         setIsSaving(true);
-        const actions = [];
         const format = { format: SaveFormat.PNG };
         const cropData = yield getCropData({
             image,
@@ -29,18 +28,19 @@ export const useCropImage = function ({ onCrop }) {
             zoom,
             focalPoint,
         });
-        actions.push({ crop: cropData });
-        const rotateVal = rotate.get();
-        if (rotateVal !== 0)
-            actions.push({ rotate: rotateVal });
-        if (flipX.get() === 180)
-            actions.push({ flip: FlipType.Vertical });
-        if (flipY.get() === 180)
-            actions.push({ flip: FlipType.Horizontal });
         try {
-            const result = yield manipulateAsync(image, actions, format);
+            const rotateVal = rotate.get();
+            const manipulate = ImageManipulator.manipulate(image);
+            let manipulator = manipulate.rotate(rotateVal);
+            if (flipX.get() === 180)
+                manipulator = manipulator.flip(FlipType.Vertical);
+            if (flipY.get() === 180)
+                manipulator = manipulator.flip(FlipType.Horizontal);
+            manipulator = manipulator.crop(cropData);
+            const result = yield manipulator.renderAsync();
+            const res = yield result.saveAsync(format);
             onCrop({
-                uri: result.uri,
+                uri: res.uri,
                 width: cropData.width,
                 height: cropData.height,
                 rotate: rotateVal,

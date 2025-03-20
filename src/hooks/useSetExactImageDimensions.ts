@@ -5,18 +5,11 @@ import { Dimensions } from '../types';
 export const useSetExactImageDimensions = function (
   calculatedImageDimensions: Dimensions | null
 ) {
-  const { exactImageDimensions, setExactImageDimensions } =
-    useImageEditorContext();
+  const { setExactImageDimensions } = useImageEditorContext();
 
   useEffect(() => {
     if (!calculatedImageDimensions) return;
-    // TODO: Verify new condition with setImage after rotating or cropping
-    if (exactImageDimensions.width || exactImageDimensions.height) return;
 
     setExactImageDimensions(calculatedImageDimensions);
-  }, [
-    calculatedImageDimensions,
-    exactImageDimensions,
-    setExactImageDimensions,
-  ]);
+  }, [calculatedImageDimensions, setExactImageDimensions]);
 };
