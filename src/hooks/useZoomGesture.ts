@@ -35,21 +35,22 @@ export const useZoomGesture = function () {
     });
 
   const zoomGesturePinch = Gesture.Pinch()
-    .onStart(() => {
-      prevZoom.set(zoom.get());
-      prevFocalPoint.set({ ...focalPoint.get() });
+    .onStart((event) => {
+      const zoomVal = zoom.get();
+      prevZoom.set(zoomVal);
+
+      const fp = focalPoint.get();
+      prevFocalPoint.set({ x: fp.x, y: fp.y });
+
+      if (zoomVal === 1) {
+        focalPoint.set({ x: event.focalX, y: event.focalY });
+      }
     })
     .onUpdate((event) => {
       const prevZoomVal = prevZoom.get();
-      const prevFocalPointVal = prevFocalPoint.get();
-
       const newScale = prevZoomVal * event.scale;
       const newZoom = clamp(newScale, MIN_ZOOM, maxZoom);
 
-      focalPoint.set({
-        x: prevZoomVal === 1 ? event.focalX : prevFocalPointVal.x,
-        y: prevZoomVal === 1 ? event.focalY : prevFocalPointVal.y,
-      });
       zoom.set(newZoom);
 
       const { minX, maxX, minY, maxY } = getBoundingLimitation(
@@ -66,9 +67,6 @@ export const useZoomGesture = function () {
 
   const zoomGestureTap = Gesture.Tap()
     .numberOfTaps(2)
-    .onStart(() => {
-      prevFocalPoint.set({ ...focalPoint.get() });
-    })
     .onEnd((event) => {
       const defZoom = 1;
       const zoomLvl2 = (maxZoom - defZoom) / 2 + defZoom;
@@ -86,7 +84,6 @@ export const useZoomGesture = function () {
 
       zoom.set(withTiming(newZoom));
       prevZoom.set(newZoom);
-
       // reset image position on double tap zoom
       imagePosition.set(withTiming({ x: 0, y: 0 }));
     });

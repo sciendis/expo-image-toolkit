@@ -14,11 +14,11 @@ export const getCropData = function ({ image, imageLayout, containerLayout, exac
             image,
             imageLayout,
         });
+        const focalPointVal = focalPoint.get();
         const boxScaleVal = boxScale.get();
         const zoomVal = zoom.get();
         const imagePosVal = imagePosition.get();
         const boxPosVal = boxPosition.get();
-        const focalPointVal = focalPoint.get();
         const croppedWidth = boxScaleVal.x * scaleX;
         const croppedHeight = boxScaleVal.y * scaleY;
         // calculate the center of the image
