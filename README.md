@@ -25,17 +25,18 @@ npm install @sciendis/expo-image-toolkit
 
 You can configure the image editor with the following options:
 
-| Option          | Type         | Default               | Description                                                                        |
-| --------------- | ------------ | --------------------- | ---------------------------------------------------------------------------------- |
-| `locale`        | `'en'\|'de'` | `'en'`                | Language option                                                                    |
-| `maxZoom`       | number       | `10`                  | Maximum zoom level allowed.                                                        |
-| `enableRotate`  | boolean      | true                  | Rotate editor can be disabled                                                      |
-| `enableZoom`    | boolean      | true                  | Zoom editor can be disabled                                                        |
-| `defaultEditor` | string       | `'ROTATE'`            | The initial editor when opening the image editor.                                  |
-| `labels`        | object       | `{}`                  | Override default texts like "Set" and "Cancel".                                    |
-| `colors`        | object       | `{}`                  | Override default colors like "background".                                         |
-| `onCancel`      | function     | () => void            | Custom handler for the cancel event.                                               |
-| `onSubmit`      | function     | (uri: string) => void | Custom handler for the submit event. Receives the edited image URI as an argument. |
+| Option            | Type         | Default               | Description                                                                            |
+| ----------------- | ------------ | --------------------- | -------------------------------------------------------------------------------------- |
+| `locale`          | `'en'\|'de'` | `'en'`                | Language option                                                                        |
+| `maxZoom`         | number       | `10`                  | Maximum zoom level allowed.                                                            |
+| `enableRotate`    | boolean      | true                  | Rotate editor can be disabled                                                          |
+| `enableZoom`      | boolean      | true                  | Zoom editor can be disabled                                                            |
+| `defaultEditor`   | string       | `'ROTATE'`            | The initial editor when opening the image editor.                                      |
+| `labels`          | object       | `{}`                  | Override default texts like "Set" and "Cancel".                                        |
+| `colors`          | object       | `{}`                  | Override default colors like "background".                                             |
+| `onCancel`        | function     | () => void            | Custom handler for the cancel event.                                                   |
+| `onSubmit`        | function     | (uri: string) => void | Custom handler for the submit event. Receives the edited image URI as an argument.     |
+| `acceptedFormats` | string[]     | []                    | Specifies accepted image formats for the pickImage function (e.g., [".jpg", ".jpeg"]). |
 
 ## Usage Example
 
