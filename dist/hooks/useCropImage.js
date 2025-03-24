@@ -36,6 +36,13 @@ export const useCropImage = function ({ onCrop }) {
                 manipulator = manipulator.flip(FlipType.Vertical);
             if (flipY.get() === 180)
                 manipulator = manipulator.flip(FlipType.Horizontal);
+            if (Math.abs(rotateVal) % 180 === 90) {
+                // If this condition is true, the rotate value is 90, -90, 270, or -270.
+                // In this case, the width and height should be swapped.
+                const { width, height } = cropData;
+                cropData.width = height;
+                cropData.height = width;
+            }
             manipulator = manipulator.crop(cropData);
             const result = yield manipulator.renderAsync();
             const res = yield result.saveAsync(format);

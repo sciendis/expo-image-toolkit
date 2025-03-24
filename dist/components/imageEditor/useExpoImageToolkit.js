@@ -12,6 +12,7 @@ export const useExpoImageToolkit = function (userConfig) {
         setOriginalImage,
         setShowEditor,
         setImage,
+        acceptedFormats: userConfig === null || userConfig === void 0 ? void 0 : userConfig.acceptedFormats,
     });
     const takePhoto = createTakePhotoCamera({
         setOriginalImage,

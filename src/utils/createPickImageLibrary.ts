@@ -5,12 +5,14 @@ type Props = {
   setOriginalImage: Dispatch<SetStateAction<string | null>>;
   setShowEditor: Dispatch<SetStateAction<boolean>>;
   setImage: Dispatch<SetStateAction<string | null>>;
+  acceptedFormats?: string[];
 };
 
 export const createPickImageLibrary = function ({
   setOriginalImage,
   setShowEditor,
   setImage,
+  acceptedFormats,
 }: Props) {
   return async function pickImageLibrary() {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -22,7 +24,14 @@ export const createPickImageLibrary = function ({
 
     if (result.canceled) return result;
 
-    setOriginalImage(result.assets[0].uri);
+    const uri = result.assets[0].uri;
+
+    if (acceptedFormats && acceptedFormats.length) {
+      const isAccepted = acceptedFormats.some((format) => uri.endsWith(format));
+      if (!isAccepted) return result;
+    }
+
+    setOriginalImage(uri);
     setShowEditor(true);
     setImage(null);
 

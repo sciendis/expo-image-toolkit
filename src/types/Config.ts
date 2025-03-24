@@ -12,6 +12,7 @@ export type Config = {
   colors: Record<keyof typeof Colors, string>;
   onCancel?: () => void;
   onSubmit?: (uri: string) => void;
+  acceptedFormats?: string[];
 };
 
 export type UserConfig = Partial<Omit<Config, 'labels' | 'colors'>> & {
