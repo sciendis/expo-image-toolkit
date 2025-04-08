@@ -2,8 +2,7 @@ import React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { GestureDetector, GestureHandlerRootView, } from 'react-native-gesture-handler';
 import Animated, { useSharedValue } from 'react-native-reanimated';
-import { useMoveZoomRangeBar, useSetInitialZoomAnimatedText, useSetViewLayout, } from '../../hooks';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { useImageEditorContext, useMoveZoomRangeBar, useSetInitialZoomAnimatedText, useSetViewLayout, } from '../../hooks';
 const AnimatedText = Animated.createAnimatedComponent(TextInput);
 export const ZoomRange = function () {
     const { config: { colors }, } = useImageEditorContext();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { useImageEditorContext } from '../../hooks';
 export const Button = function ({ activeEditor, editorName, switchEditor, children, }) {
     const { config: { colors }, } = useImageEditorContext();
     return (<TouchableOpacity style={[

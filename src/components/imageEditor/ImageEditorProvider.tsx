@@ -7,6 +7,7 @@ import {
   DefaultPositionState,
   EditorModes,
 } from '../../constants';
+import { ImageEditorContext } from '../../hooks/useImageEditorContext/ImageEditorContext';
 import { DE } from '../../locales';
 import {
   Config,
@@ -15,7 +16,6 @@ import {
   Position,
   UserConfig,
 } from '../../types';
-import { ImageEditorContext } from './ImageEditorContext';
 
 type Props = {
   image: string;

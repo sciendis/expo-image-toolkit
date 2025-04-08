@@ -3,10 +3,13 @@ import {
   GestureHandlerRootView,
 } from 'react-native-gesture-handler';
 import { EditorModes } from '../../constants';
-import { useMoveCropFrame, useZoomGesture } from '../../hooks';
+import {
+  useImageEditorContext,
+  useMoveCropFrame,
+  useZoomGesture,
+} from '../../hooks';
 import { CropFrame } from '../cropFrame';
 import { Hint } from '../hint';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 import { RenderActiveImage } from '../renderActiveImage';
 import { RotateActions } from '../rotateActions';
 import { ZoomRange } from '../zoomRange';

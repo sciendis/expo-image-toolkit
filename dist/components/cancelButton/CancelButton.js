@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import { useImageEditorContext } from '../../hooks';
 import { CustomText } from '../customText';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 export const CancelButton = function ({ onCancel }) {
     const { config: { labels, colors }, } = useImageEditorContext();
     return (<TouchableOpacity onPress={onCancel}>

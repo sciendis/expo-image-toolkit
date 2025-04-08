@@ -1,10 +1,10 @@
 import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import { Surface, Title } from 'react-native-paper';
+import { useImageEditorContext } from '../../hooks';
 import { getExpoConstants } from '../../utils';
 import { CancelButton } from '../cancelButton';
 import { CropImageButton } from '../cropImageButton';
 import { ImageEditorProps } from '../imageEditor/ImageEditor';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 
 type Props = {
   onCancel: () => void;

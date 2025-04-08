@@ -1,7 +1,7 @@
 import { Gesture } from 'react-native-gesture-handler';
 import { useSharedValue } from 'react-native-reanimated';
-import { useImageEditorContext } from '../../components/imageEditor/useImageEditorContext';
 import { DefaultPositionState } from '../../constants';
+import { useImageEditorContext } from '../useImageEditorContext';
 import { useInitialEditorState } from '../useInitialEditorState';
 export const useResizeFromTopLeft = () => {
     const { boxPosition, boxScale } = useImageEditorContext();

@@ -4,14 +4,16 @@ import { OnSaveProps, SavedImageInfo } from '../types';
 
 type Props = {
   setDimensions: Dispatch<SetStateAction<SavedImageInfo>>;
-  setImage: Dispatch<SetStateAction<string | null>>;
-  setShowEditor: Dispatch<SetStateAction<boolean>>;
+  // setImage: Dispatch<SetStateAction<string | null>>;
+  // setShowEditor: Dispatch<SetStateAction<boolean>>;
+  onCrop: (editedImageUri: string) => void;
 };
 
 export const createSaveCroppedImage = function ({
   setDimensions,
-  setImage,
-  setShowEditor,
+  // setImage,
+  // setShowEditor,
+  onCrop,
 }: Props) {
   return async function saveCroppedImage({
     uri,
@@ -27,8 +29,9 @@ export const createSaveCroppedImage = function ({
       to: newUri,
     });
 
-    setImage(newUri);
-    setShowEditor(false);
+    // setImage(newUri);
+    // setShowEditor(false);
+    onCrop(newUri);
     setDimensions({ width, height, rotate });
   };
 };

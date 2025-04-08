@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import {
+  useImageEditorContext,
   useSetInitialPositionCropFrame,
   useSwitchEditor,
   useUpdateImageLayout,
@@ -10,7 +11,6 @@ import { ImageEditorHeader } from '../imageEditorHeader';
 import { LoadingIndicator } from '../loadingIndicator';
 import { SwitchEditorButtons } from '../switchEditorButtons';
 import { ImageEditorProps } from './ImageEditor';
-import { useImageEditorContext } from './useImageEditorContext';
 
 export const ImageEditorContainer = function ({
   onCancel,

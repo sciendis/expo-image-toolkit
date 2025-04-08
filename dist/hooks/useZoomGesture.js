@@ -1,8 +1,8 @@
 import { Gesture } from 'react-native-gesture-handler';
 import { useSharedValue, withTiming } from 'react-native-reanimated';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
 import { DefaultPositionState, MIN_ZOOM } from '../constants';
 import { clamp, getBoundingLimitation } from '../utils';
+import { useImageEditorContext } from './useImageEditorContext';
 export const useZoomGesture = function () {
     const { zoom, focalPoint, imagePosition, exactImageDimensions, config } = useImageEditorContext();
     const { maxZoom } = config;

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Animated, Dimensions, StyleSheet, TouchableOpacity, View, } from 'react-native';
+import { useImageEditorContext } from '../../hooks';
 import { CustomText } from '../customText';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 const { height } = Dimensions.get('screen');
 export const CropAlert = function ({ showAlert, handleAlertResponse }) {
     const { config: { labels, colors }, } = useImageEditorContext();

@@ -1,5 +1,5 @@
 import Svg, { Path } from 'react-native-svg';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { useImageEditorContext } from '../../hooks';
 
 export const RotateIcon = function () {
   const {

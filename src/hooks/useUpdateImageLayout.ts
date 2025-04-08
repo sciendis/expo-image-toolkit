@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
+import { useImageEditorContext } from './useImageEditorContext';
 
 /**
  * Step 2: Calculate Image layout based on ImageRef measurement.

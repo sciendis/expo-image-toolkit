@@ -1,8 +1,8 @@
 import { useAnimatedStyle } from 'react-native-reanimated';
-import { useImageEditorContext } from '../../components/imageEditor/useImageEditorContext';
+import { useImageEditorContext } from '../useImageEditorContext';
 export const useImageAnimatedTransform = function ({ centerX, centerY, }) {
     const { zoom, flipX, flipY, rotate, focalPoint, imagePosition } = useImageEditorContext();
-    return useAnimatedStyle(() => {
+    const animatedStyleImage = useAnimatedStyle(() => {
         'worklet';
         const focalPointVal = focalPoint.get();
         const imagePositionVal = imagePosition.get();
@@ -19,9 +19,15 @@ export const useImageAnimatedTransform = function ({ centerX, centerY, }) {
                 { translateY: -focalOffsetY },
                 { rotateX: `${flipX.get()}deg` },
                 { rotateY: `${flipY.get()}deg` },
-                { rotate: `${rotate.get()}deg` },
             ],
         };
     });
+    const animatedStyleContainer = useAnimatedStyle(() => {
+        'worklet';
+        return {
+            transform: [{ rotate: `${rotate.get()}deg` }],
+        };
+    });
+    return { animatedStyleContainer, animatedStyleImage };
 };
 //# sourceMappingURL=useImageAnimatedTransform.js.map

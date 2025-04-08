@@ -1,9 +1,9 @@
 import { StyleSheet, View } from 'react-native';
 import { Surface, Title } from 'react-native-paper';
+import { useImageEditorContext } from '../../hooks';
 import { getExpoConstants } from '../../utils';
 import { CancelButton } from '../cancelButton';
 import { CropImageButton } from '../cropImageButton';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 export const ImageEditorHeader = function ({ onCancel, onCrop, onLayout, }) {
     const { statusBarHeight } = getExpoConstants();
     const { config: { colors, labels }, } = useImageEditorContext();

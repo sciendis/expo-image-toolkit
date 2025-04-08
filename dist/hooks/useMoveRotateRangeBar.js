@@ -1,6 +1,6 @@
 import { Gesture } from 'react-native-gesture-handler';
 import { useAnimatedProps, useAnimatedReaction, useAnimatedStyle, useDerivedValue, useSharedValue, } from 'react-native-reanimated';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
+import { useImageEditorContext } from './useImageEditorContext';
 export const useMoveRotateRangeBar = function ({ currentX, rangeLayout, }) {
     const { rotate, previousRotate } = useImageEditorContext();
     const startX = useSharedValue(0);

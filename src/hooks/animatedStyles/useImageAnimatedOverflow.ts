@@ -3,8 +3,8 @@ import {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
-import { useImageEditorContext } from '../../components/imageEditor/useImageEditorContext';
 import { EditorModes } from '../../constants';
+import { useImageEditorContext } from '../useImageEditorContext';
 
 export const useImageAnimatedOverflow = function (
   activeEditor: EditorModes | null

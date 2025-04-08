@@ -1,16 +1,15 @@
 import { StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { useGetActiveImageStyles, useSetExactImageDimensions, useUpdateImageDimensions, } from '../../hooks';
+import { useGetActiveImageStyles, useImageEditorContext, useSetExactImageDimensions, useUpdateImageDimensions, } from '../../hooks';
 import { useImageAnimatedOverflow, useImageAnimatedTransform, } from '../../hooks/animatedStyles';
 import { setLayoutDimensions } from '../../utils';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 export const RenderActiveImage = function ({ activeEditor }) {
     const { image, imageRef, setContainerLayout } = useImageEditorContext();
     const onContainerLayout = setLayoutDimensions(setContainerLayout);
     const imageDimensions = useUpdateImageDimensions();
     const { top, left, centerX, centerY, calculatedImageDimensions } = useGetActiveImageStyles(imageDimensions);
     useSetExactImageDimensions(calculatedImageDimensions);
-    const animatedTransform = useImageAnimatedTransform({ centerX, centerY });
+    const { animatedStyleContainer, animatedStyleImage } = useImageAnimatedTransform({ centerX, centerY });
     const animatedOverflowStyle = useImageAnimatedOverflow(activeEditor);
     return (<Animated.View style={[
             styles.container,
@@ -19,8 +18,8 @@ export const RenderActiveImage = function ({ activeEditor }) {
             animatedOverflowStyle,
         ]} onLayout={onContainerLayout}>
       <Animated.View ref={imageRef} style={styles.imageContainer}>
-        <Animated.View style={styles.imageMovingContainer}>
-          <Animated.Image style={[styles.image, animatedTransform]} source={{ uri: image }}/>
+        <Animated.View style={[styles.imageMovingContainer, animatedStyleContainer]}>
+          <Animated.Image style={[styles.image, animatedStyleImage]} source={{ uri: image }}/>
         </Animated.View>
       </Animated.View>
     </Animated.View>);

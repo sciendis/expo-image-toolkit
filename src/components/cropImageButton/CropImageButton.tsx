@@ -1,8 +1,7 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useCropImage } from '../../hooks';
+import { useCropImage, useImageEditorContext } from '../../hooks';
 import { CustomText } from '../customText';
 import { ImageEditorProps } from '../imageEditor/ImageEditor';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 
 export const CropImageButton = function ({
   onCrop,

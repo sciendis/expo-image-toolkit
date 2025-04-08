@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { useImageEditorContext } from '../../hooks';
 export const ContentWrapper = function ({ children }) {
     const { config: { colors }, } = useImageEditorContext();
     const colorStylesContainer = { backgroundColor: colors.background };

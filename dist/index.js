@@ -1,2 +1,2 @@
-export { useExpoImageToolkit } from './components';
+export { useExpoImageToolkit, ExpoImageToolkitProvider } from './components';
 //# sourceMappingURL=index.js.map

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { useImageEditorContext } from '../../hooks';
 
 type Props = {
   children: React.ReactNode;

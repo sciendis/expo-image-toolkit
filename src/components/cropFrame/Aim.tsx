@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { useImageEditorContext } from '../../hooks';
 
 export const Aim = function () {
   const {

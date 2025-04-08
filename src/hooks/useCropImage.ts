@@ -1,7 +1,7 @@
 import { FlipType, ImageManipulator, SaveFormat } from 'expo-image-manipulator';
 import { ImageEditorProps } from '../components/imageEditor/ImageEditor';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
 import { getCropData } from '../utils';
+import { useImageEditorContext } from './useImageEditorContext';
 
 type Props = Pick<ImageEditorProps, 'onCrop'>;
 
@@ -67,7 +67,7 @@ export const useCropImage = function ({ onCrop }: Props) {
         uri: res.uri,
         width: cropData.width,
         height: cropData.height,
-        rotate: rotateVal,
+        rotate: Math.abs(rotateVal),
       });
     } catch (error) {
       console.error('Wrong Crop Data:', error);

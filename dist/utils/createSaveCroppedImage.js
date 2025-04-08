@@ -8,7 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as FileSystem from 'expo-file-system';
-export const createSaveCroppedImage = function ({ setDimensions, setImage, setShowEditor, }) {
+export const createSaveCroppedImage = function ({ setDimensions, 
+// setImage,
+// setShowEditor,
+onCrop, }) {
     return function saveCroppedImage({ uri, width, height, rotate, }) {
         return __awaiter(this, void 0, void 0, function* () {
             const fileName = `cropped_image_${Date.now()}.png`;
@@ -17,8 +20,9 @@ export const createSaveCroppedImage = function ({ setDimensions, setImage, setSh
                 from: uri,
                 to: newUri,
             });
-            setImage(newUri);
-            setShowEditor(false);
+            // setImage(newUri);
+            // setShowEditor(false);
+            onCrop(newUri);
             setDimensions({ width, height, rotate });
         });
     };

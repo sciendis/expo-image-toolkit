@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
 import { Dimensions } from '../types';
+import { useImageEditorContext } from './useImageEditorContext';
 
 export const useSetExactImageDimensions = function (
   calculatedImageDimensions: Dimensions | null

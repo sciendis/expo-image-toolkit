@@ -9,10 +9,10 @@ import {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
+import { MIN_ZOOM } from '../constants';
 import { LayoutDimensions } from '../types';
 import { clamp, getBoundingLimitation } from '../utils';
-import { MIN_ZOOM } from '../constants';
+import { useImageEditorContext } from './useImageEditorContext';
 
 type Props = {
   currentX: SharedValue<number>;

@@ -1,1 +1,4 @@
-export { useExpoImageToolkit } from './imageEditor';
+export {
+  ExpoImageToolkitProvider,
+  useExpoImageToolkit,
+} from './expoImageToolkit';

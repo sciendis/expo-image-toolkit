@@ -1,5 +1,5 @@
 import { useAnimatedStyle } from 'react-native-reanimated';
-import { useImageEditorContext } from '../../components/imageEditor/useImageEditorContext';
+import { useImageEditorContext } from '../useImageEditorContext';
 
 type Props = {
   centerX: number;
@@ -13,7 +13,7 @@ export const useImageAnimatedTransform = function ({
   const { zoom, flipX, flipY, rotate, focalPoint, imagePosition } =
     useImageEditorContext();
 
-  return useAnimatedStyle(() => {
+  const animatedStyleImage = useAnimatedStyle(() => {
     'worklet';
 
     const focalPointVal = focalPoint.get();
@@ -36,8 +36,17 @@ export const useImageAnimatedTransform = function ({
 
         { rotateX: `${flipX.get()}deg` },
         { rotateY: `${flipY.get()}deg` },
-        { rotate: `${rotate.get()}deg` },
       ],
     };
   });
+
+  const animatedStyleContainer = useAnimatedStyle(() => {
+    'worklet';
+
+    return {
+      transform: [{ rotate: `${rotate.get()}deg` }],
+    };
+  });
+
+  return { animatedStyleContainer, animatedStyleImage };
 };

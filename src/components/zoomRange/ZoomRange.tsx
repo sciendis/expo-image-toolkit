@@ -6,11 +6,11 @@ import {
 } from 'react-native-gesture-handler';
 import Animated, { useSharedValue } from 'react-native-reanimated';
 import {
+  useImageEditorContext,
   useMoveZoomRangeBar,
   useSetInitialZoomAnimatedText,
   useSetViewLayout,
 } from '../../hooks';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 
 const AnimatedText = Animated.createAnimatedComponent(TextInput);
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
 import { calculateImageOffset } from '../utils';
+import { useImageEditorContext } from './useImageEditorContext';
 
 /**
  * Step 3: Calculate CropFrame scale and position based on ImageLayout and

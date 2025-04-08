@@ -2,8 +2,8 @@ import { RotateCcw, RotateCw } from 'lucide-react-native';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { runOnJS, useAnimatedReaction, useDerivedValue, withTiming, } from 'react-native-reanimated';
+import { useImageEditorContext } from '../../hooks';
 import { getNextLeftAngle, getNextRightAngle, resetZoomState, } from '../../utils';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 import { Button } from './Button';
 import { FlipButtons } from './FlipButtons';
 export const RotateButtons = function () {

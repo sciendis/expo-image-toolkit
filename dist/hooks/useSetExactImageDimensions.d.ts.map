@@ -1,1 +1,1 @@
-{"version":3,"file":"useSetExactImageDimensions.d.ts","sourceRoot":"","sources":["../../src/hooks/useSetExactImageDimensions.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,UAAU,EAAE,MAAM,UAAU,CAAC;AAEtC,eAAO,MAAM,0BAA0B,8BACV,UAAU,GAAG,IAAI,SAS7C,CAAC"}
+{"version":3,"file":"useSetExactImageDimensions.d.ts","sourceRoot":"","sources":["../../src/hooks/useSetExactImageDimensions.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,UAAU,EAAE,MAAM,UAAU,CAAC;AAGtC,eAAO,MAAM,0BAA0B,8BACV,UAAU,GAAG,IAAI,SAS7C,CAAC"}

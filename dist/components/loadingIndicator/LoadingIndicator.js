@@ -1,5 +1,5 @@
 import { ActivityIndicator, Animated, StyleSheet, } from 'react-native';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { useImageEditorContext } from '../../hooks';
 export const LoadingIndicator = function ({ opacity, style }) {
     const { config: { colors }, } = useImageEditorContext();
     const colorStylesContainer = { backgroundColor: colors.background };

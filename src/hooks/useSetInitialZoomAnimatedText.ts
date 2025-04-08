@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
+import { useImageEditorContext } from './useImageEditorContext';
 
 export const useSetInitialZoomAnimatedText = function () {
   const { zoom } = useImageEditorContext();

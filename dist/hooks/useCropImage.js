@@ -8,8 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { FlipType, ImageManipulator, SaveFormat } from 'expo-image-manipulator';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
 import { getCropData } from '../utils';
+import { useImageEditorContext } from './useImageEditorContext';
 export const useCropImage = function ({ onCrop }) {
     const { imageLayout, containerLayout, image, boxPosition, boxScale, zoom, rotate, flipX, flipY, setIsSaving, focalPoint, imagePosition, exactImageDimensions, } = useImageEditorContext();
     const cropImage = () => __awaiter(this, void 0, void 0, function* () {
@@ -50,7 +50,7 @@ export const useCropImage = function ({ onCrop }) {
                 uri: res.uri,
                 width: cropData.width,
                 height: cropData.height,
-                rotate: rotateVal,
+                rotate: Math.abs(rotateVal),
             });
         }
         catch (error) {

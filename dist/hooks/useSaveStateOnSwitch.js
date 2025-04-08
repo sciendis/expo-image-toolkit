@@ -8,9 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { FlipType, ImageManipulator, SaveFormat } from 'expo-image-manipulator';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
 import { EditorModes } from '../constants';
 import { getCropData } from '../utils';
+import { useImageEditorContext } from './useImageEditorContext';
 export const useSaveStateOnSwitch = function () {
     const { rotate, zoom, image, setImage, setPreviousRotate, flipX, flipY, imageLayout, imagePosition, containerLayout, exactImageDimensions, focalPoint, initialBoxScale, initialBoxPosition, boxPosition, boxScale, } = useImageEditorContext();
     const saveStateOnSwitch = (activeEditor, shouldCrop = false) => __awaiter(this, void 0, void 0, function* () {

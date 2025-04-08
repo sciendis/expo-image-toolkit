@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
+import { useImageEditorContext } from '../../hooks';
 import { CustomText } from '../customText';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 export const Hint = function ({ message }) {
     const { config: { colors }, } = useImageEditorContext();
     const colorStyles = { color: colors.hint, backgroundColor: colors.hintBg };

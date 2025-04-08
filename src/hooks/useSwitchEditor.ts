@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState } from 'react';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
 import { EditorModes } from '../constants';
 import { useSetInitialEditor } from '../utils';
 import { useFadeTransition } from './useFadeTransition';
+import { useImageEditorContext } from './useImageEditorContext';
 import { useSaveStateOnSwitch } from './useSaveStateOnSwitch';
 
 /**

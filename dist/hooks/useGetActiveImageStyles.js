@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
+import { useImageEditorContext } from './useImageEditorContext';
 export const useGetActiveImageStyles = function (imageDimensions) {
     const { imageLayout, containerLayout } = useImageEditorContext();
     const isImageLoaded = imageDimensions &&

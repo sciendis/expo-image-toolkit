@@ -1,18 +1,19 @@
 import * as ImagePicker from 'expo-image-picker';
-import { Dispatch, SetStateAction } from 'react';
 
 type Props = {
-  setOriginalImage: Dispatch<SetStateAction<string | null>>;
-  setShowEditor: Dispatch<SetStateAction<boolean>>;
-  setImage: Dispatch<SetStateAction<string | null>>;
+  // setOriginalImage: Dispatch<SetStateAction<string | null>>;
+  // setShowEditor: Dispatch<SetStateAction<boolean>>;
+  // setImage: Dispatch<SetStateAction<string | null>>;
   acceptedFormats?: string[];
+  onImageSelected: (uri: string) => void;
 };
 
 export const createPickImageLibrary = function ({
-  setOriginalImage,
-  setShowEditor,
-  setImage,
+  // setOriginalImage,
+  // setShowEditor,
+  // setImage,
   acceptedFormats,
+  onImageSelected,
 }: Props) {
   return async function pickImageLibrary() {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -31,9 +32,10 @@ export const createPickImageLibrary = function ({
       if (!isAccepted) return result;
     }
 
-    setOriginalImage(uri);
-    setShowEditor(true);
-    setImage(null);
+    // setOriginalImage(uri);
+    // setShowEditor(true);
+    // setImage(null);
+    onImageSelected(uri);
 
     return result;
   };

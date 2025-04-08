@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import Animated, { useSharedValue } from 'react-native-reanimated';
-import { useMoveRotateRangeBar, useSetViewLayout } from '../../hooks';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import {
+  useImageEditorContext,
+  useMoveRotateRangeBar,
+  useSetViewLayout,
+} from '../../hooks';
 
 const AnimatedText = Animated.createAnimatedComponent(TextInput);
 

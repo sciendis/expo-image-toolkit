@@ -9,8 +9,8 @@ import {
   useDerivedValue,
   useSharedValue,
 } from 'react-native-reanimated';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
 import { LayoutDimensions } from '../types';
+import { useImageEditorContext } from './useImageEditorContext';
 
 type Props = {
   currentX: SharedValue<number>;

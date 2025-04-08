@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
+import { useImageEditorContext } from '../../hooks';
 import { useCropFrameAnimatedStyle } from '../../hooks/animatedStyles';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 import { Aim } from './Aim';
 import { Corners } from './Corners';
 import { ExtraBorders } from './ExtraBorders';

@@ -1,7 +1,7 @@
 import { Crop, ZoomIn } from 'lucide-react-native';
 import { StyleSheet, View } from 'react-native';
 import { EditorModes } from '../../constants';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
+import { useImageEditorContext } from '../../hooks';
 import { Button } from './Button';
 import { RotateIcon } from './RotateIcon';
 export const SwitchEditorButtons = function ({ activeEditor, switchEditor, }) {

@@ -1,8 +1,8 @@
 import { Gesture } from 'react-native-gesture-handler';
 import { useAnimatedProps, useAnimatedReaction, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
-import { clamp, getBoundingLimitation } from '../utils';
 import { MIN_ZOOM } from '../constants';
+import { clamp, getBoundingLimitation } from '../utils';
+import { useImageEditorContext } from './useImageEditorContext';
 export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }) {
     const { zoom, focalPoint, containerLayout, imagePosition, config } = useImageEditorContext();
     const { maxZoom } = config;

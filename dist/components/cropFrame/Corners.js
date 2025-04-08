@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { GestureDetector } from 'react-native-gesture-handler';
+import { useImageEditorContext } from '../../hooks';
 import { useResizeFromBottomLeft, useResizeFromBottomRight, useResizeFromTopLeft, useResizeFromTopRight, } from '../../hooks/useResizeCropFrame';
-import { useImageEditorContext } from '../imageEditor/useImageEditorContext';
 export const Corners = function () {
     const { config: { colors }, } = useImageEditorContext();
     const colorStyles = { borderColor: colors.cropFrameCorners };

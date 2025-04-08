@@ -1,7 +1,7 @@
 import { FlipType, ImageManipulator, SaveFormat } from 'expo-image-manipulator';
-import { useImageEditorContext } from '../components/imageEditor/useImageEditorContext';
 import { EditorModes } from '../constants';
 import { getCropData } from '../utils';
+import { useImageEditorContext } from './useImageEditorContext';
 
 export const useSaveStateOnSwitch = function () {
   const {

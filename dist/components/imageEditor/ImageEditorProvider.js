@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import { useSharedValue } from 'react-native-reanimated';
 import { DefaultConfig, DefaultDimensionState, DefaultLayoutState, DefaultPositionState, } from '../../constants';
+import { ImageEditorContext } from '../../hooks/useImageEditorContext/ImageEditorContext';
 import { DE } from '../../locales';
-import { ImageEditorContext } from './ImageEditorContext';
 export const ImageEditorProvider = function ({ image: initialImage, userConfig, children, }) {
     var _a;
     const initialBoxPosition = useSharedValue(DefaultPositionState);

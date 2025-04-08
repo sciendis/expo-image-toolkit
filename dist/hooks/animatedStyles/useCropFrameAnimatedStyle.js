@@ -1,5 +1,5 @@
 import { useAnimatedStyle } from 'react-native-reanimated';
-import { useImageEditorContext } from '../../components/imageEditor/useImageEditorContext';
+import { useImageEditorContext } from '../useImageEditorContext';
 export const useCropFrameAnimatedStyle = function () {
     const { boxPosition, boxScale } = useImageEditorContext();
     return useAnimatedStyle(() => {

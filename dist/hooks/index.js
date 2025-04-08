@@ -1,6 +1,7 @@
 export { useCropImage } from './useCropImage';
 export { useFadeTransition } from './useFadeTransition';
 export { useGetActiveImageStyles } from './useGetActiveImageStyles';
+export { useImageEditorContext } from './useImageEditorContext';
 export { useInitialEditorState } from './useInitialEditorState';
 export { useMoveCropFrame } from './useMoveCropFrame';
 export { useMoveRotateRangeBar } from './useMoveRotateRangeBar';
