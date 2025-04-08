@@ -38,56 +38,93 @@ You can configure the image editor with the following options:
 | `onSubmit`        | function     | (uri: string) => void | Custom handler for the submit event. Receives the edited image URI as an argument.     |
 | `acceptedFormats` | string[]     | []                    | Specifies accepted image formats for the pickImage function (e.g., [".jpg", ".jpeg"]). |
 
+### Notes
+
+> The onSubmit callback provides the URI of the edited image, which is also available as editedImageUri from the hook for external usage if needed.
+
 ## Usage Example
+
+### Setup
+
+To use the toolkit, wrap your app with the ExpoImageToolkitProvider at the root level to manage the full-screen image editor state:
+
+```tsx
+import { ExpoImageToolkitProvider } from "@sciendis/expo-image-toolkit";
+
+export default function App() {
+  return (
+    <ExpoImageToolkitProvider>
+      {/* Your app components */}
+    </ExpoImageToolkitProvider>
+  );
+}
+```
 
 ### Basic Usage
 
+Here’s an example of using the toolkit in a component:
+
 ```tsx
-import { useExpoImageToolkit } from '@sciendis/expo-image-toolkit';
-import { Button, Image } from 'react-native';
+import { useExpoImageToolkit } from "@sciendis/expo-image-toolkit";
+import { Button, Image, StyleSheet, View } from "react-native";
 
 const SelectImageComponent = function () {
-  const { ImageEditorModal, pickImage, image, takePhoto, aspectRatio } =
-    useExpoImageToolkit();
+  const { pickImage, takePhoto, editedImageUri, aspectRatio, width, height } =
+    useExpoImageToolkit({
+      locale: "de",
+      onSubmit: (uri) => console.log("Edited image URI:", uri),
+    });
 
   return (
-    <>
-      <Button title="Select Image" onPress={pickImage} />
-      <Button title="Take Photo" onPress={takePhoto} />
-      <View style={[styles.imageContainer, { aspectRatio }]}>
+    <View style={styles.container}>
+      <View style={[styles.imageContainer, { width, height }]}>
         <Image
           style={styles.image}
-          source={{ uri: image }}
-          resizeMode={isDefault ? 'cover' : 'contain'}
+          source={{ uri: editedImageUri }}
+          resizeMode="contain"
         />
       </View>
-      <ImageEditorModal />
-    </>
+      <View style={styles.buttonsContainer}>
+        <Button title="Select Image" onPress={pickImage} />
+        <Button title="Take Photo" onPress={takePhoto} />
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   imageContainer: {
     borderWidth: 1,
-    width: '100%',
-    maxHeight: '50%',
+    width: "100%",
+    maxHeight: "50%",
+    borderColor: "#cccccc",
     shadowOffset: { width: 2, height: 2 },
-    shadowColor: '#333333',
+    shadowColor: "#333333",
     shadowOpacity: 0.5,
     borderRadius: 10,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    marginTop: 20,
+    gap: 10,
   },
 });
 ```
 
 ### Explanation
 
-- `ImageEditorModal`: The modal that provides image editing functionality.
+- `ExpoImageToolkitProvider`: Must wrap your app or component tree to render the **full-screen** image editor at the root level.
 - `pickImage`: Opens the image picker to select an image.
 - `takePhoto`: Opens the camera to capture an image.
-- `image`: The processed image after cropping/rotating.
-- `aspectRatio`: If you need to display the cropped image in its exact cropped dimensions, use **aspectRatio** to ensure the image appears as expected while maintaining its proportions.
+- `editedImageUri`: The URI of the processed image after editing. Available for external use if needed, though it’s also passed to `onSubmit`.
+- `aspectRatio`, `width`, `height`: Use these to display the cropped image with its exact dimensions while maintaining proportions.
