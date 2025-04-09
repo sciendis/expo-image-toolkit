@@ -9,7 +9,8 @@ export const useExpoImageToolkit = function (userConfig) {
     const saveCroppedImage = createSaveCroppedImage({
         setDimensions,
         onCrop: (editedUri) => {
-            setEditedImageUri(editedUri);
+            if (editedUri)
+                setEditedImageUri(editedUri);
             hideEditor();
         },
     });

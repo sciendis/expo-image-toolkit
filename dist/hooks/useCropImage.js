@@ -55,6 +55,7 @@ export const useCropImage = function ({ onCrop }) {
         }
         catch (error) {
             console.error('Wrong Crop Data:', error);
+            onCrop(); // Call onCrop without arguments to close the editor if something fails, to avoid confusion caused by the loading indicator.
         }
     });
     return cropImage;

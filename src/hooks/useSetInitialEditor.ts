@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { EditorModes } from '../constants';
-import { useImageEditorContext } from '../hooks';
+import { useImageEditorContext } from './useImageEditorContext';
 
 export const useSetInitialEditor = function (
   switchEditor: (mode: EditorModes) => Promise<void>

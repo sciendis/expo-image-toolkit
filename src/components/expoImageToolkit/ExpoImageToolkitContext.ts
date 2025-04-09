@@ -4,7 +4,7 @@ import { OnSaveProps, UserConfig } from '../../types';
 type ExpoImageToolkitContextType = {
   showEditor: (
     selectedImage: string,
-    onCrop?: (props: OnSaveProps) => void,
+    onCrop: (props?: OnSaveProps) => void,
     userConfig?: UserConfig
   ) => void;
   hideEditor: () => void;

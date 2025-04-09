@@ -7,7 +7,7 @@ import { ImageEditorProvider } from './ImageEditorProvider';
 export type ImageEditorProps = {
   image: string | null;
   onCancel: () => void;
-  onCrop: (props: OnSaveProps) => void;
+  onCrop: (props?: OnSaveProps) => void;
   userConfig?: UserConfig;
 };
 

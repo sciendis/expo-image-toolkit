@@ -1,4 +1,4 @@
-import { LayoutDimensions } from '../types';
+import { LayoutDimensions } from "../types";
 type Props = {
     image: string;
     imageLayout: LayoutDimensions;

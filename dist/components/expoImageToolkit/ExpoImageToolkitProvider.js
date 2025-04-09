@@ -6,6 +6,7 @@ export const ExpoImageToolkitProvider = function ({ children }) {
     const [editorState, setEditorState] = useState({
         selectedImage: null,
         visible: false,
+        onCrop: () => { },
     });
     const showEditor = (selectedImage, onCrop, userConfig) => {
         setEditorState({
@@ -16,15 +17,13 @@ export const ExpoImageToolkitProvider = function ({ children }) {
         });
     };
     const hideEditor = () => {
-        setEditorState({
-            visible: false,
-            selectedImage: null,
-        });
+        setEditorState((prev) => (Object.assign(Object.assign({}, prev), { visible: false, selectedImage: null })));
     };
     const onCrop = (args) => {
         var _a, _b, _c;
         (_a = editorState.onCrop) === null || _a === void 0 ? void 0 : _a.call(editorState, args);
-        (_c = (_b = editorState.userConfig) === null || _b === void 0 ? void 0 : _b.onSubmit) === null || _c === void 0 ? void 0 : _c.call(_b, args.uri);
+        if (args === null || args === void 0 ? void 0 : args.uri)
+            (_c = (_b = editorState.userConfig) === null || _b === void 0 ? void 0 : _b.onSubmit) === null || _c === void 0 ? void 0 : _c.call(_b, args.uri);
     };
     const onCancel = () => {
         var _a, _b;

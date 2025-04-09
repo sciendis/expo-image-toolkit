@@ -8,7 +8,7 @@ type EditorState = {
   selectedImage: string | null;
   visible: boolean;
   userConfig?: UserConfig;
-  onCrop?: (props: OnSaveProps) => void;
+  onCrop: (props?: OnSaveProps) => void;
 };
 
 type Props = {
@@ -19,11 +19,12 @@ export const ExpoImageToolkitProvider = function ({ children }: Props) {
   const [editorState, setEditorState] = useState<EditorState>({
     selectedImage: null,
     visible: false,
+    onCrop: () => {},
   });
 
   const showEditor = (
     selectedImage: string,
-    onCrop?: (props: OnSaveProps) => void,
+    onCrop: (props?: OnSaveProps) => void,
     userConfig?: UserConfig
   ) => {
     setEditorState({
@@ -35,15 +36,16 @@ export const ExpoImageToolkitProvider = function ({ children }: Props) {
   };
 
   const hideEditor = () => {
-    setEditorState({
+    setEditorState((prev) => ({
+      ...prev,
       visible: false,
       selectedImage: null,
-    });
+    }));
   };
 
-  const onCrop = (args: OnSaveProps) => {
+  const onCrop = (args?: OnSaveProps) => {
     editorState.onCrop?.(args);
-    editorState.userConfig?.onSubmit?.(args.uri);
+    if (args?.uri) editorState.userConfig?.onSubmit?.(args.uri);
   };
 
   const onCancel = () => {

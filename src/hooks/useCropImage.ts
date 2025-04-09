@@ -1,5 +1,5 @@
 import { FlipType, ImageManipulator, SaveFormat } from 'expo-image-manipulator';
-import { ImageEditorProps } from '../components/imageEditor/ImageEditor';
+import { ImageEditorProps } from '../components/imageEditor';
 import { getCropData } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
 
@@ -71,6 +71,7 @@ export const useCropImage = function ({ onCrop }: Props) {
       });
     } catch (error) {
       console.error('Wrong Crop Data:', error);
+      onCrop(); // Call onCrop without arguments to close the editor if something fails, to avoid confusion caused by the loading indicator.
     }
   };
 

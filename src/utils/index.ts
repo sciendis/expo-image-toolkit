@@ -12,4 +12,3 @@ export { getNextLeftAngle } from './getNextLeftAngle';
 export { getNextRightAngle } from './getNextRightAngle';
 export { resetZoomState } from './resetZoomState';
 export { setLayoutDimensions } from './setLayoutDimensions';
-export { useSetInitialEditor } from './useSetInitialEditor';

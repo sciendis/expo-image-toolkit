@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { LayoutChangeEvent } from 'react-native';
-import { ImageEditorProps } from '../imageEditor/ImageEditor';
+import { ImageEditorProps } from '../imageEditor';
 type Props = {
     onCancel: () => void;
     onLayout?: (event: LayoutChangeEvent) => void;

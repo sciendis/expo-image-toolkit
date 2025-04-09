@@ -8,17 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as ImagePicker from 'expo-image-picker';
-export const createTakePhotoCamera = function ({ 
-// setOriginalImage,
-// setShowEditor,
-// setImage,
-onImageSelected, }) {
+export const createTakePhotoCamera = function ({ onImageSelected }) {
     return function takePhoto() {
         return __awaiter(this, void 0, void 0, function* () {
             const { status } = yield ImagePicker.requestCameraPermissionsAsync();
             if (status !== ImagePicker.PermissionStatus.GRANTED) {
                 alert('Sorry, we need camera permissions to make this work!');
-                // setImage(null);
                 return;
             }
             const result = yield ImagePicker.launchCameraAsync({
@@ -29,9 +24,6 @@ onImageSelected, }) {
             });
             if (result.canceled)
                 return result;
-            // setOriginalImage(result.assets[0].uri);
-            // setShowEditor(true);
-            // setImage(null);
             onImageSelected(result.assets[0].uri);
             return result;
         });

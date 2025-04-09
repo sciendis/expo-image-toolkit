@@ -1,4 +1,4 @@
-import { ImageEditorProps } from '../components/imageEditor/ImageEditor';
+import { ImageEditorProps } from '../components/imageEditor';
 type Props = Pick<ImageEditorProps, 'onCrop'>;
 export declare const useCropImage: ({ onCrop }: Props) => () => Promise<void>;
 export {};

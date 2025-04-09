@@ -8,11 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as ImagePicker from 'expo-image-picker';
-export const createPickImageLibrary = function ({ 
-// setOriginalImage,
-// setShowEditor,
-// setImage,
-acceptedFormats, onImageSelected, }) {
+export const createPickImageLibrary = function ({ acceptedFormats, onImageSelected, }) {
     return function pickImageLibrary() {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield ImagePicker.launchImageLibraryAsync({
@@ -29,9 +25,6 @@ acceptedFormats, onImageSelected, }) {
                 if (!isAccepted)
                     return result;
             }
-            // setOriginalImage(uri);
-            // setShowEditor(true);
-            // setImage(null);
             onImageSelected(uri);
             return result;
         });

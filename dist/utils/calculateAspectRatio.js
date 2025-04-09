@@ -7,11 +7,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Image } from 'react-native';
+import * as ImageManipulator from "expo-image-manipulator";
 export const calculateAspectRatio = function ({ image, imageLayout, }) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { width, height } = yield new Promise((resolve, reject) => {
-            Image.getSize(image, (width, height) => resolve({ width, height }), reject);
+        // TODO: Update deprecated function
+        const { width, height } = yield ImageManipulator.manipulateAsync(image, [], {
+            base64: false,
         });
         const imageAspectRatio = width / height;
         const viewAspectRatio = imageLayout.width / imageLayout.height;

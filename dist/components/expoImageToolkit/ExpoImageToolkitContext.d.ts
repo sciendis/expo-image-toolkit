@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { OnSaveProps, UserConfig } from '../../types';
 type ExpoImageToolkitContextType = {
-    showEditor: (selectedImage: string, onCrop?: (props: OnSaveProps) => void, userConfig?: UserConfig) => void;
+    showEditor: (selectedImage: string, onCrop: (props?: OnSaveProps) => void, userConfig?: UserConfig) => void;
     hideEditor: () => void;
 };
 export declare const ExpoImageToolkitContext: import("react").Context<ExpoImageToolkitContextType | undefined>;
