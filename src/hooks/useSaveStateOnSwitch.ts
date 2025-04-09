@@ -38,10 +38,17 @@ export const useSaveStateOnSwitch = function () {
 
         const manipulate = ImageManipulator.manipulate(image);
         let manipulator = manipulate.rotate(rotateVal);
-        if (flipX.get() === 180)
-          manipulator = manipulator.flip(FlipType.Vertical);
-        if (flipY.get() === 180)
-          manipulator = manipulator.flip(FlipType.Horizontal);
+        if (Math.abs(rotate.get()) % 180 === 90) {
+          if (flipX.get() === 180)
+            manipulator = manipulator.flip(FlipType.Horizontal);
+          if (flipY.get() === 180)
+            manipulator = manipulator.flip(FlipType.Vertical);
+        } else {
+          if (flipX.get() === 180)
+            manipulator = manipulator.flip(FlipType.Vertical);
+          if (flipY.get() === 180)
+            manipulator = manipulator.flip(FlipType.Horizontal);
+        }
 
         const result = await manipulator.renderAsync();
         const { uri } = await result.saveAsync(format);
