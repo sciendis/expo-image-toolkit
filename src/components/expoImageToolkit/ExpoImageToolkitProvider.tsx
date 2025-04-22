@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { OnSaveProps, UserConfig } from '../../types';
-import { StyleSheet, View } from 'react-native';
+import { BackHandler, StyleSheet, View } from 'react-native';
 import { ExpoImageToolkitContext } from './ExpoImageToolkitContext';
 import { ImageEditor } from '../imageEditor';
 
@@ -60,6 +60,26 @@ export const ExpoImageToolkitProvider = function ({ children }: Props) {
     editorState.userConfig?.onCancel?.();
     hideEditor();
   };
+
+  useEffect(() => {
+    const backAction = () => {
+      if (editorState.visible) {
+        onCancel();
+        return true;
+      }
+
+      return false;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction
+    );
+
+    return () => backHandler.remove();
+    // update BackEvent only when custom modal visibility changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editorState.visible]);
 
   return (
     <ExpoImageToolkitContext.Provider value={{ showEditor, hideEditor }}>
