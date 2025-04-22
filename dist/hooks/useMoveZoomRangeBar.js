@@ -4,7 +4,7 @@ import { MIN_ZOOM } from '../constants';
 import { clamp, getBoundingLimitation } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
 export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }) {
-    const { zoom, focalPoint, containerLayout, imagePosition, config } = useImageEditorContext();
+    const { zoom, focalPoint, imagePosition, config, dimensions: { centerX, centerY, displayedImageWidth, displayedImageHeight }, } = useImageEditorContext();
     const { maxZoom } = config;
     const startX = useSharedValue(0);
     const zoomRange = maxZoom - MIN_ZOOM;
@@ -26,10 +26,8 @@ export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }) {
     const moveRangeBar = Gesture.Pan()
         .onBegin(() => {
         startX.set(currentX.get());
-        const cx = containerLayout.width / 2;
-        const cy = containerLayout.height / 2;
         if (zoom.get() === 1)
-            focalPoint.set({ x: cx, y: cy });
+            focalPoint.set({ x: centerX, y: centerY });
     })
         .onUpdate((e) => {
         const newXRangebar = startX.get() + e.translationX;
@@ -38,7 +36,7 @@ export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }) {
         currentX.set(newX);
         const newZoom = calculateZoom(newX);
         zoom.set(parseFloat(newZoom.toFixed(2)));
-        const { minX, maxX, minY, maxY } = getBoundingLimitation(containerLayout, zoom, focalPoint);
+        const { minX, maxX, minY, maxY } = getBoundingLimitation({ displayedImageWidth, displayedImageHeight }, zoom, focalPoint);
         imagePosition.set((prevPos) => ({
             x: clamp(prevPos.x, minX, maxX),
             y: clamp(prevPos.y, minY, maxY),

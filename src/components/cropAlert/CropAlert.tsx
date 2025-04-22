@@ -3,11 +3,11 @@ import {
   Animated,
   Dimensions,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
-import { CustomText } from '../customText';
 
 const { height } = Dimensions.get('screen');
 
@@ -21,8 +21,8 @@ export const CropAlert = function ({ showAlert, handleAlertResponse }: Props) {
     config: { labels, colors },
   } = useImageEditorContext();
 
-  const fadeAnim = useRef(new Animated.Value(0)).current; // Opacity
-  const scaleAnim = useRef(new Animated.Value(0.8)).current; // Scale (starts smaller)
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnim = useRef(new Animated.Value(0.8)).current;
 
   useEffect(() => {
     Animated.parallel([
@@ -53,9 +53,9 @@ export const CropAlert = function ({ showAlert, handleAlertResponse }: Props) {
       ]}
     >
       <View style={styles.messageContainer}>
-        <CustomText style={[styles.message, { color: colors.alertMessage }]}>
+        <Text style={[styles.message, { color: colors.alertMessage }]}>
           {labels.CROP_ALERT}
-        </CustomText>
+        </Text>
       </View>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonsParent}>
@@ -63,9 +63,9 @@ export const CropAlert = function ({ showAlert, handleAlertResponse }: Props) {
             style={[styles.button, { backgroundColor: colors.alertNoBg }]}
             onPress={() => handleAlertResponse(false)} // No
           >
-            <CustomText style={[styles.buttonText, { color: colors.alertNo }]}>
+            <Text style={[styles.buttonText, { color: colors.alertNo }]}>
               {labels.NO}
-            </CustomText>
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonsParent}>
@@ -73,9 +73,9 @@ export const CropAlert = function ({ showAlert, handleAlertResponse }: Props) {
             style={[styles.button, { backgroundColor: colors.alertYesBg }]}
             onPress={() => handleAlertResponse(true)} // Yes
           >
-            <CustomText style={[styles.buttonText, { color: colors.alertYes }]}>
+            <Text style={[styles.buttonText, { color: colors.alertYes }]}>
               {labels.YES}
-            </CustomText>
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

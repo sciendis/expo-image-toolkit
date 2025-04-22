@@ -4,15 +4,14 @@ import { DefaultPositionState, MIN_ZOOM } from '../constants';
 import { clamp, getBoundingLimitation } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
 export const useZoomGesture = function () {
-    const { zoom, focalPoint, imagePosition, exactImageDimensions, config } = useImageEditorContext();
-    const { maxZoom } = config;
+    const { zoom, focalPoint, imagePosition, dimensions: { displayedImageWidth, displayedImageHeight }, config: { maxZoom }, } = useImageEditorContext();
     const prevImagePosition = useSharedValue(DefaultPositionState);
     const prevZoom = useSharedValue(1);
     const prevFocalPoint = useSharedValue(DefaultPositionState);
     const moveGesture = Gesture.Pan()
         .onBegin(() => prevImagePosition.set(Object.assign({}, imagePosition.get())))
         .onUpdate((e) => {
-        const { minX, maxX, minY, maxY } = getBoundingLimitation(exactImageDimensions, zoom, focalPoint);
+        const { minX, maxX, minY, maxY } = getBoundingLimitation({ displayedImageWidth, displayedImageHeight }, zoom, focalPoint);
         const prevImgPosVal = prevImagePosition.get();
         const newX = prevImgPosVal.x + e.translationX;
         const newY = prevImgPosVal.y + e.translationY;
@@ -36,7 +35,7 @@ export const useZoomGesture = function () {
         const newScale = prevZoomVal * event.scale;
         const newZoom = clamp(newScale, MIN_ZOOM, maxZoom);
         zoom.set(newZoom);
-        const { minX, maxX, minY, maxY } = getBoundingLimitation(exactImageDimensions, zoom, focalPoint);
+        const { minX, maxX, minY, maxY } = getBoundingLimitation({ displayedImageWidth, displayedImageHeight }, zoom, focalPoint);
         imagePosition.set((prevPosVal) => ({
             x: clamp(prevPosVal.x, minX, maxX),
             y: clamp(prevPosVal.y, minY, maxY),

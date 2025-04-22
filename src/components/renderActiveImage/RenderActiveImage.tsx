@@ -1,35 +1,27 @@
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { EditorModes } from '../../constants';
-import {
-  useGetActiveImageStyles,
-  useImageEditorContext,
-  useSetExactImageDimensions,
-  useUpdateImageDimensions,
-} from '../../hooks';
+import { useImageEditorContext } from '../../hooks';
 import {
   useImageAnimatedOverflow,
   useImageAnimatedTransform,
 } from '../../hooks/animatedStyles';
-import { setLayoutDimensions } from '../../utils';
+import { CropFrame } from '../cropFrame';
 
 type Props = {
-  activeEditor: EditorModes | null;
+  activeEditor: EditorModes;
 };
 
 export const RenderActiveImage = function ({ activeEditor }: Props) {
-  const { image, imageRef, setContainerLayout } = useImageEditorContext();
-  const onContainerLayout = setLayoutDimensions(setContainerLayout);
-
-  const imageDimensions = useUpdateImageDimensions();
-
-  const { top, left, centerX, centerY, calculatedImageDimensions } =
-    useGetActiveImageStyles(imageDimensions);
-
-  useSetExactImageDimensions(calculatedImageDimensions);
+  const {
+    image,
+    imageRef,
+    dimensions: { displayedImageWidth, displayedImageHeight },
+  } = useImageEditorContext();
 
   const { animatedStyleContainer, animatedStyleImage } =
-    useImageAnimatedTransform({ centerX, centerY });
+    useImageAnimatedTransform();
 
   const animatedOverflowStyle = useImageAnimatedOverflow(activeEditor);
 
@@ -37,12 +29,15 @@ export const RenderActiveImage = function ({ activeEditor }: Props) {
     <Animated.View
       style={[
         styles.container,
-        { top, left },
-        calculatedImageDimensions,
+        !!displayedImageWidth &&
+          !!displayedImageHeight && {
+            width: displayedImageWidth,
+            height: displayedImageHeight,
+          },
         animatedOverflowStyle,
       ]}
-      onLayout={onContainerLayout}
     >
+      {activeEditor === EditorModes.CROP && <CropFrame />}
       <Animated.View ref={imageRef} style={styles.imageContainer}>
         <Animated.View
           style={[styles.imageMovingContainer, animatedStyleContainer]}
@@ -59,10 +54,11 @@ export const RenderActiveImage = function ({ activeEditor }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    zIndex: -1,
+    zIndex: 1,
     width: '100%',
     height: '100%',
     maxHeight: '70%',
+    position: 'relative',
   },
   imageContainer: {
     width: '100%',

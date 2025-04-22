@@ -20,8 +20,13 @@ type Props = {
 };
 
 export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }: Props) {
-  const { zoom, focalPoint, containerLayout, imagePosition, config } =
-    useImageEditorContext();
+  const {
+    zoom,
+    focalPoint,
+    imagePosition,
+    config,
+    dimensions: { centerX, centerY, displayedImageWidth, displayedImageHeight },
+  } = useImageEditorContext();
   const { maxZoom } = config;
 
   const startX = useSharedValue(0);
@@ -57,10 +62,7 @@ export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }: Props) {
     .onBegin(() => {
       startX.set(currentX.get());
 
-      const cx = containerLayout.width / 2;
-      const cy = containerLayout.height / 2;
-
-      if (zoom.get() === 1) focalPoint.set({ x: cx, y: cy });
+      if (zoom.get() === 1) focalPoint.set({ x: centerX, y: centerY });
     })
     .onUpdate((e) => {
       const newXRangebar = startX.get() + e.translationX;
@@ -72,7 +74,7 @@ export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }: Props) {
       zoom.set(parseFloat(newZoom.toFixed(2)));
 
       const { minX, maxX, minY, maxY } = getBoundingLimitation(
-        containerLayout,
+        { displayedImageWidth, displayedImageHeight },
         zoom,
         focalPoint
       );

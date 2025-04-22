@@ -1,1 +1,1 @@
-{"version":3,"file":"useSaveStateOnSwitch.d.ts","sourceRoot":"","sources":["../../src/hooks/useSaveStateOnSwitch.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,WAAW,EAAE,MAAM,cAAc,CAAC;AAI3C,eAAO,MAAM,oBAAoB;sCAqBf,WAAW,GAAG,IAAI;;;;CAiGnC,CAAC"}
+{"version":3,"file":"useSaveStateOnSwitch.d.ts","sourceRoot":"","sources":["../../src/hooks/useSaveStateOnSwitch.ts"],"names":[],"mappings":"AACA,OAAO,EAAyB,WAAW,EAAE,MAAM,cAAc,CAAC;AASlE,eAAO,MAAM,oBAAoB;sCAkBf,WAAW;CAkF5B,CAAC"}

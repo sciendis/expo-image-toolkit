@@ -1,9 +1,9 @@
-export const getBoundingLimitation = function ({ width, height }, zoom, focalPoint) {
+export const getBoundingLimitation = function ({ displayedImageWidth, displayedImageHeight, }, zoom, focalPoint) {
     'worklet';
     const fp = focalPoint.get();
     const z = zoom.get();
-    const w = width;
-    const h = height;
+    const w = displayedImageWidth;
+    const h = displayedImageHeight;
     const sw = w * z;
     const sh = h * z;
     const focalRatioX = fp.x / w;

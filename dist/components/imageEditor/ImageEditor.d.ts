@@ -6,5 +6,5 @@ export type ImageEditorProps = {
     onCrop: (props?: OnSaveProps) => void;
     userConfig?: UserConfig;
 };
-export declare const ImageEditor: ({ image, onCrop, onCancel, userConfig, }: ImageEditorProps) => React.JSX.Element | null;
+export declare const ImageEditor: ({ image, onCrop, onCancel, userConfig, }: ImageEditorProps) => React.JSX.Element;
 //# sourceMappingURL=ImageEditor.d.ts.map

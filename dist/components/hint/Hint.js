@@ -1,11 +1,10 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
-import { CustomText } from '../customText';
 export const Hint = function ({ message }) {
     const { config: { colors }, } = useImageEditorContext();
     const colorStyles = { color: colors.hint, backgroundColor: colors.hintBg };
     return (<View style={styles.container}>
-      <CustomText style={[styles.message, colorStyles]}>{message}</CustomText>
+      <Text style={[styles.message, colorStyles]}>{message}</Text>
     </View>);
 };
 const styles = StyleSheet.create({

@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as FileSystem from 'expo-file-system';
-export const createSaveCroppedImage = function ({ setDimensions, onCrop, }) {
+export const createSaveCroppedImage = function ({ setSavedImageDimensions, onCrop, }) {
     return function saveCroppedImage(args = undefined) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!args) {
@@ -23,7 +23,7 @@ export const createSaveCroppedImage = function ({ setDimensions, onCrop, }) {
                 to: newUri,
             });
             onCrop(newUri);
-            setDimensions({ width, height, rotate });
+            setSavedImageDimensions({ width, height, rotate });
         });
     };
 };

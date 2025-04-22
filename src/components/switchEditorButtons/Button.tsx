@@ -3,10 +3,11 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { EditorModes } from '../../constants';
 import { useImageEditorContext } from '../../hooks';
 type Props = {
-  activeEditor: EditorModes | null;
+  activeEditor: EditorModes;
   editorName: EditorModes;
   switchEditor: (mode: EditorModes) => Promise<void>;
   children: React.ReactNode;
+  disabled?: boolean;
 };
 
 export const Button = function ({
@@ -14,6 +15,7 @@ export const Button = function ({
   editorName,
   switchEditor,
   children,
+  disabled,
 }: Props) {
   const {
     config: { colors },
@@ -29,6 +31,7 @@ export const Button = function ({
         },
       ]}
       onPress={() => switchEditor(editorName)}
+      disabled={disabled}
     >
       {children}
     </TouchableOpacity>

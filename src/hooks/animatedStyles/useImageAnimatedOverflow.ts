@@ -6,27 +6,21 @@ import {
 import { EditorModes } from '../../constants';
 import { useImageEditorContext } from '../useImageEditorContext';
 
-export const useImageAnimatedOverflow = function (
-  activeEditor: EditorModes | null
-) {
+export const useImageAnimatedOverflow = function (activeEditor: EditorModes) {
   const { zoom } = useImageEditorContext();
 
-  const isOverflowVisible = useSharedValue(true);
+  const isOverflowHidden = useSharedValue(true);
 
   useAnimatedReaction(
     () => zoom.get(),
-    (currentZoom) => {
-      isOverflowVisible.set(
-        currentZoom === 1 && activeEditor === EditorModes.ROTATE
-      );
-    },
+    (currentZoom) => isOverflowHidden.set(currentZoom !== 1),
     [activeEditor]
   );
 
   return useAnimatedStyle(() => {
     'worklet';
     return {
-      overflow: isOverflowVisible.get() ? 'visible' : 'hidden',
+      overflow: isOverflowHidden.get() ? 'hidden' : 'visible',
     };
   });
 };

@@ -2,7 +2,10 @@ import { SharedValue } from 'react-native-reanimated';
 import { Dimensions, Position } from '../types';
 
 export const getBoundingLimitation = function (
-  { width, height }: Dimensions,
+  {
+    displayedImageWidth,
+    displayedImageHeight,
+  }: Pick<Dimensions, 'displayedImageWidth' | 'displayedImageHeight'>,
   zoom: SharedValue<number>,
   focalPoint: SharedValue<Position>
 ) {
@@ -10,8 +13,8 @@ export const getBoundingLimitation = function (
 
   const fp = focalPoint.get();
   const z = zoom.get();
-  const w = width;
-  const h = height;
+  const w = displayedImageWidth;
+  const h = displayedImageHeight;
   const sw = w * z;
   const sh = h * z;
 

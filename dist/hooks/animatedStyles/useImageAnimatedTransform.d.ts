@@ -1,8 +1,4 @@
-type Props = {
-    centerX: number;
-    centerY: number;
-};
-export declare const useImageAnimatedTransform: ({ centerX, centerY, }: Props) => {
+export declare const useImageAnimatedTransform: () => {
     animatedStyleContainer: {
         transform: {
             rotate: string;
@@ -42,5 +38,4 @@ export declare const useImageAnimatedTransform: ({ centerX, centerY, }: Props) =
         })[];
     };
 };
-export {};
 //# sourceMappingURL=useImageAnimatedTransform.d.ts.map

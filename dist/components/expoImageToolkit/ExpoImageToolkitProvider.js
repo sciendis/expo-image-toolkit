@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ExpoImageToolkitContext } from './ExpoImageToolkitContext';
 import { ImageEditor } from '../imageEditor';
+/**
+ * @description This provider renders the editor modal in fullscreen mode at the root level.
+ * To use expoImageToolkit, you must wrap your entire app in this provider.
+ * It handles how the editor is opened after image selection or taking a photo, and how it's closed.
+ *
+ * @param children - Your app’s components.
+ * @returns The wrapped children along with the editor modal.
+ */
 export const ExpoImageToolkitProvider = function ({ children }) {
     const [editorState, setEditorState] = useState({
         selectedImage: null,
@@ -32,9 +40,11 @@ export const ExpoImageToolkitProvider = function ({ children }) {
     };
     return (<ExpoImageToolkitContext.Provider value={{ showEditor, hideEditor }}>
       {children}
+      {/** start editor modal */}
       {editorState.visible && (<View style={styles.modal}>
           <ImageEditor image={editorState.selectedImage} onCrop={onCrop} onCancel={onCancel} userConfig={editorState.userConfig}/>
         </View>)}
+      {/** end editor modal */}
     </ExpoImageToolkitContext.Provider>);
 };
 const styles = StyleSheet.create({

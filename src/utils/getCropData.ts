@@ -1,13 +1,9 @@
 import { ActionCrop } from 'expo-image-manipulator';
 import { SharedValue } from 'react-native-reanimated';
-import { Dimensions, LayoutDimensions, Position } from '../types';
-import { calculateImageOffset } from './calculateImageOffset';
+import { Dimensions, Position } from '../types';
 
 type Props = {
-  image: string;
-  imageLayout: LayoutDimensions;
-  containerLayout: LayoutDimensions;
-  exactImageDimensions: Dimensions;
+  dimensions: Dimensions;
   boxScale: SharedValue<Position>;
   boxPosition: SharedValue<Position>;
   imagePosition: SharedValue<Position>;
@@ -15,22 +11,14 @@ type Props = {
   focalPoint: SharedValue<Position>;
 };
 
-export const getCropData = async function ({
-  image,
-  imageLayout,
-  containerLayout,
-  exactImageDimensions,
+export const getCropData = function ({
+  dimensions: { scaleX, scaleY, centerX, centerY, imageWidth, imageHeight },
   boxScale,
   boxPosition,
   imagePosition,
   zoom,
   focalPoint,
 }: Props) {
-  const { scaleX, scaleY } = await calculateImageOffset({
-    image,
-    imageLayout,
-  });
-
   const focalPointVal = focalPoint.get();
   const boxScaleVal = boxScale.get();
   const zoomVal = zoom.get();
@@ -40,21 +28,15 @@ export const getCropData = async function ({
   const croppedWidth = boxScaleVal.x * scaleX;
   const croppedHeight = boxScaleVal.y * scaleY;
 
-  // calculate the center of the image
-  const imageCenterX = exactImageDimensions.width / 2;
-  const imageCenterY = exactImageDimensions.height / 2;
-
   // calculate the offset from the center caused by zooming on a focal point
-  const focalOffsetX =
-    ((imageCenterX - focalPointVal.x) * (zoomVal - 1)) / zoomVal;
-  const focalOffsetY =
-    ((imageCenterY - focalPointVal.y) * (zoomVal - 1)) / zoomVal;
+  const focalOffsetX = ((centerX - focalPointVal.x) * (zoomVal - 1)) / zoomVal;
+  const focalOffsetY = ((centerY - focalPointVal.y) * (zoomVal - 1)) / zoomVal;
 
   // calculate position covered image by cropFrame
-  const relativeScaleX = imageCenterX * (1 - 1 / zoomVal);
-  const relativeScaleY = imageCenterY * (1 - 1 / zoomVal);
-  const relativeOffsetX = boxPosVal.x - containerLayout.x - imagePosVal.x;
-  const relativeOffsetY = boxPosVal.y - containerLayout.y - imagePosVal.y;
+  const relativeScaleX = centerX * (1 - 1 / zoomVal);
+  const relativeScaleY = centerY * (1 - 1 / zoomVal);
+  const relativeOffsetX = boxPosVal.x - imagePosVal.x;
+  const relativeOffsetY = boxPosVal.y - imagePosVal.y;
 
   const relativeX = relativeOffsetX / zoomVal - focalOffsetX + relativeScaleX;
   const relativeY = relativeOffsetY / zoomVal - focalOffsetY + relativeScaleY;
@@ -62,8 +44,8 @@ export const getCropData = async function ({
   const cropData: ActionCrop['crop'] = {
     originX: relativeX * scaleX,
     originY: relativeY * scaleY,
-    width: croppedWidth / zoomVal,
-    height: croppedHeight / zoomVal,
+    width: Math.min(croppedWidth / zoomVal, imageWidth),
+    height: Math.min(croppedHeight / zoomVal, imageHeight),
   };
 
   return cropData;

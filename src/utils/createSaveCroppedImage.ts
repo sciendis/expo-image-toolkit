@@ -1,14 +1,14 @@
 import * as FileSystem from 'expo-file-system';
 import { Dispatch, SetStateAction } from 'react';
-import { OnSaveProps, SavedImageInfo } from '../types';
+import { OnSaveProps, SavedImageDimensions } from '../types';
 
 type Props = {
-  setDimensions: Dispatch<SetStateAction<SavedImageInfo>>;
+  setSavedImageDimensions: Dispatch<SetStateAction<SavedImageDimensions>>;
   onCrop: (editedImageUri?: string) => void;
 };
 
 export const createSaveCroppedImage = function ({
-  setDimensions,
+  setSavedImageDimensions,
   onCrop,
 }: Props) {
   return async function saveCroppedImage(
@@ -30,6 +30,6 @@ export const createSaveCroppedImage = function ({
     });
 
     onCrop(newUri);
-    setDimensions({ width, height, rotate });
+    setSavedImageDimensions({ width, height, rotate });
   };
 };

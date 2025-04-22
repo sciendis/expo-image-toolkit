@@ -1,1 +1,1 @@
-{"version":3,"file":"useImageAnimatedTransform.d.ts","sourceRoot":"","sources":["../../../src/hooks/animatedStyles/useImageAnimatedTransform.ts"],"names":[],"mappings":"AAGA,KAAK,KAAK,GAAG;IACX,OAAO,EAAE,MAAM,CAAC;IAChB,OAAO,EAAE,MAAM,CAAC;CACjB,CAAC;AAEF,eAAO,MAAM,yBAAyB,0BAGnC,KAAK;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CAwCP,CAAC"}
+{"version":3,"file":"useImageAnimatedTransform.d.ts","sourceRoot":"","sources":["../../../src/hooks/animatedStyles/useImageAnimatedTransform.ts"],"names":[],"mappings":"AAGA,eAAO,MAAM,yBAAyB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CAmDrC,CAAC"}

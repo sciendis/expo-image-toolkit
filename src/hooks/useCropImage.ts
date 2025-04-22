@@ -1,14 +1,11 @@
-import { FlipType, ImageManipulator, SaveFormat } from 'expo-image-manipulator';
 import { ImageEditorProps } from '../components/imageEditor';
-import { getCropData } from '../utils';
+import { getCropData, rotateAndCropManipulator } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
 
 type Props = Pick<ImageEditorProps, 'onCrop'>;
 
 export const useCropImage = function ({ onCrop }: Props) {
   const {
-    imageLayout,
-    containerLayout,
     image,
     boxPosition,
     boxScale,
@@ -19,21 +16,14 @@ export const useCropImage = function ({ onCrop }: Props) {
     setIsSaving,
     focalPoint,
     imagePosition,
-    exactImageDimensions,
+    dimensions,
   } = useImageEditorContext();
 
   const cropImage = async () => {
-    if (imageLayout.width <= 0 || imageLayout.height <= 0) return;
-
     setIsSaving(true);
 
-    const format = { format: SaveFormat.PNG };
-
-    const cropData = await getCropData({
-      image,
-      imageLayout,
-      containerLayout,
-      exactImageDimensions,
+    const cropData = getCropData({
+      dimensions,
       boxScale,
       boxPosition,
       imagePosition,
@@ -42,32 +32,19 @@ export const useCropImage = function ({ onCrop }: Props) {
     });
 
     try {
-      const rotateVal = rotate.get();
-
-      const manipulate = ImageManipulator.manipulate(image);
-      let manipulator = manipulate.rotate(rotateVal);
-      if (flipX.get() === 180)
-        manipulator = manipulator.flip(FlipType.Vertical);
-      if (flipY.get() === 180)
-        manipulator = manipulator.flip(FlipType.Horizontal);
-
-      if (Math.abs(rotateVal) % 180 === 90) {
-        // If this condition is true, the rotate value is 90, -90, 270, or -270.
-        // In this case, the width and height should be swapped.
-        const { width, height } = cropData;
-        cropData.width = height;
-        cropData.height = width;
-      }
-
-      manipulator = manipulator.crop(cropData);
-      const result = await manipulator.renderAsync();
-      const res = await result.saveAsync(format);
+      const result = await rotateAndCropManipulator({
+        image,
+        rotate,
+        flipX,
+        flipY,
+        cropData,
+      });
 
       onCrop({
-        uri: res.uri,
+        uri: result.uri,
         width: cropData.width,
         height: cropData.height,
-        rotate: Math.abs(rotateVal),
+        rotate: rotate.get(),
       });
     } catch (error) {
       console.error('Wrong Crop Data:', error);

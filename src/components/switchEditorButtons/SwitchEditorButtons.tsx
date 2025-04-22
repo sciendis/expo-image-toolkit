@@ -6,13 +6,15 @@ import { Button } from './Button';
 import { RotateIcon } from './RotateIcon';
 
 type Props = {
-  activeEditor: EditorModes | null;
+  activeEditor: EditorModes;
   switchEditor: (mode: EditorModes) => Promise<void>;
+  isLoading: boolean;
 };
 
 export const SwitchEditorButtons = function ({
   activeEditor,
   switchEditor,
+  isLoading,
 }: Props) {
   const {
     config: { enableRotate, enableZoom, colors },
@@ -25,6 +27,7 @@ export const SwitchEditorButtons = function ({
           activeEditor={activeEditor}
           switchEditor={switchEditor}
           editorName={EditorModes.ROTATE}
+          disabled={isLoading}
         >
           <RotateIcon />
         </Button>
@@ -34,6 +37,7 @@ export const SwitchEditorButtons = function ({
           activeEditor={activeEditor}
           switchEditor={switchEditor}
           editorName={EditorModes.ZOOM}
+          disabled={isLoading}
         >
           <ZoomIn color={colors.switchEditorIcon} />
         </Button>
@@ -43,6 +47,7 @@ export const SwitchEditorButtons = function ({
           activeEditor={activeEditor}
           switchEditor={switchEditor}
           editorName={EditorModes.CROP}
+          disabled={isLoading}
         >
           <Crop color={colors.switchEditorIcon} />
         </Button>

@@ -1,8 +1,8 @@
-/// <reference types="react" />
+import React from 'react';
 import { EditorModes } from '../../constants';
 type Props = {
-    activeEditor: EditorModes | null;
+    activeEditor: EditorModes;
 };
-export declare const RenderActiveImage: ({ activeEditor }: Props) => import("react").JSX.Element;
+export declare const RenderActiveImage: ({ activeEditor }: Props) => React.JSX.Element;
 export {};
 //# sourceMappingURL=RenderActiveImage.d.ts.map

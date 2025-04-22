@@ -1,1 +1,1 @@
-{"version":3,"file":"useFadeTransition.d.ts","sourceRoot":"","sources":["../../src/hooks/useFadeTransition.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,QAAQ,EAAE,MAAM,cAAc,CAAC;AAExC,eAAO,MAAM,iBAAiB;;;;;CAwC7B,CAAC;AAEF;;;;;;;;;;;;;;;;;;;;;;;;;;;;GA4BG"}
+{"version":3,"file":"useFadeTransition.d.ts","sourceRoot":"","sources":["../../src/hooks/useFadeTransition.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,QAAQ,EAAE,MAAM,cAAc,CAAC;AAExC,eAAO,MAAM,iBAAiB;;;;CA8B7B,CAAC"}

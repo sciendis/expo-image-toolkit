@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
   },
   headerItem: {
     marginHorizontal: 10,
-    padding: 4,
     flex: 1,
   },
   headerCenter: {

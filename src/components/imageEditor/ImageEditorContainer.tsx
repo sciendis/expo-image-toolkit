@@ -1,9 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import {
   useImageEditorContext,
-  useSetInitialPositionCropFrame,
+  useSetInitialDimensions,
   useSwitchEditor,
-  useUpdateImageLayout,
 } from '../../hooks';
 import { CropAlert } from '../cropAlert';
 import { ImageEditorContents } from '../imageEditorContents';
@@ -18,7 +17,7 @@ export const ImageEditorContainer = function ({
 }: Pick<ImageEditorProps, 'onCrop' | 'onCancel'>) {
   const {
     switchEditor,
-    opacityReverse,
+    opacity,
     isLoading,
     activeEditor,
     showAlert,
@@ -30,8 +29,7 @@ export const ImageEditorContainer = function ({
   } = useImageEditorContext();
   const colorStylesContainer = { backgroundColor: colors.background };
 
-  useSetInitialPositionCropFrame();
-  useUpdateImageLayout();
+  useSetInitialDimensions();
 
   if (isSaving) {
     return (
@@ -43,14 +41,16 @@ export const ImageEditorContainer = function ({
 
   return (
     <View style={[styles.container, colorStylesContainer]}>
-      {(isLoading || activeEditor === null) && (
-        <LoadingIndicator opacity={opacityReverse} /> // This loading must be here to load indicator while other things being loaded
-      )}
       <ImageEditorHeader onCancel={onCancel} onCrop={onCrop} />
-      <ImageEditorContents activeEditor={activeEditor} />
+      <ImageEditorContents
+        activeEditor={activeEditor}
+        isLoading={isLoading}
+        opacity={opacity}
+      />
       <SwitchEditorButtons
         activeEditor={activeEditor}
         switchEditor={switchEditor}
+        isLoading={isLoading}
       />
       <CropAlert
         showAlert={showAlert}

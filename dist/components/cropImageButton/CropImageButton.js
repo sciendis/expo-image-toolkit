@@ -1,16 +1,19 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useCropImage, useImageEditorContext } from '../../hooks';
-import { CustomText } from '../customText';
 export const CropImageButton = function ({ onCrop, }) {
     const cropImage = useCropImage({ onCrop });
     const { isSaving, config: { labels, colors }, } = useImageEditorContext();
-    return (<TouchableOpacity onPress={cropImage} disabled={isSaving}>
-      <CustomText style={[styles.title, { color: colors.headerButtons }]}>
+    return (<TouchableOpacity onPress={cropImage} style={styles.container} disabled={isSaving}>
+      <Text style={[styles.title, { color: colors.headerButtons }]}>
         {labels.SET}
-      </CustomText>
+      </Text>
     </TouchableOpacity>);
 };
 const styles = StyleSheet.create({
+    container: {
+        paddingHorizontal: 4,
+        paddingVertical: 8,
+    },
     title: {
         fontSize: 14,
     },

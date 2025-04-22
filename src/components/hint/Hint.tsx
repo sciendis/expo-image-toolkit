@@ -1,6 +1,5 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
-import { CustomText } from '../customText';
 
 type Props = {
   message: string;
@@ -14,7 +13,7 @@ export const Hint = function ({ message }: Props) {
 
   return (
     <View style={styles.container}>
-      <CustomText style={[styles.message, colorStyles]}>{message}</CustomText>
+      <Text style={[styles.message, colorStyles]}>{message}</Text>
     </View>
   );
 };

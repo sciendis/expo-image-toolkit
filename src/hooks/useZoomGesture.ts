@@ -6,9 +6,13 @@ import { clamp, getBoundingLimitation } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
 
 export const useZoomGesture = function () {
-  const { zoom, focalPoint, imagePosition, exactImageDimensions, config } =
-    useImageEditorContext();
-  const { maxZoom } = config;
+  const {
+    zoom,
+    focalPoint,
+    imagePosition,
+    dimensions: { displayedImageWidth, displayedImageHeight },
+    config: { maxZoom },
+  } = useImageEditorContext();
 
   const prevImagePosition = useSharedValue<Position>(DefaultPositionState);
   const prevZoom = useSharedValue(1);
@@ -18,7 +22,7 @@ export const useZoomGesture = function () {
     .onBegin(() => prevImagePosition.set({ ...imagePosition.get() }))
     .onUpdate((e) => {
       const { minX, maxX, minY, maxY } = getBoundingLimitation(
-        exactImageDimensions,
+        { displayedImageWidth, displayedImageHeight },
         zoom,
         focalPoint
       );
@@ -54,7 +58,7 @@ export const useZoomGesture = function () {
       zoom.set(newZoom);
 
       const { minX, maxX, minY, maxY } = getBoundingLimitation(
-        exactImageDimensions,
+        { displayedImageWidth, displayedImageHeight },
         zoom,
         focalPoint
       );

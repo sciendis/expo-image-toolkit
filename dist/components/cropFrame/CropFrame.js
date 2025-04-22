@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         pointerEvents: 'box-none',
         opacity: 0,
+        top: 0,
+        left: 0,
+        zIndex: 10,
     },
     box: {
         height: '100%',

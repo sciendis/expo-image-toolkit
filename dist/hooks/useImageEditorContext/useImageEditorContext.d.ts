@@ -4,8 +4,8 @@ export declare const useImageEditorContext: () => {
     image: string;
     setImage: import("react").Dispatch<import("react").SetStateAction<string>>;
     imageRef: import("react").RefObject<import("react-native").View>;
-    initialBoxPosition: import("react-native-reanimated").SharedValue<import("../..").Position>;
-    initialBoxScale: import("react-native-reanimated").SharedValue<import("../..").Position>;
+    dimensions: import("../..").Dimensions;
+    setDimensions: import("react").Dispatch<import("react").SetStateAction<import("../..").Dimensions>>;
     boxScale: import("react-native-reanimated").SharedValue<import("../..").Position>;
     boxPosition: import("react-native-reanimated").SharedValue<import("../..").Position>;
     rotate: import("react-native-reanimated").SharedValue<number>;
@@ -16,17 +16,9 @@ export declare const useImageEditorContext: () => {
     zoom: import("react-native-reanimated").SharedValue<number>;
     focalPoint: import("react-native-reanimated").SharedValue<import("../..").Position>;
     imagePosition: import("react-native-reanimated").SharedValue<import("../..").Position>;
-    offset: import("../..").Position;
-    setOffset: import("react").Dispatch<import("react").SetStateAction<import("../..").Position>>;
-    containerLayout: import("../..").LayoutDimensions;
-    setContainerLayout: import("react").Dispatch<import("react").SetStateAction<import("../..").LayoutDimensions>>;
-    imageLayout: import("../..").LayoutDimensions;
-    setImageLayout: import("react").Dispatch<import("react").SetStateAction<import("../..").LayoutDimensions>>;
-    activeEditor: import("../../constants").EditorModes | null;
-    setActiveEditor: import("react").Dispatch<import("react").SetStateAction<import("../../constants").EditorModes | null>>;
+    activeEditor: import("../../constants").EditorModes;
+    setActiveEditor: import("react").Dispatch<import("react").SetStateAction<import("../../constants").EditorModes>>;
     isSaving: boolean;
     setIsSaving: import("react").Dispatch<import("react").SetStateAction<boolean>>;
-    exactImageDimensions: import("../..").Dimensions;
-    setExactImageDimensions: import("react").Dispatch<import("react").SetStateAction<import("../..").Dimensions>>;
 };
 //# sourceMappingURL=useImageEditorContext.d.ts.map

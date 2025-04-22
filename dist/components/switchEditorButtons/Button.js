@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
-export const Button = function ({ activeEditor, editorName, switchEditor, children, }) {
+export const Button = function ({ activeEditor, editorName, switchEditor, children, disabled, }) {
     const { config: { colors }, } = useImageEditorContext();
     return (<TouchableOpacity style={[
             styles.container,
@@ -9,7 +9,7 @@ export const Button = function ({ activeEditor, editorName, switchEditor, childr
             activeEditor === editorName && {
                 backgroundColor: colors.switchEditorIconActive,
             },
-        ]} onPress={() => switchEditor(editorName)}>
+        ]} onPress={() => switchEditor(editorName)} disabled={disabled}>
       {children}
     </TouchableOpacity>);
 };
