@@ -1,1 +1,1 @@
-{"version":3,"file":"isRotate90.js","sourceRoot":"","sources":["../../src/utils/isRotate90.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,UAAU,GAAG,CAAC,KAAa,EAAE,EAAE,CAAC,IAAI,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,GAAG,KAAK,EAAE,CAAC"}
+{"version":3,"file":"isRotate90.js","sourceRoot":"","sources":["../../src/utils/isRotate90.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,MAAM,UAAU,GAAG,CAAC,KAAa,EAAE,EAAE;IAC1C,SAAS,CAAC;IACV,OAAO,IAAI,CAAC,GAAG,CAAC,KAAK,CAAC,GAAG,GAAG,KAAK,EAAE,CAAC;AACtC,CAAC,CAAC"}

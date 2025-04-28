@@ -27,5 +27,6 @@ export declare const DefaultDimensionState: {
         readonly x: 0;
         readonly y: 0;
     };
+    readonly rotateScale: 1;
 };
 //# sourceMappingURL=DefaultDimensionState.d.ts.map

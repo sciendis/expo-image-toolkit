@@ -52,7 +52,8 @@ export const RotateButtons = function () {
     const nextAngle = getNextRightAngle(currentAngle);
     if (currentAngle === nextAngle) return;
     resetZoomState(zoom, imagePosition);
-    rotate.set(withTiming(nextAngle - previousRotate));
+    const nextRotate = nextAngle - previousRotate;
+    rotate.set(withTiming(nextRotate));
   };
 
   const rotateLeft = () => {
@@ -60,7 +61,8 @@ export const RotateButtons = function () {
     const nextAngle = getNextLeftAngle(currentAngle);
     if (currentAngle === nextAngle) return;
     resetZoomState(zoom, imagePosition);
-    rotate.set(withTiming(nextAngle - previousRotate));
+    const nextRotate = nextAngle - previousRotate;
+    rotate.set(withTiming(nextRotate));
   };
 
   return (

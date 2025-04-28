@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Animated from 'react-native-reanimated';
+import Animated, {
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
 import { EditorModes } from '../../constants';
 import { useImageEditorContext } from '../../hooks';
 import {
@@ -17,13 +20,20 @@ export const RenderActiveImage = function ({ activeEditor }: Props) {
   const {
     image,
     imageRef,
-    dimensions: { displayedImageWidth, displayedImageHeight },
+    rotate,
+    dimensions: { displayedImageWidth, displayedImageHeight, rotateScale },
   } = useImageEditorContext();
 
   const { animatedStyleContainer, animatedStyleImage } =
     useImageAnimatedTransform();
 
   const animatedOverflowStyle = useImageAnimatedOverflow(activeEditor);
+
+  const animatedStyleRotateScale = useAnimatedStyle(() => {
+    'worklet';
+
+    return { transform: [{ scale: withTiming(1 / rotateScale) }] };
+  }, [rotate, rotateScale]);
 
   return (
     <Animated.View
@@ -35,10 +45,11 @@ export const RenderActiveImage = function ({ activeEditor }: Props) {
             height: displayedImageHeight,
           },
         animatedOverflowStyle,
+        animatedStyleRotateScale,
       ]}
     >
-      {activeEditor === EditorModes.CROP && <CropFrame />}
       <Animated.View ref={imageRef} style={styles.imageContainer}>
+        {activeEditor === EditorModes.CROP && <CropFrame />}
         <Animated.View
           style={[styles.imageMovingContainer, animatedStyleContainer]}
         >
@@ -54,7 +65,7 @@ export const RenderActiveImage = function ({ activeEditor }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    zIndex: 1,
+    zIndex: 0,
     width: '100%',
     height: '100%',
     maxHeight: '70%',

@@ -17,4 +17,5 @@ export const DefaultDimensionState = {
   initialCropFrameScale: DefaultPositionState,
   savedInitialCropFramePosition: DefaultPositionState,
   savedInitialCropFrameScale: DefaultPositionState,
+  rotateScale: 1,
 } as const;

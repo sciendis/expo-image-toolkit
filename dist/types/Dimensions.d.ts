@@ -16,5 +16,6 @@ export type Dimensions = {
     initialCropFrameScale: Position;
     savedInitialCropFramePosition: Position;
     savedInitialCropFrameScale: Position;
+    rotateScale: number;
 };
 //# sourceMappingURL=Dimensions.d.ts.map

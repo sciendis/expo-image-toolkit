@@ -35,7 +35,8 @@ export const RotateButtons = function () {
         if (currentAngle === nextAngle)
             return;
         resetZoomState(zoom, imagePosition);
-        rotate.set(withTiming(nextAngle - previousRotate));
+        const nextRotate = nextAngle - previousRotate;
+        rotate.set(withTiming(nextRotate));
     };
     const rotateLeft = () => {
         const currentAngle = totalRotation.get();
@@ -43,7 +44,8 @@ export const RotateButtons = function () {
         if (currentAngle === nextAngle)
             return;
         resetZoomState(zoom, imagePosition);
-        rotate.set(withTiming(nextAngle - previousRotate));
+        const nextRotate = nextAngle - previousRotate;
+        rotate.set(withTiming(nextRotate));
     };
     return (<View style={styles.container}>
       <Button onPress={rotateLeft} disabled={leftDisabled}>

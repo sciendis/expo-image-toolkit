@@ -49,7 +49,7 @@ You can configure the image editor with the following options:
 To use the toolkit, wrap your app with the ExpoImageToolkitProvider at the root level to manage the full-screen image editor state:
 
 ```tsx
-import { ExpoImageToolkitProvider } from "@sciendis/expo-image-toolkit";
+import { ExpoImageToolkitProvider } from '@sciendis/expo-image-toolkit';
 
 export default function App() {
   return (
@@ -65,14 +65,14 @@ export default function App() {
 Here’s an example of using the toolkit in a component:
 
 ```tsx
-import { useExpoImageToolkit } from "@sciendis/expo-image-toolkit";
-import { Button, Image, StyleSheet, View } from "react-native";
+import { useExpoImageToolkit } from '@sciendis/expo-image-toolkit';
+import { Button, Image, StyleSheet, View } from 'react-native';
 
 const SelectImageComponent = function () {
   const { pickImage, takePhoto, editedImageUri, aspectRatio, width, height } =
     useExpoImageToolkit({
-      locale: "de",
-      onSubmit: (uri) => console.log("Edited image URI:", uri),
+      locale: 'de',
+      onSubmit: (uri) => console.log('Edited image URI:', uri),
     });
 
   return (
@@ -95,26 +95,26 @@ const SelectImageComponent = function () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imageContainer: {
     borderWidth: 1,
-    width: "100%",
-    maxHeight: "50%",
-    borderColor: "#cccccc",
+    width: '100%',
+    maxHeight: '50%',
+    borderColor: '#cccccc',
     shadowOffset: { width: 2, height: 2 },
-    shadowColor: "#333333",
+    shadowColor: '#333333',
     shadowOpacity: 0.5,
     borderRadius: 10,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   image: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   buttonsContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 20,
     gap: 10,
   },
@@ -128,3 +128,47 @@ const styles = StyleSheet.create({
 - `takePhoto`: Opens the camera to capture an image.
 - `editedImageUri`: The URI of the processed image after editing. Available for external use if needed, though it’s also passed to `onSubmit`.
 - `aspectRatio`, `width`, `height`: Use these to display the cropped image with its exact dimensions while maintaining proportions.
+
+## Development Setup
+
+To set up the project locally for development:
+
+1. Install dependencies using npm (preferred):
+
+```bash
+npm install
+```
+
+2. Start the development server:
+
+```bash
+npm start
+```
+
+> Note: You can also use yarn if you prefer. Make sure to install all packages before starting the project.
+
+3. Run the app:
+
+```bash
+cd expo-image-toolkit
+npm install
+npm start
+```
+
+4. Check the errors before committing:
+
+```bash
+npm run precommit
+```
+
+### Development Files Overview (Where to start?)
+
+There are 3 separate files for starting development.
+
+1. useExpoImageToolkit/components/expoImageToolkit/useExpoImageToolkit.tsx
+2. useExpoImageToolkit/components/expoImageToolkit/ExpoImageToolkitProvider.tsx
+
+   > Note: These files handle opening/closing the editor and picking an image from the library or taking a photo.
+
+3. useExpoImageToolkit/components/imageEditor/ImageEditor.tsx
+   > Note: You can find all image editor actions (e.g., rotate, zoom, crop, etc.) starting from the third file and its nested components.
