@@ -1,0 +1,1 @@
+{"version":3,"file":"useBackButtonCustomModalHandler.d.ts","sourceRoot":"","sources":["../../src/hooks/useBackButtonCustomModalHandler.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,oBAAoB,EAAE,MAAM,UAAU,CAAC;AAEhD,KAAK,KAAK,GAAG;IACX,WAAW,EAAE,oBAAoB,CAAC;IAClC,QAAQ,EAAE,MAAM,IAAI,CAAC;CACtB,CAAC;AAEF;;;;;;;;GAQG;AACH,eAAO,MAAM,+BAA+B,+BAGzC,KAAK,SAoBP,CAAC"}

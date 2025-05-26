@@ -5,8 +5,15 @@ import { Position } from '../../types';
 import { useImageEditorContext } from '../useImageEditorContext';
 import { useInitialEditorState } from '../useInitialEditorState';
 
+/**
+ * @description Gesture handler for resizing the crop frame from the bottom-left corner.
+ *
+ * - Adjusts X and Y scale based on drag direction.
+ * - Enforces minimum width/height and bounding limits.
+ * - Updates both position and scale to preserve top-right anchor.
+ */
 export const useResizeFromBottomLeft = () => {
-  const { boxPosition, boxScale } = useImageEditorContext();
+  const { boxPosition, boxScale, saveHistoryState } = useImageEditorContext();
   const { minWidth, minHeight, minX, maxY } = useInitialEditorState();
 
   const startPosition = useSharedValue<Position>(DefaultPositionState);
@@ -39,6 +46,17 @@ export const useResizeFromBottomLeft = () => {
       boxScale.set({
         x: newWidth,
         y: newHeight,
+      });
+    })
+    .onEnd(() => {
+      const { x: spX, y: spY } = startPosition.get();
+      const { x: ssX, y: ssY } = startScale.get();
+      const { x: pX, y: pY } = boxPosition.get();
+      const { x: sX, y: sY } = boxScale.get();
+      if ((spX === pX && spY === pY) || (ssX === sX && ssY === sY)) return;
+      saveHistoryState({
+        boxPosition: startPosition.get(),
+        boxScale: startScale.get(),
       });
     });
 };

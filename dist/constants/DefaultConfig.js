@@ -1,5 +1,8 @@
 import { EN } from '../locales';
 import { Colors } from '../styles';
+/**
+ * @description The default config of the `ImageEditor`. By default the English labels will load.
+ */
 export const DefaultConfig = {
     locale: 'en',
     maxZoom: 10,

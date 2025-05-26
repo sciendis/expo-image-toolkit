@@ -12,11 +12,21 @@ import { useImageEditorContext } from '../../hooks';
 const { height } = Dimensions.get('screen');
 
 type Props = {
-  showAlert: boolean;
+  visible: boolean;
   handleAlertResponse: (shouldCrop: boolean) => Promise<void>;
 };
 
-export const CropAlert = function ({ showAlert, handleAlertResponse }: Props) {
+/**
+ * @description This alert appears when users modify the CropFrame and try to switch editors.
+ * It shows a confirmation dialog asking whether they want to crop or not before proceeding.
+ *
+ * @param props - An object containing:
+ * - `visible`: `boolean` – Check if the alert should be shown (CropFrame has changed).
+ * - `handleAlertResponse`: `(shouldCrop: boolean) => Promise<void>` – Callback returning the user’s choice (to crop or not).
+ *
+ * @returns A Dialog animated alert with YES and NO buttons.
+ */
+export const CropAlert = function ({ visible, handleAlertResponse }: Props) {
   const {
     config: { labels, colors },
   } = useImageEditorContext();
@@ -27,17 +37,17 @@ export const CropAlert = function ({ showAlert, handleAlertResponse }: Props) {
   useEffect(() => {
     Animated.parallel([
       Animated.timing(fadeAnim, {
-        toValue: showAlert ? 1 : 0,
+        toValue: visible ? 1 : 0,
         duration: 300,
         useNativeDriver: true,
       }),
       Animated.timing(scaleAnim, {
-        toValue: showAlert ? 1 : 0.8,
+        toValue: visible ? 1 : 0.8,
         duration: 300,
         useNativeDriver: true,
       }),
     ]).start();
-  }, [showAlert]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [visible]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Animated.View
@@ -46,7 +56,7 @@ export const CropAlert = function ({ showAlert, handleAlertResponse }: Props) {
         {
           opacity: fadeAnim,
           transform: [{ translateY: -height / 16 }, { scale: scaleAnim }],
-          zIndex: showAlert ? 1000 : -20,
+          zIndex: visible ? 1000 : -20,
           backgroundColor: colors.alertBg,
           shadowColor: colors.alertShadow,
         },

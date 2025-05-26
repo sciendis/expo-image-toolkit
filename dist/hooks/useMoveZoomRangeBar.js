@@ -3,10 +3,27 @@ import { useAnimatedProps, useAnimatedReaction, useAnimatedStyle, useSharedValue
 import { MIN_ZOOM } from '../constants';
 import { clamp, getBoundingLimitation } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
+/**
+ * @description Gesture handler for the ZoomRangeBar. Allows users to zoom between 1 and the maxZoom defined in the config (default is 10).
+ * Also displays the current zoom level as text.
+ *
+ * If zoom is at 1x, the focal point resets to the center of the image.
+ * Otherwise, the range bar continues zooming based on the last focal point
+ * (set by pinch or double tap) until it resets back to 1x.
+ *
+ * @param props - An object containing:
+ * - `currentX`: `SharedValue<number>` – Shared value that holds the current horizontal position of the zoom range pointer.
+ * - `rangeLayout`: `LayoutDimensions` – Object representing the layout dimensions of the zoom range bar.
+ *
+ * @returns { moveRangeBar, styledRangeAnimated, animatedTextProps: animatedTextProps as Partial<AnimatedProps<TextInputProps>> } An object containing:
+ * - `moveRangeBar`: `PanGesture` – Gesture handler to move the zoom range bar.
+ * - `styledRangeAnimated`: `AnimatedStyle` – Animated style used to update the pointer’s position.
+ * - `animatedTextProps`: `Partial<AnimatedProps<TextInputProps>>` – Animated props used to show the current zoom level as text.
+ */
 export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }) {
-    const { zoom, focalPoint, imagePosition, config, dimensions: { centerX, centerY, displayedImageWidth, displayedImageHeight }, } = useImageEditorContext();
-    const { maxZoom } = config;
+    const { zoom, focalPoint, imagePosition, saveHistoryState, dimensions: { centerX, centerY, displayedImageWidth, displayedImageHeight }, config: { maxZoom }, } = useImageEditorContext();
     const startX = useSharedValue(0);
+    const prevZoom = useSharedValue(1);
     const zoomRange = maxZoom - MIN_ZOOM;
     const pointerWidth = 20;
     const effectiveWidth = rangeLayout.width - pointerWidth;
@@ -26,7 +43,9 @@ export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }) {
     const moveRangeBar = Gesture.Pan()
         .onBegin(() => {
         startX.set(currentX.get());
-        if (zoom.get() === 1)
+        const newZoom = zoom.get();
+        prevZoom.set(newZoom);
+        if (newZoom === 1)
             focalPoint.set({ x: centerX, y: centerY });
     })
         .onUpdate((e) => {
@@ -41,6 +60,13 @@ export const useMoveZoomRangeBar = function ({ currentX, rangeLayout }) {
             x: clamp(prevPos.x, minX, maxX),
             y: clamp(prevPos.y, minY, maxY),
         }));
+    })
+        .onEnd(() => {
+        const newZoom = zoom.get();
+        const prevZoomVal = prevZoom.get();
+        if (prevZoomVal === newZoom)
+            return;
+        saveHistoryState({ zoom: prevZoomVal });
     });
     const styledRangeAnimated = useAnimatedStyle(() => {
         'worklet';

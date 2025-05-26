@@ -4,6 +4,17 @@ import { EditorModes } from '../../constants';
 import { useImageEditorContext } from '../../hooks';
 import { Button } from './Button';
 import { RotateIcon } from './RotateIcon';
+/**
+ * @description Renders buttons for switching between available editors: (Rotate/Zoom/Crop).
+ * Each button activates its related editor when pressed.
+ *
+ * @param props - An object containing:
+ * - `activeEditor`: `EditorModes` – The currently active editor mode.
+ * - `switchEditor`: `(mode: EditorModes) => Promise<void>` – Function to handle switch editor modes.
+ * - `isLoading`: `boolean` – Disables buttons while the image is processing.
+ *
+ * @returns A horizontal row of editor selection buttons.
+ */
 export const SwitchEditorButtons = function ({ activeEditor, switchEditor, isLoading, }) {
     const { config: { enableRotate, enableZoom, colors }, } = useImageEditorContext();
     return (<View style={stylesScreens.container}>

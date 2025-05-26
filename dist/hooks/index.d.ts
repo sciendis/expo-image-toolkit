@@ -1,3 +1,4 @@
+export { useBackButtonCustomModalHandler } from './useBackButtonCustomModalHandler';
 export { useCropImage } from './useCropImage';
 export { useFadeTransition } from './useFadeTransition';
 export { useImageEditorContext } from './useImageEditorContext';
@@ -9,5 +10,6 @@ export { useSetInitialDimensions } from './useSetInitialDimensions';
 export { useSetInitialZoomAnimatedText } from './useSetInitialZoomAnimatedText';
 export { useSetViewLayout } from './useSetViewLayout';
 export { useSwitchEditor } from './useSwitchEditor';
+export { useUndoRedoSnapshot } from './useUndoRedoSnapshot';
 export { useZoomGesture } from './useZoomGesture';
 //# sourceMappingURL=index.d.ts.map

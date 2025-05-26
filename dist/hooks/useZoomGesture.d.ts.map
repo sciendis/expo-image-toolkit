@@ -1,1 +1,1 @@
-{"version":3,"file":"useZoomGesture.d.ts","sourceRoot":"","sources":["../../src/hooks/useZoomGesture.ts"],"names":[],"mappings":"AAOA,eAAO,MAAM,cAAc;;CA8F1B,CAAC"}
+{"version":3,"file":"useZoomGesture.d.ts","sourceRoot":"","sources":["../../src/hooks/useZoomGesture.ts"],"names":[],"mappings":"AAOA;;;;GAIG;AACH,eAAO,MAAM,cAAc,sHA8G1B,CAAC"}

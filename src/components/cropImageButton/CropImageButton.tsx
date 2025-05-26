@@ -2,6 +2,11 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useCropImage, useImageEditorContext } from '../../hooks';
 import { ImageEditorProps } from '../imageEditor';
 
+/**
+ * @description The finish Button that appears on top-right corner of the editor modal header.
+ * @param {() => void} onCrop - The function to call when the finish button is pressed.
+ * @returns A touchable finish button component.
+ */
 export const CropImageButton = function ({
   onCrop,
 }: Pick<ImageEditorProps, 'onCrop'>) {

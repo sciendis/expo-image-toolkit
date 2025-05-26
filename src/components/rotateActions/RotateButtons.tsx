@@ -16,10 +16,21 @@ import {
 import { Button } from './Button';
 import { FlipButtons } from './FlipButtons';
 
+/**
+ * @description Renders Rotate-Left/Right buttons.
+ * Also includes FlipButtons between them.
+ * Handles total rotation logic and enables/disables buttons at ±360.
+ * @returns Rotate Buttons and Flip Buttons.
+ */
 export const RotateButtons = function () {
-  const { rotate, previousRotate, zoom, imagePosition, config } =
-    useImageEditorContext();
-  const { colors } = config;
+  const {
+    rotate,
+    previousRotate,
+    zoom,
+    imagePosition,
+    saveHistoryState,
+    config: { colors },
+  } = useImageEditorContext();
 
   /** previousRotate holding the rotation angle from the last time that users changing image rotation and switch on another editor,
    * then because saving totally a new image from rotation, we keep the last state of rotation in previousRotate state
@@ -54,6 +65,7 @@ export const RotateButtons = function () {
     resetZoomState(zoom, imagePosition);
     const nextRotate = nextAngle - previousRotate;
     rotate.set(withTiming(nextRotate));
+    saveHistoryState();
   };
 
   const rotateLeft = () => {

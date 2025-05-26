@@ -1,3 +1,11 @@
+/**
+ * @description Provides two animated styles:
+ * - `animatedStyleContainer`: Applies image rotation.
+ * - `animatedStyleImage`: Applies zoom, pan (image position), focal zooming, and flip transformations.
+ *
+ * Handles correct positioning of the zoomed image relative to the focal point.
+ * Rotation of ±180° inverts the coordinate axis, which is accounted for during transformation.
+ */
 export declare const useImageAnimatedTransform: () => {
     animatedStyleContainer: {
         transform: {

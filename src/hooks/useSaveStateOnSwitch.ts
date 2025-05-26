@@ -1,4 +1,3 @@
-import { ImageManipulator, SaveFormat } from 'expo-image-manipulator';
 import { DefaultDimensionState, EditorModes } from '../constants';
 import {
   getCropData,
@@ -8,6 +7,13 @@ import {
 } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
 
+/**
+ * @description This hook returns the saveStateOnSwitch function, which saves the current state of the RotateEditor
+ * when switching to another editor, only if the rotation value is ±90/±270. In such cases, it generates a new image.
+ * For other rotation values (like ±180/±360), this function won’t run since the image dimensions stay the same.
+ * It also checks if the CropFrame was modified. If changes are detected while switching editors, an alert will ask whether to keep the cropped area.
+ * If the user selects “No,” nothing happens. If they confirm, a new image is generated using the current CropFrame.
+ */
 export const useSaveStateOnSwitch = function () {
   const {
     rotate,
@@ -23,15 +29,14 @@ export const useSaveStateOnSwitch = function () {
     boxScale,
     dimensions,
     setDimensions,
+    saveHistoryState,
   } = useImageEditorContext();
 
-  const saveStateOnSwitch = async (
+  return async function saveStateOnSwitch(
     activeEditor: EditorModes,
     shouldCrop = false
-  ) => {
+  ) {
     if (activeEditor === EditorModes.ZOOM) return true;
-
-    const format = { format: SaveFormat.PNG };
 
     const rotateVal = rotate.get();
 
@@ -53,7 +58,6 @@ export const useSaveStateOnSwitch = function () {
         flipX.set(0);
         flipY.set(0);
         boxScale.set({ x: width, y: height });
-        return true;
       } catch (error) {
         console.error('Error rotating image:', error);
       }
@@ -86,16 +90,25 @@ export const useSaveStateOnSwitch = function () {
       imagePosition,
       zoom,
       focalPoint,
+      activeEditor,
     });
 
     try {
-      const manipulate = ImageManipulator.manipulate(image);
-      const manipulator = manipulate.crop(cropData);
-      const result = await manipulator.renderAsync();
-      const { uri } = await result.saveAsync(format);
+      const { uri } = await rotateAndCropManipulator({
+        image,
+        rotate,
+        flipX,
+        flipY,
+        cropData,
+      });
 
+      saveHistoryState({ image, dimensions });
       setImage(uri);
+      setPreviousRotate((prev) => (prev + rotateVal) % 360);
       setDimensions(DefaultDimensionState);
+      rotate.set(0);
+      flipX.set(0);
+      flipY.set(0);
     } catch (error) {
       console.error('Error saving image:', error);
     }
@@ -106,6 +119,4 @@ export const useSaveStateOnSwitch = function () {
 
     return true;
   };
-
-  return { saveStateOnSwitch };
 };

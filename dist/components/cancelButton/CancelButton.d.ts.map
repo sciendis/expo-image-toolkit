@@ -1,1 +1,1 @@
-{"version":3,"file":"CancelButton.d.ts","sourceRoot":"","sources":["../../../src/components/cancelButton/CancelButton.tsx"],"names":[],"mappings":";AAGA,KAAK,KAAK,GAAG;IACX,QAAQ,EAAE,MAAM,IAAI,CAAC;CACtB,CAAC;AACF,eAAO,MAAM,YAAY,iBAA2B,KAAK,gCAYxD,CAAC"}
+{"version":3,"file":"CancelButton.d.ts","sourceRoot":"","sources":["../../../src/components/cancelButton/CancelButton.tsx"],"names":[],"mappings":";AAGA,KAAK,KAAK,GAAG;IACX,QAAQ,EAAE,MAAM,IAAI,CAAC;CACtB,CAAC;AAEF;;;;GAIG;AACH,eAAO,MAAM,YAAY,iBAA2B,KAAK,gCAYxD,CAAC"}

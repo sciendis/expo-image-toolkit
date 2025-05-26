@@ -1,1 +1,1 @@
-{"version":3,"file":"useImageAnimatedOverflow.d.ts","sourceRoot":"","sources":["../../../src/hooks/animatedStyles/useImageAnimatedOverflow.ts"],"names":[],"mappings":"AAKA,OAAO,EAAE,WAAW,EAAE,MAAM,iBAAiB,CAAC;AAG9C,eAAO,MAAM,wBAAwB,iBAA2B,WAAW;;CAiB1E,CAAC"}
+{"version":3,"file":"useImageAnimatedOverflow.d.ts","sourceRoot":"","sources":["../../../src/hooks/animatedStyles/useImageAnimatedOverflow.ts"],"names":[],"mappings":"AAKA,OAAO,EAAE,WAAW,EAAE,MAAM,iBAAiB,CAAC;AAG9C;;;;;;;;;;;;GAYG;AACH,eAAO,MAAM,wBAAwB,iBAA2B,WAAW;;CAiB1E,CAAC"}

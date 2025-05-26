@@ -5,6 +5,16 @@ import { ImageEditorContents } from '../imageEditorContents';
 import { ImageEditorHeader } from '../imageEditorHeader';
 import { LoadingIndicator } from '../loadingIndicator';
 import { SwitchEditorButtons } from '../switchEditorButtons';
+/**
+ * @description This container handles switching between editors (Zoom/Rotate/Crop) and renders the header, footer, and contents of the editor.
+ * If saving is in progress, it shows a full-screen loading view.
+ *
+ * @param props - An object containing:
+ * - `onCancel`: `() => void` – Callback triggered when the user presses the cancel button.
+ * - `onCrop`: `() => void` – Callback triggered when the user presses the finish button.
+ *
+ * @returns The view that renders the editor components based on the active/selected editor or the loading screen while processing the image.
+ */
 export const ImageEditorContainer = function ({ onCancel, onCrop, }) {
     const { switchEditor, opacity, isLoading, activeEditor, showAlert, handleAlertResponse, } = useSwitchEditor();
     const { isSaving, config: { colors }, } = useImageEditorContext();
@@ -19,7 +29,7 @@ export const ImageEditorContainer = function ({ onCancel, onCrop, }) {
       <ImageEditorHeader onCancel={onCancel} onCrop={onCrop}/>
       <ImageEditorContents activeEditor={activeEditor} isLoading={isLoading} opacity={opacity}/>
       <SwitchEditorButtons activeEditor={activeEditor} switchEditor={switchEditor} isLoading={isLoading}/>
-      <CropAlert showAlert={showAlert} handleAlertResponse={handleAlertResponse}/>
+      <CropAlert visible={showAlert} handleAlertResponse={handleAlertResponse}/>
     </View>);
 };
 const styles = StyleSheet.create({

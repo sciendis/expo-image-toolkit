@@ -6,6 +6,12 @@ import { Aim } from './Aim';
 import { Corners } from './Corners';
 import { ExtraBorders } from './ExtraBorders';
 
+/**
+ * @description The main component for the CropFrame UI.
+ * It has borders, central Aim marker, draggable corners, and additional styling.
+ *
+ * @returns The whole CropFrame box with animated styling and subcomponents.
+ */
 export const CropFrame = function () {
   const {
     config: { colors },

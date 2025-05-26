@@ -1,1 +1,1 @@
-{"version":3,"file":"RotateButtons.d.ts","sourceRoot":"","sources":["../../../src/components/rotateActions/RotateButtons.tsx"],"names":[],"mappings":";AAkBA,eAAO,MAAM,aAAa,mCA4DzB,CAAC;AAEF,eAAO,MAAM,MAAM;;;;;;;;;;;CAWjB,CAAC"}
+{"version":3,"file":"RotateButtons.d.ts","sourceRoot":"","sources":["../../../src/components/rotateActions/RotateButtons.tsx"],"names":[],"mappings":";AAkBA;;;;;GAKG;AACH,eAAO,MAAM,aAAa,mCAkEzB,CAAC;AAEF,eAAO,MAAM,MAAM;;;;;;;;;;;CAWjB,CAAC"}

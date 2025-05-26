@@ -4,6 +4,7 @@ import { DefaultDimensionState, DefaultPositionState } from '../../constants';
 import { ImageEditorContext } from '../../hooks/useImageEditorContext/ImageEditorContext';
 import { Dimensions, Position, UserConfig } from '../../types';
 import { getInitialEditor, setupConfig } from '../../utils';
+import { useUndoRedoSnapshot } from '../../hooks';
 
 type Props = {
   image: string;
@@ -11,6 +12,18 @@ type Props = {
   children: ReactNode;
 };
 
+/**
+ * @description This provider is not related to `ExpoImageToolkitProvider`.
+ * While `ExpoImageToolkitProvider` is used to wrap the app at root level,
+ * `ImageEditorProvider` handles all internal state of the image editor, such as crop frame scale/position, rotation, flip, and zoom.
+ *
+ * @param props - An object containing:
+ * - `image`: `string` – The initial/original source of the image to be edited.
+ * - `userConfig`: `UserConfig` (optional) – Optional user configuration for editor settings.
+ * - `children`: `ReactNode` – The nested components that render the active editor container.
+ *
+ * @returns React provider for sharing image editor state via context.
+ */
 export const ImageEditorProvider = function ({
   image: initialImage,
   userConfig,
@@ -33,13 +46,13 @@ export const ImageEditorProvider = function ({
 
   const [activeEditor, setActiveEditor] = useState(defaultEditor);
   const [previousRotate, setPreviousRotate] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [dimensions, setDimensions] = useState<Dimensions>(
     DefaultDimensionState
   );
 
-  const value = {
-    config,
+  const imageEditorContextValues = {
     image,
     setImage,
     imageRef,
@@ -59,10 +72,20 @@ export const ImageEditorProvider = function ({
     imagePosition,
     dimensions,
     setDimensions,
+    isLoading,
+    setIsLoading,
+  };
+
+  const undoRedoActions = useUndoRedoSnapshot({ ...imageEditorContextValues });
+
+  const contextValue = {
+    ...imageEditorContextValues,
+    ...undoRedoActions,
+    config,
   };
 
   return (
-    <ImageEditorContext.Provider value={value}>
+    <ImageEditorContext.Provider value={contextValue}>
       {children}
     </ImageEditorContext.Provider>
   );

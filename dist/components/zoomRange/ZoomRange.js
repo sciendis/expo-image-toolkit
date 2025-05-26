@@ -4,6 +4,16 @@ import { GestureDetector, GestureHandlerRootView, } from 'react-native-gesture-h
 import Animated, { useSharedValue } from 'react-native-reanimated';
 import { useImageEditorContext, useMoveZoomRangeBar, useSetInitialZoomAnimatedText, useSetViewLayout, } from '../../hooks';
 const AnimatedText = Animated.createAnimatedComponent(TextInput);
+/**
+ * @description Adds an optional visual range bar for zoom control.
+ * Zooming can be performed via pinch, double tap, or this range bar.
+ *
+ * If zoom is at 1x, the focal point resets to the center of the image.
+ * Otherwise, the range bar continues zooming based on the last focal point
+ * (set by pinch or double tap) until reset back to 1x.
+ *
+ * @returns A gesture-enabled range bar with zoom indicator text.
+ */
 export const ZoomRange = function () {
     const { config: { colors }, } = useImageEditorContext();
     const currentX = useSharedValue(1);

@@ -3,8 +3,8 @@ import { UserConfig } from '../../types';
  * @description To use the expoImageToolkit package, simply import this hook wherever you want to use it.
  * Make sure your app is wrapped with the `ExpoImageToolkitProvider`.
  *
- * This custom hook provides the image picker and camera functionality, along with access to the edited image
- * and its calculated dimensions.
+ * This custom hook provides the image picker and camera functionality,
+ * along with access to the edited image and its calculated dimensions.
  *
  * @param userConfig - Optional user configuration for the toolkit.
  * @returns {object} An object containing:

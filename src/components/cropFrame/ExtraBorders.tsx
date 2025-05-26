@@ -2,6 +2,10 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
 
+/**
+ * @description The borders displayed in the middle of the CropFrame. Two horizontal borders and two vertical borders.
+ *
+ */
 export const ExtraBorders = function () {
   const {
     config: { colors },

@@ -1,5 +1,10 @@
 import { StyleSheet, View } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
+/**
+ * @description A visual cross "+" placed at the center of the CropFrame, used for alignment or reference.
+ *
+ * @returns The view that display vertical and horizontal lines in the center of the CropFrame.
+ */
 export const Aim = function () {
     const { config: { colors }, } = useImageEditorContext();
     const colorStyles = {

@@ -3,8 +3,13 @@ import { useSharedValue, withTiming } from 'react-native-reanimated';
 import { DefaultPositionState, MIN_ZOOM } from '../constants';
 import { clamp, getBoundingLimitation } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
+/**
+ * @description Handles double-tap zoom and pinch-to-zoom gestures on the focal point, and merges them with the move gesture when zoom > 1.
+ * This supports all interactions within the ZoomEditor.
+ * Note: the ZoomRangeBar is handled by a separate hook and not included here.
+ */
 export const useZoomGesture = function () {
-    const { zoom, focalPoint, imagePosition, dimensions: { displayedImageWidth, displayedImageHeight }, config: { maxZoom }, } = useImageEditorContext();
+    const { zoom, focalPoint, imagePosition, dimensions: { displayedImageWidth, displayedImageHeight }, saveHistoryState, config: { maxZoom }, } = useImageEditorContext();
     const prevImagePosition = useSharedValue(DefaultPositionState);
     const prevZoom = useSharedValue(1);
     const prevFocalPoint = useSharedValue(DefaultPositionState);
@@ -19,6 +24,13 @@ export const useZoomGesture = function () {
             x: clamp(newX, minX, maxX),
             y: clamp(newY, minY, maxY),
         });
+    })
+        .onEnd(() => {
+        const { x: pIpX, y: pIpY } = prevImagePosition.get();
+        const { x: ipX, y: ipY } = imagePosition.get();
+        if (pIpX === ipX && pIpY === ipY)
+            return;
+        saveHistoryState({ imagePosition: prevImagePosition.get() });
     });
     const zoomGesturePinch = Gesture.Pinch()
         .onStart((event) => {
@@ -40,6 +52,13 @@ export const useZoomGesture = function () {
             x: clamp(prevPosVal.x, minX, maxX),
             y: clamp(prevPosVal.y, minY, maxY),
         }));
+    })
+        .onEnd(() => {
+        const newZoom = zoom.get();
+        const prevZoomVal = prevZoom.get();
+        if (prevZoomVal === newZoom)
+            return;
+        saveHistoryState({ zoom: prevZoomVal });
     });
     const zoomGestureTap = Gesture.Tap()
         .numberOfTaps(2)
@@ -50,10 +69,12 @@ export const useZoomGesture = function () {
         const fy = event.y;
         let newZoom = zoom.get();
         if (newZoom === defZoom) {
+            saveHistoryState({ zoom: newZoom, focalPoint: { x: fx, y: fy } });
             newZoom = zoomLvl2;
             focalPoint.set({ x: fx, y: fy });
         }
         else {
+            saveHistoryState({ zoom: newZoom });
             newZoom = defZoom;
         }
         zoom.set(withTiming(newZoom));
@@ -62,6 +83,6 @@ export const useZoomGesture = function () {
         imagePosition.set(withTiming({ x: 0, y: 0 }));
     });
     const combinedGestures = Gesture.Simultaneous(moveGesture, zoomGesturePinch, zoomGestureTap);
-    return { zoomGesture: combinedGestures };
+    return combinedGestures;
 };
 //# sourceMappingURL=useZoomGesture.js.map

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { BackHandler, StyleSheet, View } from 'react-native';
-import { ExpoImageToolkitContext } from './ExpoImageToolkitContext';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useBackButtonCustomModalHandler } from '../../hooks';
 import { ImageEditor } from '../imageEditor';
+import { ExpoImageToolkitContext } from './ExpoImageToolkitContext';
 /**
  * @description This provider renders the editor modal in fullscreen mode at the root level.
- * To use expoImageToolkit, you must wrap your entire app in this provider.
- * It handles how the editor is opened after image selection or taking a photo, and how it's closed.
+ * To use `expo-image-toolkit`, you must wrap your entire app in this provider.
+ * It handles opening the editor after image selection or taking a photo, and closing it.
  *
  * @param children - Your app’s components.
  * @returns The wrapped children along with the editor modal.
@@ -38,19 +39,7 @@ export const ExpoImageToolkitProvider = function ({ children }) {
         (_b = (_a = editorState.userConfig) === null || _a === void 0 ? void 0 : _a.onCancel) === null || _b === void 0 ? void 0 : _b.call(_a);
         hideEditor();
     };
-    useEffect(() => {
-        const backAction = () => {
-            if (editorState.visible) {
-                onCancel();
-                return true;
-            }
-            return false;
-        };
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-        return () => backHandler.remove();
-        // update BackEvent only when custom modal visibility changes
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [editorState.visible]);
+    useBackButtonCustomModalHandler({ editorState, onCancel });
     return (<ExpoImageToolkitContext.Provider value={{ showEditor, hideEditor }}>
       {children}
       {/** start editor modal */}

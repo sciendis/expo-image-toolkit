@@ -1,3 +1,8 @@
+/**
+ * find the next angle based on the current angle when user clicks the rotate-left button
+ * @param currentAngle - The current rotation angle in degrees
+ * @returns The next angle rotated 90 degrees to the left
+ */
 export const getNextLeftAngle = (currentAngle) => {
     if (currentAngle <= -270)
         return -360;

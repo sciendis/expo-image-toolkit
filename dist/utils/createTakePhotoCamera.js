@@ -8,6 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as ImagePicker from 'expo-image-picker';
+/**
+ * @description Creates a function to open the device's camera and capture a photo.
+ * If permission is granted, launches the camera and passes the image URI to a callback.
+ *
+ * @param props - An object containing:
+ * - `onImageSelected`: `(uri: string) => void` – Callback triggered with the URI of the captured image.
+ *
+ * @returns A function that requests camera permission and launches the camera.
+ */
 export const createTakePhotoCamera = function ({ onImageSelected }) {
     return function takePhoto() {
         return __awaiter(this, void 0, void 0, function* () {

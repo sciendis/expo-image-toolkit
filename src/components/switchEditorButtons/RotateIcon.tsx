@@ -1,6 +1,12 @@
 import Svg, { Path } from 'react-native-svg';
 import { useImageEditorContext } from '../../hooks';
 
+/**
+ * @description Custom Rotate Icon displaying two curved arrows.
+ * Used as the Rotate editor icon in the bottom navigation bar of ImageEditor-Modal.
+ *
+ * @returns An SVG element displays the rotate icon.
+ */
 export const RotateIcon = function () {
   const {
     config: { colors },

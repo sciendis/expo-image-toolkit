@@ -5,10 +5,23 @@ import { useImageEditorContext } from '../../hooks';
 import { isRotate90, resetZoomState } from '../../utils';
 import { Button } from './Button';
 
+/**
+ * @description Renders Flip-X/Y buttons.
+ *
+ * If rotated to ±90/±270, flips are based on visible X/Y-Axis to avoid confusion not the actual X/Y-Axis.
+ * the rotated values with the visible X/Y-Axis has to be also verify on final crop calculation.
+ */
+
 export const FlipButtons = function () {
-  const { flipX, flipY, zoom, imagePosition, rotate, config } =
-    useImageEditorContext();
-  const { colors } = config;
+  const {
+    flipX,
+    flipY,
+    zoom,
+    imagePosition,
+    rotate,
+    saveHistoryState,
+    config: { colors },
+  } = useImageEditorContext();
 
   const flipVertical = () => {
     if (isRotate90(rotate.get())) {
@@ -17,6 +30,7 @@ export const FlipButtons = function () {
       flipX.set((prevVal) => withTiming(prevVal === 180 ? 0 : 180));
     }
     resetZoomState(zoom, imagePosition);
+    saveHistoryState();
   };
   const flipHorizontal = () => {
     if (isRotate90(rotate.get())) {
@@ -25,6 +39,7 @@ export const FlipButtons = function () {
       flipY.set((prevVal) => withTiming(prevVal === 180 ? 0 : 180));
     }
     resetZoomState(zoom, imagePosition);
+    saveHistoryState();
   };
 
   return (

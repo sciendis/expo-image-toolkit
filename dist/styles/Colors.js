@@ -3,7 +3,7 @@ const BLACK = '#000000';
 const WHITE = '#ffffff';
 const GRAY = '#cccccc';
 const LIGHT_GRAY = '#cccccc33';
-const LIGHTEST_GRAY = '#eeeeee28';
+const LIGHTEST_GRAY = '#383838';
 export const Colors = {
     background: DARK,
     cropFrameCorners: WHITE,
@@ -34,5 +34,7 @@ export const Colors = {
     alertNo: WHITE,
     alertYesBg: LIGHTEST_GRAY,
     alertYes: WHITE,
+    historyDisabled: LIGHT_GRAY,
+    historyEnabled: WHITE,
 };
 //# sourceMappingURL=Colors.js.map

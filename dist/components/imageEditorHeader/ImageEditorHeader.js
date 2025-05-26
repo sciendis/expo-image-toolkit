@@ -4,6 +4,16 @@ import { useImageEditorContext } from '../../hooks';
 import { getExpoConstants } from '../../utils';
 import { CancelButton } from '../cancelButton';
 import { CropImageButton } from '../cropImageButton';
+/**
+ * @description This is the header of the Modal Editor. This will render CancelButton/FinishButton and the title of the editor which can be edited via userConfig.
+ *
+ * @param props - An object containing:
+ * - `onCancel`: `() => void` – Callback triggered when the user presses the cancel button.
+ * - `onCrop`: `() => void` – Callback triggered when the user presses the finish button.
+ * - `onLayout`: `(event: LayoutChangeEvent) => void` (optional) – Used to pass layout changes to the parent.
+ *
+ * @returns A Surface component containing the editor header with cancel, title, and crop actions.
+ */
 export const ImageEditorHeader = function ({ onCancel, onCrop, onLayout, }) {
     const { statusBarHeight } = getExpoConstants();
     const { config: { colors, labels }, } = useImageEditorContext();

@@ -18,7 +18,54 @@ export declare const useImageEditorContext: () => {
     imagePosition: import("react-native-reanimated").SharedValue<import("../..").Position>;
     activeEditor: import("../../constants").EditorModes;
     setActiveEditor: import("react").Dispatch<import("react").SetStateAction<import("../../constants").EditorModes>>;
+    isLoading: boolean;
+    setIsLoading: import("react").Dispatch<import("react").SetStateAction<boolean>>;
     isSaving: boolean;
     setIsSaving: import("react").Dispatch<import("react").SetStateAction<boolean>>;
+    undo: () => void;
+    redo: () => void;
+    undoStack: {
+        image: string;
+        rotate: number;
+        previousRotate: number;
+        flipX: number;
+        flipY: number;
+        zoom: number;
+        focalPoint: import("../..").Position;
+        imagePosition: import("../..").Position;
+        boxScale: import("../..").Position;
+        boxPosition: import("../..").Position;
+        dimensions: import("../..").Dimensions;
+        activeEditor: import("../../constants").EditorModes;
+    }[];
+    redoStack: {
+        image: string;
+        rotate: number;
+        previousRotate: number;
+        flipX: number;
+        flipY: number;
+        zoom: number;
+        focalPoint: import("../..").Position;
+        imagePosition: import("../..").Position;
+        boxScale: import("../..").Position;
+        boxPosition: import("../..").Position;
+        dimensions: import("../..").Dimensions;
+        activeEditor: import("../../constants").EditorModes;
+    }[];
+    saveHistoryState: (snapshotValue?: Partial<{
+        image: string;
+        rotate: number;
+        previousRotate: number;
+        flipX: number;
+        flipY: number;
+        zoom: number;
+        focalPoint: import("../..").Position;
+        imagePosition: import("../..").Position;
+        boxScale: import("../..").Position;
+        boxPosition: import("../..").Position;
+        dimensions: import("../..").Dimensions;
+        activeEditor: import("../../constants").EditorModes;
+    }> | undefined) => void;
+    isUndoRedoUpdated: import("react").MutableRefObject<boolean>;
 };
 //# sourceMappingURL=useImageEditorContext.d.ts.map

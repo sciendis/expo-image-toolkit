@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { createPickImageLibrary, createSaveCroppedImage, createTakePhotoCamera, isRotate90, } from '../../utils';
+import { createPickImageLibrary, createSaveCroppedImage, createTakePhotoCamera, } from '../../utils';
 import { useExpoImageToolkitContext } from './useExpoImageToolkitContext';
 /**
  * @description To use the expoImageToolkit package, simply import this hook wherever you want to use it.
  * Make sure your app is wrapped with the `ExpoImageToolkitProvider`.
  *
- * This custom hook provides the image picker and camera functionality, along with access to the edited image
- * and its calculated dimensions.
+ * This custom hook provides the image picker and camera functionality,
+ * along with access to the edited image and its calculated dimensions.
  *
  * @param userConfig - Optional user configuration for the toolkit.
  * @returns {object} An object containing:
@@ -46,10 +46,10 @@ export const useExpoImageToolkit = function (userConfig) {
             showEditor(originalUri, saveCroppedImage, userConfig);
         },
     });
-    const { width, height, rotate } = savedImageDimensions;
+    const { width, height } = savedImageDimensions;
     const croppedDimensions = {
-        width: (isRotate90(rotate) ? height : width) || 250,
-        height: (isRotate90(rotate) ? width : height) || 250,
+        width: width || 250,
+        height: height || 250,
     };
     const aspectRatio = croppedDimensions.width / croppedDimensions.height;
     return Object.assign({ pickImage,

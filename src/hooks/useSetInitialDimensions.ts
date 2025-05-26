@@ -3,28 +3,40 @@ import { useEffect } from 'react';
 import { Dimensions } from 'react-native';
 import { useImageEditorContext } from './useImageEditorContext';
 
-const {
-  width: screenWidth,
-  // height: screenHeight
-} = Dimensions.get('screen');
+const { width: screenWidth } = Dimensions.get('screen');
 
+/**
+ * @description This custom hook calculates the actual and displayed image dimensions, along with all necessary scales and offsets.
+ * These values are needed for further calculations like zooming on a focal point, moving a zoomed image, and cropping.
+ * The effect only runs on initial render or when a new image is generated. for example, after cropping or rotating the image by ±90/±270 degrees.
+ */
 export const useSetInitialDimensions = function () {
-  const { image, imageRef, setDimensions, boxScale, boxPosition } =
-    useImageEditorContext();
+  const {
+    image,
+    imageRef,
+    setDimensions,
+    boxScale,
+    boxPosition,
+    isUndoRedoUpdated,
+  } = useImageEditorContext();
 
   useEffect(() => {
     if (!imageRef.current) return;
+    if (isUndoRedoUpdated.current) return;
 
     const calcDimensions = async (image: string) => {
       if (!imageRef.current) return;
 
+      // calculate the actual image dimensions. using Image.getSize on android don't give us full image sizes when image is too large.
       const { width, height } =
         await ImageManipulator.manipulate(image).renderAsync();
 
+      // calculate scales/offsets/aspectRatios using layout-width/height
       imageRef.current.measure((_x, _y, layoutWidth, layoutHeight) => {
         const imageAspectRatio = width / height;
         const viewAspectRatio = layoutWidth / layoutHeight;
 
+        // The image width is larger than it's height
         let displayedImageWidth = layoutWidth;
         let displayedImageHeight = layoutWidth / imageAspectRatio;
         let offsetX = 0;
@@ -81,5 +93,12 @@ export const useSetInitialDimensions = function () {
     };
 
     calcDimensions(image);
-  }, [image, imageRef, setDimensions, boxScale, boxPosition]);
+  }, [
+    image,
+    imageRef,
+    setDimensions,
+    boxScale,
+    boxPosition,
+    isUndoRedoUpdated,
+  ]);
 };

@@ -1,5 +1,9 @@
 import { useCallback, useState } from 'react';
 import { DefaultLayoutState } from '../constants';
+/**
+ * @description Manages layout state updates for the zoom and rotate range bars.
+ * @returns the current layout state and an onLayout callback to update the range bars' layout dynamically.
+ */
 export const useSetViewLayout = function () {
     const [viewLayout, setViewLayout] = useState(DefaultLayoutState);
     const onLayout = useCallback((event) => {

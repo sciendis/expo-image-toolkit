@@ -10,8 +10,8 @@ export { getNextLeftAngle } from './getNextLeftAngle';
 export { getNextRightAngle } from './getNextRightAngle';
 export { isCropFrameChanged } from './isCropFrameChanged';
 export { isRotate90 } from './isRotate90';
+export { maybeWithTiming } from './maybeWithTiming';
 export { resetZoomState } from './resetZoomState';
 export { rotateAndCropManipulator } from './rotateAndCropManipulator';
-export { setLayoutDimensions } from './setLayoutDimensions';
 export { setupConfig } from './setupConfig';
 //# sourceMappingURL=index.d.ts.map

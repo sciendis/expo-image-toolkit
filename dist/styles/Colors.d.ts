@@ -10,7 +10,7 @@ export declare const Colors: {
     readonly headerTitle: "#ffffff";
     readonly headerTitleBg: "#cccccc33";
     readonly hint: "#ffffff";
-    readonly hintBg: "#eeeeee28";
+    readonly hintBg: "#383838";
     readonly indicator: "#ffffff";
     readonly rotateActions: "#000000";
     readonly rotateActionsBg: "#ffffff";
@@ -26,7 +26,9 @@ export declare const Colors: {
     readonly alertMessage: "#ffffff";
     readonly alertNoBg: "#000000";
     readonly alertNo: "#ffffff";
-    readonly alertYesBg: "#eeeeee28";
+    readonly alertYesBg: "#383838";
     readonly alertYes: "#ffffff";
+    readonly historyDisabled: "#cccccc33";
+    readonly historyEnabled: "#ffffff";
 };
 //# sourceMappingURL=Colors.d.ts.map

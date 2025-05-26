@@ -1,1 +1,1 @@
-{"version":3,"file":"useResizeFromTopLeft.d.ts","sourceRoot":"","sources":["../../../src/hooks/useResizeCropFrame/useResizeFromTopLeft.ts"],"names":[],"mappings":"AAOA,eAAO,MAAM,oBAAoB,qGAoChC,CAAC"}
+{"version":3,"file":"useResizeFromTopLeft.d.ts","sourceRoot":"","sources":["../../../src/hooks/useResizeCropFrame/useResizeFromTopLeft.ts"],"names":[],"mappings":"AAOA;;;;;;GAMG;AAEH,eAAO,MAAM,oBAAoB,qGA+ChC,CAAC"}

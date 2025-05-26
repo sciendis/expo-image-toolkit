@@ -1,6 +1,15 @@
 import { useCallback, useRef } from 'react';
 import { Animated } from 'react-native';
 
+/**
+ * @description Provides fade-in/out animations used when switching between editor modes.
+ *
+ * - `fadeOut`: Fades opacity from 0 to 1.
+ * - `fadeIn`: Fades opacity from 1 to 0.
+ * - `opacity`: Animated value used in components to control visibility of the loading screen.
+ *
+ * @returns { opacity, fadeOut, fadeIn }
+ */
 export const useFadeTransition = () => {
   const opacity = useRef(new Animated.Value(0)).current;
 

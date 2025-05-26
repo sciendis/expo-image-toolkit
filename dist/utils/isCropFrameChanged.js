@@ -1,3 +1,14 @@
+/**
+ * Detect if the CropFrame has been changed by the user or not, by comparing the current CropFrame-Position/Scale
+ * with the initial-Position/Scale, and checking if the scale or position has changed.
+ *
+ * @param props - An object containing:
+ * - `boxScale`: `SharedValue<Position>` – The current scale of the CropFrame.
+ * - `boxPosition`: `SharedValue<Position>` – The current position of the CropFrame.
+ * - `dimensions`: `Dimensions` – The initial crop frame position and scale used for comparison.
+ *
+ * @returns `boolean` – Returns `true` if the CropFrame has been changed by the user.
+ */
 export const isCropFrameChanged = function ({ boxScale, boxPosition, dimensions: { initialCropFramePosition, initialCropFrameScale }, }) {
     const initBoxScaleVal = initialCropFrameScale;
     const initBoxPosVal = initialCropFramePosition;
