@@ -18,6 +18,7 @@ export const useSetInitialDimensions = function () {
     boxScale,
     boxPosition,
     isUndoRedoUpdated,
+    setIsLoading,
   } = useImageEditorContext();
 
   useEffect(() => {
@@ -26,6 +27,7 @@ export const useSetInitialDimensions = function () {
 
     const calcDimensions = async (image: string) => {
       if (!imageRef.current) return;
+      setIsLoading(true);
 
       // calculate the actual image dimensions. using Image.getSize on android don't give us full image sizes when image is too large.
       const { width, height } =
@@ -89,6 +91,7 @@ export const useSetInitialDimensions = function () {
           initialCropFrameScale,
           rotateScale,
         }));
+        setIsLoading(false);
       });
     };
 
@@ -100,5 +103,6 @@ export const useSetInitialDimensions = function () {
     boxScale,
     boxPosition,
     isUndoRedoUpdated,
+    setIsLoading,
   ]);
 };

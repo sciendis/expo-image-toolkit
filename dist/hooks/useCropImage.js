@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { EditorModes } from '../constants';
+import { DefaultCropFrameState, EditorModes } from '../constants';
 import { getCropData, isRotate90, rotateAndCropManipulator } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
 /**
@@ -20,10 +20,11 @@ import { useImageEditorContext } from './useImageEditorContext';
  * @returns {() => Promise<void>} cropImage function
  */
 export const useCropImage = function ({ onCrop }) {
-    const { image, boxPosition, boxScale, zoom, rotate, flipX, flipY, setIsSaving, focalPoint, imagePosition, dimensions, activeEditor, } = useImageEditorContext();
+    const { image, boxPosition, boxScale, zoom, rotate, flipX, flipY, setIsSaving, setIsLoading, focalPoint, imagePosition, dimensions, activeEditor, } = useImageEditorContext();
     return function cropImage() {
         return __awaiter(this, void 0, void 0, function* () {
             setIsSaving(true);
+            setIsLoading(true);
             const cropData = getCropData({
                 dimensions,
                 boxScale,
@@ -33,6 +34,12 @@ export const useCropImage = function ({ onCrop }) {
                 focalPoint,
                 activeEditor,
             });
+            if (cropData.width < DefaultCropFrameState.minWidth ||
+                cropData.height < DefaultCropFrameState.minHeight) {
+                setIsSaving(false);
+                setIsLoading(false);
+                return;
+            }
             try {
                 const is90 = isRotate90(rotate.get());
                 if (activeEditor === EditorModes.ROTATE && is90) {

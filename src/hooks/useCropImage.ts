@@ -1,5 +1,5 @@
 import { ImageEditorProps } from '../components/imageEditor';
-import { EditorModes } from '../constants';
+import { DefaultCropFrameState, EditorModes } from '../constants';
 import { getCropData, isRotate90, rotateAndCropManipulator } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
 
@@ -24,6 +24,7 @@ export const useCropImage = function ({ onCrop }: Props) {
     flipX,
     flipY,
     setIsSaving,
+    setIsLoading,
     focalPoint,
     imagePosition,
     dimensions,
@@ -32,6 +33,7 @@ export const useCropImage = function ({ onCrop }: Props) {
 
   return async function cropImage() {
     setIsSaving(true);
+    setIsLoading(true);
 
     const cropData = getCropData({
       dimensions,
@@ -42,6 +44,15 @@ export const useCropImage = function ({ onCrop }: Props) {
       focalPoint,
       activeEditor,
     });
+
+    if (
+      cropData.width < DefaultCropFrameState.minWidth ||
+      cropData.height < DefaultCropFrameState.minHeight
+    ) {
+      setIsSaving(false);
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const is90 = isRotate90(rotate.get());

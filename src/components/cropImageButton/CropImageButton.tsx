@@ -12,6 +12,7 @@ export const CropImageButton = function ({
 }: Pick<ImageEditorProps, 'onCrop'>) {
   const cropImage = useCropImage({ onCrop });
   const {
+    isLoading,
     isSaving,
     config: { labels, colors },
   } = useImageEditorContext();
@@ -20,7 +21,7 @@ export const CropImageButton = function ({
     <TouchableOpacity
       onPress={cropImage}
       style={styles.container}
-      disabled={isSaving}
+      disabled={isSaving || isLoading}
     >
       <Text style={[styles.title, { color: colors.headerButtons }]}>
         {labels.SET}

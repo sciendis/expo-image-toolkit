@@ -1,1 +1,1 @@
-{"version":3,"file":"useCropImage.d.ts","sourceRoot":"","sources":["../../src/hooks/useCropImage.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,gBAAgB,EAAE,MAAM,2BAA2B,CAAC;AAK7D,KAAK,KAAK,GAAG,IAAI,CAAC,gBAAgB,EAAE,QAAQ,CAAC,CAAC;AAE9C;;;;;;;;GAQG;AACH,eAAO,MAAM,YAAY,eAAyB,KAAK,wBA6DtD,CAAC"}
+{"version":3,"file":"useCropImage.d.ts","sourceRoot":"","sources":["../../src/hooks/useCropImage.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,gBAAgB,EAAE,MAAM,2BAA2B,CAAC;AAK7D,KAAK,KAAK,GAAG,IAAI,CAAC,gBAAgB,EAAE,QAAQ,CAAC,CAAC;AAE9C;;;;;;;;GAQG;AACH,eAAO,MAAM,YAAY,eAAyB,KAAK,wBAwEtD,CAAC"}

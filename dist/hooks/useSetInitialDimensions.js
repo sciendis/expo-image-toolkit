@@ -18,7 +18,7 @@ const { width: screenWidth } = Dimensions.get('screen');
  * The effect only runs on initial render or when a new image is generated. for example, after cropping or rotating the image by ±90/±270 degrees.
  */
 export const useSetInitialDimensions = function () {
-    const { image, imageRef, setDimensions, boxScale, boxPosition, isUndoRedoUpdated, } = useImageEditorContext();
+    const { image, imageRef, setDimensions, boxScale, boxPosition, isUndoRedoUpdated, setIsLoading, } = useImageEditorContext();
     useEffect(() => {
         if (!imageRef.current)
             return;
@@ -27,6 +27,7 @@ export const useSetInitialDimensions = function () {
         const calcDimensions = (image) => __awaiter(this, void 0, void 0, function* () {
             if (!imageRef.current)
                 return;
+            setIsLoading(true);
             // calculate the actual image dimensions. using Image.getSize on android don't give us full image sizes when image is too large.
             const { width, height } = yield ImageManipulator.manipulate(image).renderAsync();
             // calculate scales/offsets/aspectRatios using layout-width/height
@@ -75,6 +76,7 @@ export const useSetInitialDimensions = function () {
                     initialCropFramePosition,
                     initialCropFrameScale,
                     rotateScale })));
+                setIsLoading(false);
             });
         });
         calcDimensions(image);
@@ -85,6 +87,7 @@ export const useSetInitialDimensions = function () {
         boxScale,
         boxPosition,
         isUndoRedoUpdated,
+        setIsLoading,
     ]);
 };
 //# sourceMappingURL=useSetInitialDimensions.js.map

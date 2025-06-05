@@ -7,8 +7,8 @@ import { useCropImage, useImageEditorContext } from '../../hooks';
  */
 export const CropImageButton = function ({ onCrop, }) {
     const cropImage = useCropImage({ onCrop });
-    const { isSaving, config: { labels, colors }, } = useImageEditorContext();
-    return (<TouchableOpacity onPress={cropImage} style={styles.container} disabled={isSaving}>
+    const { isLoading, isSaving, config: { labels, colors }, } = useImageEditorContext();
+    return (<TouchableOpacity onPress={cropImage} style={styles.container} disabled={isSaving || isLoading}>
       <Text style={[styles.title, { color: colors.headerButtons }]}>
         {labels.SET}
       </Text>
