@@ -14,11 +14,11 @@ import { useImageEditorContext } from '../../hooks';
  *
  * @returns An animated loading screen with an ActivityIndicator.
  */
-export const LoadingIndicator = function ({ opacity, style }) {
+export const LoadingIndicator = function ({ opacity, size = 'large', style, }) {
     const { config: { colors }, } = useImageEditorContext();
     const colorStylesContainer = { backgroundColor: colors.background };
     return (<Animated.View style={[styles.container, colorStylesContainer, style, { opacity }]}>
-      <ActivityIndicator size="large" color={colors.indicator}/>
+      <ActivityIndicator size={size} color={colors.indicator}/>
     </Animated.View>);
 };
 const styles = StyleSheet.create({

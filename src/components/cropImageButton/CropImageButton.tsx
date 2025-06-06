@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useCropImage, useImageEditorContext } from '../../hooks';
 import { ImageEditorProps } from '../imageEditor';
+import { LoadingIndicator } from '../loadingIndicator';
 
 /**
  * @description The finish Button that appears on top-right corner of the editor modal header.
@@ -23,9 +24,13 @@ export const CropImageButton = function ({
       style={styles.container}
       disabled={isSaving || isLoading}
     >
-      <Text style={[styles.title, { color: colors.headerButtons }]}>
-        {labels.SET}
-      </Text>
+      {isSaving || isLoading ? (
+        <LoadingIndicator size="small" style={{ left: -20 }} />
+      ) : (
+        <Text style={[styles.title, { color: colors.headerButtons }]}>
+          {labels.SET}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };

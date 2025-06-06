@@ -2,6 +2,7 @@
 import { Animated, StyleProp, ViewStyle } from 'react-native';
 type Props = {
     opacity?: Animated.Value;
+    size?: number | 'small' | 'large';
     style?: StyleProp<ViewStyle>;
 };
 /**
@@ -18,6 +19,6 @@ type Props = {
  *
  * @returns An animated loading screen with an ActivityIndicator.
  */
-export declare const LoadingIndicator: ({ opacity, style }: Props) => import("react").JSX.Element;
+export declare const LoadingIndicator: ({ opacity, size, style, }: Props) => import("react").JSX.Element;
 export {};
 //# sourceMappingURL=LoadingIndicator.d.ts.map

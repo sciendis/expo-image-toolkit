@@ -9,6 +9,7 @@ import { useImageEditorContext } from '../../hooks';
 
 type Props = {
   opacity?: Animated.Value;
+  size?: number | 'small' | 'large';
   style?: StyleProp<ViewStyle>;
 };
 
@@ -26,7 +27,11 @@ type Props = {
  *
  * @returns An animated loading screen with an ActivityIndicator.
  */
-export const LoadingIndicator = function ({ opacity, style }: Props) {
+export const LoadingIndicator = function ({
+  opacity,
+  size = 'large',
+  style,
+}: Props) {
   const {
     config: { colors },
   } = useImageEditorContext();
@@ -36,7 +41,7 @@ export const LoadingIndicator = function ({ opacity, style }: Props) {
     <Animated.View
       style={[styles.container, colorStylesContainer, style, { opacity }]}
     >
-      <ActivityIndicator size="large" color={colors.indicator} />
+      <ActivityIndicator size={size} color={colors.indicator} />
     </Animated.View>
   );
 };
