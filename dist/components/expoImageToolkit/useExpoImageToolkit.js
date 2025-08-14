@@ -35,12 +35,14 @@ export const useExpoImageToolkit = function (userConfig) {
     });
     const pickImage = createPickImageLibrary({
         acceptedFormats: userConfig === null || userConfig === void 0 ? void 0 : userConfig.acceptedFormats,
+        quality: userConfig === null || userConfig === void 0 ? void 0 : userConfig.quality,
         onImageSelected: (originalUri) => {
             setEditedImageUri(null);
             showEditor(originalUri, saveCroppedImage, userConfig);
         },
     });
     const takePhoto = createTakePhotoCamera({
+        quality: userConfig === null || userConfig === void 0 ? void 0 : userConfig.quality,
         onImageSelected: (originalUri) => {
             setEditedImageUri(null);
             showEditor(originalUri, saveCroppedImage, userConfig);

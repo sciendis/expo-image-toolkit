@@ -15,17 +15,18 @@ import * as ImagePicker from 'expo-image-picker';
  * @param props - An object containing:
  * - `acceptedFormats`: `string[]` (optional) – Array of accepted image file extensions (e.g., ['.jpg', '.png']).
  * - `onImageSelected`: `(uri: string) => void` – Callback triggered with the URI of the selected image.
+ * - `quality`: `number` – Quality of the image to be selected (0 to 1).
  *
  * @returns A function that launches the image picker and returns the result.
  */
-export const createPickImageLibrary = function ({ acceptedFormats, onImageSelected, }) {
+export const createPickImageLibrary = function ({ acceptedFormats, onImageSelected, quality = 1, }) {
     return function pickImageLibrary() {
         return __awaiter(this, void 0, void 0, function* () {
             const result = yield ImagePicker.launchImageLibraryAsync({
                 mediaTypes: ['images'],
                 allowsEditing: false,
                 aspect: [4, 3],
-                quality: 1,
+                quality: quality,
             });
             if (result.canceled)
                 return result;

@@ -44,12 +44,14 @@ export const useExpoImageToolkit = function (userConfig?: UserConfig) {
 
   const pickImage = createPickImageLibrary({
     acceptedFormats: userConfig?.acceptedFormats,
+    quality: userConfig?.quality,
     onImageSelected: (originalUri) => {
       setEditedImageUri(null);
       showEditor(originalUri, saveCroppedImage, userConfig);
     },
   });
   const takePhoto = createTakePhotoCamera({
+    quality: userConfig?.quality,
     onImageSelected: (originalUri) => {
       setEditedImageUri(null);
       showEditor(originalUri, saveCroppedImage, userConfig);

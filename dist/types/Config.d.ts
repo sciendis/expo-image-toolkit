@@ -12,6 +12,11 @@ export type Config = {
     onCancel?: () => void;
     onSubmit?: (uri: string) => void;
     acceptedFormats?: string[];
+    /**
+     * quality defines the compression rate when picking or taking an image.
+     * 0 = lowest quality, 1 = highest quality
+     */
+    quality?: number;
 };
 export type UserConfig = Partial<Omit<Config, 'labels' | 'colors'>> & {
     labels?: Partial<Config['labels']>;

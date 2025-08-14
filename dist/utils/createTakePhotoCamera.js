@@ -14,10 +14,11 @@ import * as ImagePicker from 'expo-image-picker';
  *
  * @param props - An object containing:
  * - `onImageSelected`: `(uri: string) => void` – Callback triggered with the URI of the captured image.
+ * - `quality`: `number` – Quality of the image to be captured (0 to 1).
  *
  * @returns A function that requests camera permission and launches the camera.
  */
-export const createTakePhotoCamera = function ({ onImageSelected }) {
+export const createTakePhotoCamera = function ({ onImageSelected, quality = 1, }) {
     return function takePhoto() {
         return __awaiter(this, void 0, void 0, function* () {
             const { status } = yield ImagePicker.requestCameraPermissionsAsync();
@@ -29,7 +30,7 @@ export const createTakePhotoCamera = function ({ onImageSelected }) {
                 mediaTypes: ['images'],
                 allowsEditing: false,
                 aspect: [4, 3],
-                quality: 1,
+                quality: quality,
             });
             if (result.canceled)
                 return result;
