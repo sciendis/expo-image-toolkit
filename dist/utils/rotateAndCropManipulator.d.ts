@@ -6,6 +6,7 @@ type Props = {
     flipX: SharedValue<number>;
     flipY: SharedValue<number>;
     cropData?: ActionCrop['crop'];
+    quality?: number;
 };
 /**
  * @description This is a reusable function to do the crop/rotate/flip on the image with ImageManipulator
@@ -18,9 +19,10 @@ type Props = {
  * - `flipX`: `SharedValue<number>` – The horizontal flip value.
  * - `flipY`: `SharedValue<number>` – The vertical flip value.
  * - `cropData`: `ActionCrop['crop']` (optional) – Optional crop data to apply. includes zoom on focal point state
+ * - quality defines the compression rate when picking or taking an image. 0 = lowest quality, 1 = highest quality
  *
  * @returns `Promise<string>` – A promise that resolves to the manipulated image URI saved as PNG.
  */
-export declare const rotateAndCropManipulator: ({ image, rotate, flipX, flipY, cropData, }: Props) => Promise<import("expo-image-manipulator").ImageResult>;
+export declare const rotateAndCropManipulator: ({ image, rotate, flipX, flipY, cropData, quality, }: Props) => Promise<import("expo-image-manipulator").ImageResult>;
 export {};
 //# sourceMappingURL=rotateAndCropManipulator.d.ts.map

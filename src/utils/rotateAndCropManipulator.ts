@@ -3,6 +3,7 @@ import {
   FlipType,
   ImageManipulator,
   SaveFormat,
+  SaveOptions,
 } from 'expo-image-manipulator';
 import { SharedValue } from 'react-native-reanimated';
 import { isRotate90 } from './isRotate90';
@@ -13,6 +14,7 @@ type Props = {
   flipX: SharedValue<number>;
   flipY: SharedValue<number>;
   cropData?: ActionCrop['crop'];
+  quality?: number;
 };
 
 /**
@@ -26,6 +28,7 @@ type Props = {
  * - `flipX`: `SharedValue<number>` – The horizontal flip value.
  * - `flipY`: `SharedValue<number>` – The vertical flip value.
  * - `cropData`: `ActionCrop['crop']` (optional) – Optional crop data to apply. includes zoom on focal point state
+ * - quality defines the compression rate when picking or taking an image. 0 = lowest quality, 1 = highest quality
  *
  * @returns `Promise<string>` – A promise that resolves to the manipulated image URI saved as PNG.
  */
@@ -35,8 +38,12 @@ export const rotateAndCropManipulator = async function ({
   flipX,
   flipY,
   cropData,
+  quality = 1,
 }: Props) {
-  const format = { format: SaveFormat.PNG };
+  const saveOptions: SaveOptions = {
+    format: SaveFormat.PNG,
+    compress: quality,
+  };
 
   const rotateVal = rotate.get();
   const flipValX = flipX.get();
@@ -59,5 +66,5 @@ export const rotateAndCropManipulator = async function ({
   if (cropData) manipulator = manipulator.crop(cropData);
 
   const result = await manipulator.renderAsync();
-  return await result.saveAsync(format);
+  return await result.saveAsync(saveOptions);
 };

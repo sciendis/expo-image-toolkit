@@ -20,12 +20,16 @@ import { isRotate90 } from './isRotate90';
  * - `flipX`: `SharedValue<number>` – The horizontal flip value.
  * - `flipY`: `SharedValue<number>` – The vertical flip value.
  * - `cropData`: `ActionCrop['crop']` (optional) – Optional crop data to apply. includes zoom on focal point state
+ * - quality defines the compression rate when picking or taking an image. 0 = lowest quality, 1 = highest quality
  *
  * @returns `Promise<string>` – A promise that resolves to the manipulated image URI saved as PNG.
  */
-export const rotateAndCropManipulator = function ({ image, rotate, flipX, flipY, cropData, }) {
+export const rotateAndCropManipulator = function ({ image, rotate, flipX, flipY, cropData, quality = 1, }) {
     return __awaiter(this, void 0, void 0, function* () {
-        const format = { format: SaveFormat.PNG };
+        const saveOptions = {
+            format: SaveFormat.PNG,
+            compress: quality,
+        };
         const rotateVal = rotate.get();
         const flipValX = flipX.get();
         const flipValY = flipY.get();
@@ -40,7 +44,7 @@ export const rotateAndCropManipulator = function ({ image, rotate, flipX, flipY,
         if (cropData)
             manipulator = manipulator.crop(cropData);
         const result = yield manipulator.renderAsync();
-        return yield result.saveAsync(format);
+        return yield result.saveAsync(saveOptions);
     });
 };
 //# sourceMappingURL=rotateAndCropManipulator.js.map

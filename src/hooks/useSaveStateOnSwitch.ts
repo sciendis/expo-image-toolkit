@@ -30,6 +30,7 @@ export const useSaveStateOnSwitch = function () {
     dimensions,
     setDimensions,
     saveHistoryState,
+    config: { quality },
   } = useImageEditorContext();
 
   return async function saveStateOnSwitch(
@@ -49,6 +50,7 @@ export const useSaveStateOnSwitch = function () {
           rotate,
           flipX,
           flipY,
+          quality,
         });
 
         setImage(uri);
@@ -100,6 +102,7 @@ export const useSaveStateOnSwitch = function () {
         flipX,
         flipY,
         cropData,
+        quality,
       });
 
       saveHistoryState({ image, dimensions });
