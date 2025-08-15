@@ -13,4 +13,5 @@ export const DefaultConfig: Config = {
   enableZoom: true,
   enableRotate: true,
   colors: Colors,
+  saveFormat: 'JPEG',
 } as const;

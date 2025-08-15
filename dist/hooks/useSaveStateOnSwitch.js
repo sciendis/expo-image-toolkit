@@ -18,7 +18,7 @@ import { useImageEditorContext } from './useImageEditorContext';
  * If the user selects “No,” nothing happens. If they confirm, a new image is generated using the current CropFrame.
  */
 export const useSaveStateOnSwitch = function () {
-    const { rotate, zoom, image, setImage, setPreviousRotate, flipX, flipY, imagePosition, focalPoint, boxPosition, boxScale, dimensions, setDimensions, saveHistoryState, config: { quality }, } = useImageEditorContext();
+    const { rotate, zoom, image, setImage, setPreviousRotate, flipX, flipY, imagePosition, focalPoint, boxPosition, boxScale, dimensions, setDimensions, saveHistoryState, config: { quality, saveFormat }, } = useImageEditorContext();
     return function saveStateOnSwitch(activeEditor, shouldCrop = false) {
         return __awaiter(this, void 0, void 0, function* () {
             if (activeEditor === EditorModes.ZOOM)
@@ -34,6 +34,7 @@ export const useSaveStateOnSwitch = function () {
                         flipX,
                         flipY,
                         quality,
+                        saveFormat,
                     });
                     setImage(uri);
                     setPreviousRotate((prev) => (prev + rotateVal) % 360);
@@ -77,6 +78,7 @@ export const useSaveStateOnSwitch = function () {
                     flipY,
                     cropData,
                     quality,
+                    saveFormat,
                 });
                 saveHistoryState({ image, dimensions });
                 setImage(uri);

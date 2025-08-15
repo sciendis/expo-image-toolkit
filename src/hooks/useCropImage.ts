@@ -29,7 +29,7 @@ export const useCropImage = function ({ onCrop }: Props) {
     imagePosition,
     dimensions,
     activeEditor,
-    config: { quality },
+    config: { quality, saveFormat },
   } = useImageEditorContext();
 
   return async function cropImage() {
@@ -75,6 +75,7 @@ export const useCropImage = function ({ onCrop }: Props) {
         flipY,
         cropData,
         quality,
+        saveFormat,
       });
 
       onCrop({

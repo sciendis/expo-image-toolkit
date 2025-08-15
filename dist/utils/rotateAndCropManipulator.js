@@ -24,10 +24,10 @@ import { isRotate90 } from './isRotate90';
  *
  * @returns `Promise<string>` – A promise that resolves to the manipulated image URI saved as PNG.
  */
-export const rotateAndCropManipulator = function ({ image, rotate, flipX, flipY, cropData, quality = 1, }) {
+export const rotateAndCropManipulator = function ({ image, rotate, flipX, flipY, cropData, quality = 1, saveFormat, }) {
     return __awaiter(this, void 0, void 0, function* () {
         const saveOptions = {
-            format: SaveFormat.PNG,
+            format: SaveFormat[saveFormat],
             compress: quality,
         };
         const rotateVal = rotate.get();

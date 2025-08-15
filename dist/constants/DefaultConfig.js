@@ -11,5 +11,6 @@ export const DefaultConfig = {
     enableZoom: true,
     enableRotate: true,
     colors: Colors,
+    saveFormat: 'JPEG',
 };
 //# sourceMappingURL=DefaultConfig.js.map

@@ -1,3 +1,4 @@
+import { SaveFormat } from 'expo-image-manipulator';
 import { EditorModes } from '../constants';
 import { EN } from '../locales';
 import { Colors } from '../styles';
@@ -17,6 +18,7 @@ export type Config = {
      * 0 = lowest quality, 1 = highest quality
      */
     quality?: number;
+    saveFormat: keyof typeof SaveFormat;
 };
 export type UserConfig = Partial<Omit<Config, 'labels' | 'colors'>> & {
     labels?: Partial<Config['labels']>;

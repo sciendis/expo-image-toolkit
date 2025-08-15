@@ -1,4 +1,4 @@
-import { ActionCrop } from 'expo-image-manipulator';
+import { ActionCrop, SaveFormat } from 'expo-image-manipulator';
 import { SharedValue } from 'react-native-reanimated';
 type Props = {
     image: string;
@@ -7,6 +7,7 @@ type Props = {
     flipY: SharedValue<number>;
     cropData?: ActionCrop['crop'];
     quality?: number;
+    saveFormat: keyof typeof SaveFormat;
 };
 /**
  * @description This is a reusable function to do the crop/rotate/flip on the image with ImageManipulator
@@ -23,6 +24,6 @@ type Props = {
  *
  * @returns `Promise<string>` – A promise that resolves to the manipulated image URI saved as PNG.
  */
-export declare const rotateAndCropManipulator: ({ image, rotate, flipX, flipY, cropData, quality, }: Props) => Promise<import("expo-image-manipulator").ImageResult>;
+export declare const rotateAndCropManipulator: ({ image, rotate, flipX, flipY, cropData, quality, saveFormat, }: Props) => Promise<import("expo-image-manipulator").ImageResult>;
 export {};
 //# sourceMappingURL=rotateAndCropManipulator.d.ts.map

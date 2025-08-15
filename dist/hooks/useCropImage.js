@@ -20,7 +20,7 @@ import { useImageEditorContext } from './useImageEditorContext';
  * @returns {() => Promise<void>} cropImage function
  */
 export const useCropImage = function ({ onCrop }) {
-    const { image, boxPosition, boxScale, zoom, rotate, flipX, flipY, setIsSaving, setIsLoading, focalPoint, imagePosition, dimensions, activeEditor, config: { quality }, } = useImageEditorContext();
+    const { image, boxPosition, boxScale, zoom, rotate, flipX, flipY, setIsSaving, setIsLoading, focalPoint, imagePosition, dimensions, activeEditor, config: { quality, saveFormat }, } = useImageEditorContext();
     return function cropImage() {
         return __awaiter(this, void 0, void 0, function* () {
             setIsSaving(true);
@@ -59,6 +59,7 @@ export const useCropImage = function ({ onCrop }) {
                     flipY,
                     cropData,
                     quality,
+                    saveFormat,
                 });
                 onCrop({
                     uri: result.uri,

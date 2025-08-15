@@ -15,6 +15,7 @@ type Props = {
   flipY: SharedValue<number>;
   cropData?: ActionCrop['crop'];
   quality?: number;
+  saveFormat: keyof typeof SaveFormat;
 };
 
 /**
@@ -39,9 +40,10 @@ export const rotateAndCropManipulator = async function ({
   flipY,
   cropData,
   quality = 1,
+  saveFormat,
 }: Props) {
   const saveOptions: SaveOptions = {
-    format: SaveFormat.PNG,
+    format: SaveFormat[saveFormat],
     compress: quality,
   };
 
