@@ -24,7 +24,6 @@ export const useCropImage = function ({ onCrop }: Props) {
     flipX,
     flipY,
     setIsSaving,
-    setIsLoading,
     focalPoint,
     imagePosition,
     dimensions,
@@ -34,7 +33,6 @@ export const useCropImage = function ({ onCrop }: Props) {
 
   return async function cropImage() {
     setIsSaving(true);
-    setIsLoading(true);
 
     const cropData = getCropData({
       dimensions,
@@ -51,7 +49,6 @@ export const useCropImage = function ({ onCrop }: Props) {
       cropData.height < DefaultCropFrameState.minHeight
     ) {
       setIsSaving(false);
-      setIsLoading(false);
       return;
     }
 

@@ -25,14 +25,8 @@ export const ImageEditorContainer = function ({
   onCancel,
   onCrop,
 }: Pick<ImageEditorProps, 'onCrop' | 'onCancel'>) {
-  const {
-    switchEditor,
-    opacity,
-    isLoading,
-    activeEditor,
-    showAlert,
-    handleAlertResponse,
-  } = useSwitchEditor();
+  const { switchEditor, activeEditor, showAlert, handleAlertResponse } =
+    useSwitchEditor();
   const {
     isSaving,
     config: { colors },
@@ -52,15 +46,10 @@ export const ImageEditorContainer = function ({
   return (
     <View style={[styles.container, colorStylesContainer]}>
       <ImageEditorHeader onCancel={onCancel} onCrop={onCrop} />
-      <ImageEditorContents
-        activeEditor={activeEditor}
-        isLoading={isLoading}
-        opacity={opacity}
-      />
+      <ImageEditorContents activeEditor={activeEditor} />
       <SwitchEditorButtons
         activeEditor={activeEditor}
         switchEditor={switchEditor}
-        isLoading={isLoading}
       />
       <CropAlert
         visible={showAlert}

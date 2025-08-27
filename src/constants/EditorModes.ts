@@ -1,5 +1,5 @@
 export enum EditorModes {
-  CROP,
-  ZOOM,
-  ROTATE,
+  CROP = 'crop',
+  ZOOM = 'zoom',
+  ROTATE = 'rotate',
 }

@@ -5,7 +5,6 @@ type Props = {
     editorName: EditorModes;
     switchEditor: (mode: EditorModes) => Promise<void>;
     children: React.ReactNode;
-    disabled?: boolean;
 };
 /**
  * @description The main Button component for switching between editor modes (Rotate/Zoom/Crop).
@@ -20,6 +19,6 @@ type Props = {
  *
  * @returns A styled TouchableOpacity for editor switching.
  */
-export declare const Button: ({ activeEditor, editorName, switchEditor, children, disabled, }: Props) => React.JSX.Element;
+export declare const Button: ({ activeEditor, editorName, switchEditor, children, }: Props) => React.JSX.Element;
 export {};
 //# sourceMappingURL=Button.d.ts.map

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ImageEditorContext } from './ImageEditorContext';
+import { ImageEditorContext } from '../../components/imageEditor/ImageEditorContext';
 export const useImageEditorContext = () => {
     const context = useContext(ImageEditorContext);
     if (context === undefined)

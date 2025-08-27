@@ -24,9 +24,7 @@ export const useMoveRotateRangeBar = function ({ currentX, rangeLayout, }) {
         'worklet';
         return Math.round((currentPosition / totalWidth) * 360);
     };
-    const totalRotation = useDerivedValue(() => {
-        return previousRotate + rotate.get();
-    });
+    const totalRotation = useDerivedValue(() => previousRotate + rotate.get());
     useAnimatedReaction(() => totalRotation.get(), (total) => {
         currentX.set((total / 360) * rangeLayout.width);
     });

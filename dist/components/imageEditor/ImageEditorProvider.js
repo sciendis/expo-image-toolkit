@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import { useSharedValue } from 'react-native-reanimated';
 import { DefaultDimensionState, DefaultPositionState } from '../../constants';
-import { ImageEditorContext } from '../../hooks/useImageEditorContext/ImageEditorContext';
-import { getInitialEditor, setupConfig } from '../../utils';
 import { useUndoRedoSnapshot } from '../../hooks';
+import { getInitialEditor, setupConfig } from '../../utils';
+import { ImageEditorContext } from './ImageEditorContext';
 /**
  * @description This provider is not related to `ExpoImageToolkitProvider`.
  * While `ExpoImageToolkitProvider` is used to wrap the app at root level,

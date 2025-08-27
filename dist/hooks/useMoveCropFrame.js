@@ -10,15 +10,17 @@ import { useInitialEditorState } from './useInitialEditorState';
  * while keeping it constrained within the allowed bounds based on layout size and CropFrame scale.
  */
 export const useMoveCropFrame = function () {
-    const { boxPosition, boxScale, saveHistoryState } = useImageEditorContext();
+    const { boxPosition, boxScale, saveHistoryState, dimensions: { rotateScale }, } = useImageEditorContext();
     const { maxX, maxY, minX, minY } = useInitialEditorState();
     const startPosition = useSharedValue(DefaultPositionState);
     return Gesture.Pan()
         .onStart(() => startPosition.set(boxPosition.get()))
         .onUpdate((e) => {
         const startPosVal = startPosition.get();
-        const newX = startPosVal.x + e.translationX;
-        const newY = startPosVal.y + e.translationY;
+        const translationX = e.translationX * rotateScale;
+        const translationY = e.translationY * rotateScale;
+        const newX = startPosVal.x + translationX;
+        const newY = startPosVal.y + translationY;
         const boundedMinX = Math.max(newX, minX);
         const boundedMinY = Math.max(newY, minY);
         boxPosition.set({

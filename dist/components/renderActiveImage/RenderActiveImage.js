@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Animated, { useAnimatedStyle, withTiming, } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { EditorModes } from '../../constants';
 import { useImageEditorContext } from '../../hooks';
 import { useImageAnimatedOverflow, useImageAnimatedTransform, } from '../../hooks/animatedStyles';
@@ -18,13 +18,13 @@ import { CropFrame } from '../cropFrame';
  * @param {EditorModes} activeEditor - The current active editor mode (Zoom/Crop/Rotate).
  */
 export const RenderActiveImage = function ({ activeEditor }) {
-    const { image, imageRef, rotate, dimensions: { displayedImageWidth, displayedImageHeight, rotateScale }, } = useImageEditorContext();
+    const { image, imageRef, dimensions: { displayedImageWidth, displayedImageHeight, rotateScale }, } = useImageEditorContext();
     const { animatedStyleContainer, animatedStyleImage } = useImageAnimatedTransform();
     const animatedOverflowStyle = useImageAnimatedOverflow(activeEditor);
     const animatedStyleRotateScale = useAnimatedStyle(() => {
         'worklet';
-        return { transform: [{ scale: withTiming(1 / rotateScale) }] };
-    }, [rotate, rotateScale]);
+        return { transform: [{ scale: 1 / rotateScale }] };
+    }, [rotateScale]);
     return (<Animated.View style={[
             styles.container,
             !!displayedImageWidth &&
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
         zIndex: 0,
         width: '100%',
         height: '100%',
-        maxHeight: '70%',
         position: 'relative',
     },
     imageContainer: {
@@ -62,7 +61,6 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%',
-        resizeMode: 'contain',
     },
 });
 //# sourceMappingURL=RenderActiveImage.js.map

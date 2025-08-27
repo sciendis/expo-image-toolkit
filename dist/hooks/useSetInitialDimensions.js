@@ -11,7 +11,8 @@ import { ImageManipulator } from 'expo-image-manipulator';
 import { useEffect } from 'react';
 import { Dimensions } from 'react-native';
 import { useImageEditorContext } from './useImageEditorContext';
-const { width: screenWidth } = Dimensions.get('screen');
+const { width: screenWidth, height: screenHeight } = Dimensions.get('screen');
+const isDeviceLandscapeMode = screenHeight < screenWidth;
 /**
  * @description This custom hook calculates the actual and displayed image dimensions, along with all necessary scales and offsets.
  * These values are needed for further calculations like zooming on a focal point, moving a zoomed image, and cropping.
@@ -29,27 +30,30 @@ export const useSetInitialDimensions = function () {
                 return;
             setIsLoading(true);
             // calculate the actual image dimensions. using Image.getSize on android don't give us full image sizes when image is too large.
-            const { width, height } = yield ImageManipulator.manipulate(image).renderAsync();
+            const { width: imageWidth, height: imageHeight } = yield ImageManipulator.manipulate(image).renderAsync();
             // calculate scales/offsets/aspectRatios using layout-width/height
             imageRef.current.measure((_x, _y, layoutWidth, layoutHeight) => {
-                const imageAspectRatio = width / height;
-                const viewAspectRatio = layoutWidth / layoutHeight;
+                const imageAspectRatio = imageWidth / imageHeight;
                 // The image width is larger than it's height
-                let displayedImageWidth = layoutWidth;
-                let displayedImageHeight = layoutWidth / imageAspectRatio;
-                let offsetX = 0;
-                let offsetY = Math.round((layoutHeight - displayedImageHeight) / 2);
-                let rotateScale = 1;
+                let displayedImageWidth = isDeviceLandscapeMode
+                    ? layoutHeight * imageAspectRatio
+                    : layoutWidth;
+                let displayedImageHeight = isDeviceLandscapeMode
+                    ? layoutHeight
+                    : layoutWidth / imageAspectRatio;
+                let rotateScale = isDeviceLandscapeMode
+                    ? displayedImageWidth / layoutHeight
+                    : 1;
                 // The image height is larger than it's width
-                if (imageAspectRatio <= viewAspectRatio) {
+                if (imageWidth < imageHeight) {
                     displayedImageWidth = layoutHeight * imageAspectRatio;
                     displayedImageHeight = layoutHeight;
-                    offsetX = Math.round((layoutWidth - displayedImageWidth) / 2);
-                    offsetY = 0;
-                    rotateScale = displayedImageHeight / screenWidth;
+                    rotateScale = isDeviceLandscapeMode
+                        ? 1
+                        : displayedImageHeight / screenWidth;
                 }
-                const scaleX = width / displayedImageWidth;
-                const scaleY = height / displayedImageHeight;
+                const scaleX = imageWidth / displayedImageWidth;
+                const scaleY = imageHeight / displayedImageHeight;
                 const centerX = displayedImageWidth / 2;
                 const centerY = displayedImageHeight / 2;
                 const initialCropFramePosition = {
@@ -66,17 +70,17 @@ export const useSetInitialDimensions = function () {
                 setDimensions((prev) => (Object.assign(Object.assign({}, prev), { // this is for `savedInitialCropFramePosition` & `savedInitialCropFrameScale`
                     scaleX,
                     scaleY,
-                    offsetX,
-                    offsetY,
                     centerX,
                     centerY,
                     displayedImageWidth,
-                    displayedImageHeight, imageWidth: width, imageHeight: height, layoutWidth,
-                    layoutHeight,
+                    displayedImageHeight,
+                    imageWidth,
+                    imageHeight,
                     initialCropFramePosition,
                     initialCropFrameScale,
                     rotateScale })));
                 setIsLoading(false);
+                // setTimeout(() => setIsLoading(false), 200);
             });
         });
         calcDimensions(image);

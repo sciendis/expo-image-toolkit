@@ -6,5 +6,5 @@ import { EditorModes } from '../constants';
  * It also checks if the CropFrame was modified. If changes are detected while switching editors, an alert will ask whether to keep the cropped area.
  * If the user selects “No,” nothing happens. If they confirm, a new image is generated using the current CropFrame.
  */
-export declare const useSaveStateOnSwitch: () => (activeEditor: EditorModes, shouldCrop?: boolean) => Promise<true | void>;
+export declare const useSaveStateOnSwitch: () => (activeEditor: EditorModes, shouldCrop?: boolean) => Promise<boolean>;
 //# sourceMappingURL=useSaveStateOnSwitch.d.ts.map

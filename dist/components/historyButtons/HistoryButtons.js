@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     container: {
         position: 'absolute',
         left: 15,
-        top: 5,
+        top: 0,
         display: 'flex',
         flexDirection: 'row',
         gap: 10,

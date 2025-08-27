@@ -14,26 +14,26 @@ import { useImageEditorContext } from './useImageEditorContext';
 import { useSaveStateOnSwitch } from './useSaveStateOnSwitch';
 /**
  * @description Handles all necessary actions when switching editors — like generating a new image or detecting CropFrame changes to show the related alert.
- * @returns the opacity, isLoading, activeEditor, showAlert for handling loadingScreen or showing the CropFrame warning alert.
+ * @returns the opacity, activeEditor, showAlert for handling loadingScreen or showing the CropFrame warning alert.
  */
 export const useSwitchEditor = function () {
-    const { setActiveEditor, activeEditor, isLoading, setIsLoading } = useImageEditorContext();
+    const { setActiveEditor, activeEditor, setIsLoading } = useImageEditorContext();
     const saveStateOnSwitch = useSaveStateOnSwitch();
     const { opacity, fadeOut, fadeIn } = useFadeTransition();
     const [pendingEditor, setPendingEditor] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
     const performSwitch = (mode) => __awaiter(this, void 0, void 0, function* () {
         setActiveEditor(mode);
-        yield fadeIn(300);
+        yield fadeIn(100);
         setIsLoading(false);
     });
     const switchEditor = (mode) => __awaiter(this, void 0, void 0, function* () {
         if (mode === activeEditor)
             return;
         setIsLoading(true);
-        yield fadeOut(300);
-        const notNeedAlert = yield saveStateOnSwitch(activeEditor);
-        if (!notNeedAlert && activeEditor === EditorModes.CROP) {
+        yield fadeOut();
+        const needAlert = yield saveStateOnSwitch(activeEditor);
+        if (needAlert && activeEditor === EditorModes.CROP) {
             setPendingEditor(mode);
             setShowAlert(true);
             setIsLoading(false);
@@ -54,7 +54,6 @@ export const useSwitchEditor = function () {
     return {
         switchEditor,
         opacity,
-        isLoading,
         activeEditor,
         showAlert,
         handleAlertResponse,

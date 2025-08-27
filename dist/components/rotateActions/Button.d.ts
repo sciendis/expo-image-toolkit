@@ -22,6 +22,7 @@ export declare const styles: {
         height: number;
         justifyContent: "center";
         alignItems: "center";
+        opacity: number;
     };
     icon: {
         resizeMode: "contain";

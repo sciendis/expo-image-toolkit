@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
+import { calculateFontScale } from '../../utils';
 /**
  * @description The main Button component for Rotate/Flip actions.
  * It accepts any ReactNode as children (usually an icon).
@@ -22,10 +23,11 @@ export const Button = function ({ children, onPress, disabled }) {
 export const styles = StyleSheet.create({
     item: {
         borderRadius: 100,
-        width: 40,
-        height: 40,
+        width: calculateFontScale(40),
+        height: calculateFontScale(40),
         justifyContent: 'center',
         alignItems: 'center',
+        opacity: 0.7,
     },
     icon: {
         resizeMode: 'contain',

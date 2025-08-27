@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { runOnJS } from 'react-native-reanimated';
 import { DefaultDimensionState, EditorModes } from '../constants';
 import { getCropData, isCropFrameChanged, isRotate90, rotateAndCropManipulator, } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
@@ -22,11 +23,11 @@ export const useSaveStateOnSwitch = function () {
     return function saveStateOnSwitch(activeEditor, shouldCrop = false) {
         return __awaiter(this, void 0, void 0, function* () {
             if (activeEditor === EditorModes.ZOOM)
-                return true;
+                return false;
             const rotateVal = rotate.get();
             if (activeEditor === EditorModes.ROTATE) {
                 if (!isRotate90(rotateVal))
-                    return true;
+                    return false;
                 try {
                     const { uri, width, height } = yield rotateAndCropManipulator({
                         image,
@@ -47,7 +48,7 @@ export const useSaveStateOnSwitch = function () {
                 catch (error) {
                     console.error('Error rotating image:', error);
                 }
-                return true;
+                return false;
             }
             // activeEditor === Crop editor
             const isChanged = isCropFrameChanged({
@@ -57,10 +58,13 @@ export const useSaveStateOnSwitch = function () {
             });
             const needsConfirmation = isChanged && !shouldCrop;
             if (needsConfirmation) {
-                return setDimensions((prev) => (Object.assign(Object.assign({}, prev), { savedInitialCropFramePosition: boxPosition.get(), savedInitialCropFrameScale: boxScale.get() })));
+                const pos = boxPosition.get();
+                const scale = boxScale.get();
+                runOnJS(setDimensions)((prev) => (Object.assign(Object.assign({}, prev), { savedInitialCropFramePosition: pos, savedInitialCropFrameScale: scale })));
+                return true;
             }
             if (!shouldCrop)
-                return true;
+                return false;
             const cropData = getCropData({
                 dimensions,
                 boxScale,
@@ -94,7 +98,7 @@ export const useSaveStateOnSwitch = function () {
             // reset zoom and image position
             zoom.set(1);
             imagePosition.set({ x: 0, y: 0 });
-            return true;
+            return false;
         });
     };
 };

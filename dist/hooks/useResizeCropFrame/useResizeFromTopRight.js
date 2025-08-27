@@ -11,7 +11,7 @@ import { useInitialEditorState } from '../useInitialEditorState';
  * - Updates both position and scale to preserve bottom-left anchor.
  */
 export const useResizeFromTopRight = () => {
-    const { boxPosition, boxScale, saveHistoryState } = useImageEditorContext();
+    const { boxPosition, boxScale, saveHistoryState, dimensions: { rotateScale }, } = useImageEditorContext();
     const { minWidth, minHeight, minY, maxX } = useInitialEditorState();
     const startPosition = useSharedValue(DefaultPositionState);
     const startScale = useSharedValue(DefaultPositionState);
@@ -24,8 +24,10 @@ export const useResizeFromTopRight = () => {
         const startPosVal = startPosition.get();
         const startScaleVal = startScale.get();
         const boxPosVal = boxPosition.get();
-        const newY = Math.max(startPosVal.y + event.translationY, minY);
-        const newWidth = Math.min(Math.max(startScaleVal.x + event.translationX, minWidth), maxX - boxPosVal.x);
+        const translationX = event.translationX * rotateScale;
+        const translationY = event.translationY * rotateScale;
+        const newY = Math.max(startPosVal.y + translationY, minY);
+        const newWidth = Math.min(Math.max(startScaleVal.x + translationX, minWidth), maxX - boxPosVal.x);
         const newHeight = Math.max(startScaleVal.y - (newY - startPosVal.y), minHeight);
         boxPosition.set({
             x: boxPosVal.x,

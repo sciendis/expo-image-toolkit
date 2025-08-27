@@ -1,6 +1,6 @@
 export declare enum EditorModes {
-    CROP = 0,
-    ZOOM = 1,
-    ROTATE = 2
+    CROP = "crop",
+    ZOOM = "zoom",
+    ROTATE = "rotate"
 }
 //# sourceMappingURL=EditorModes.d.ts.map

@@ -8,7 +8,6 @@ import {
 import { useImageEditorContext } from '../../hooks';
 
 type Props = {
-  opacity?: Animated.Value;
   size?: number | 'small' | 'large';
   style?: StyleProp<ViewStyle>;
 };
@@ -22,25 +21,18 @@ type Props = {
  * This is the second reason for using a loading screen while switching between editors.
  *
  * @param props - An object containing:
- * - `opacity`: `Animated.Value` (optional) – Controls the opacity animation of the loading screen.
  * - `style`: `StyleProp<ViewStyle>` (optional) – Additional styles for customizing the loading container.
  *
  * @returns An animated loading screen with an ActivityIndicator.
  */
-export const LoadingIndicator = function ({
-  opacity,
-  size = 'large',
-  style,
-}: Props) {
+export const LoadingIndicator = function ({ size = 'large', style }: Props) {
   const {
     config: { colors },
   } = useImageEditorContext();
   const colorStylesContainer = { backgroundColor: colors.background };
 
   return (
-    <Animated.View
-      style={[styles.container, colorStylesContainer, style, { opacity }]}
-    >
+    <Animated.View style={[styles.container, colorStylesContainer, style]}>
       <ActivityIndicator size={size} color={colors.indicator} />
     </Animated.View>
   );

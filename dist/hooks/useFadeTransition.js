@@ -9,7 +9,7 @@ import { Animated } from 'react-native';
  *
  * @returns { opacity, fadeOut, fadeIn }
  */
-export const useFadeTransition = () => {
+export const useFadeTransition = function () {
     const opacity = useRef(new Animated.Value(0)).current;
     const fadeOut = useCallback((duration = 0) => {
         return new Promise((resolve) => {

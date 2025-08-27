@@ -2,7 +2,7 @@ import { FlipHorizontal, FlipVertical } from 'lucide-react-native';
 import React from 'react';
 import { withTiming } from 'react-native-reanimated';
 import { useImageEditorContext } from '../../hooks';
-import { isRotate90, resetZoomState } from '../../utils';
+import { calculateFontScale, isRotate90, resetZoomState } from '../../utils';
 import { Button } from './Button';
 
 /**
@@ -45,10 +45,16 @@ export const FlipButtons = function () {
   return (
     <>
       <Button onPress={flipVertical}>
-        <FlipVertical color={colors.rotateActions} />
+        <FlipVertical
+          size={calculateFontScale(24)}
+          color={colors.rotateActions}
+        />
       </Button>
       <Button onPress={flipHorizontal}>
-        <FlipHorizontal color={colors.rotateActions} />
+        <FlipHorizontal
+          size={calculateFontScale(24)}
+          color={colors.rotateActions}
+        />
       </Button>
     </>
   );

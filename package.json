@@ -1,7 +1,7 @@
 {
   "name": "@sciendis/expo-image-toolkit",
   "author": "sciendis",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "A reusable Image Editor for React Native projects",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.3",
+    "@react-native-async-storage/async-storage": "^2.2.0",
     "expo": "^52.0.38",
     "expo-constants": "~17.0.8",
     "expo-file-system": "~18.0.11",
@@ -21,7 +22,6 @@
     "react-dom": "^18.3.1",
     "react-native": "^0.76.7",
     "react-native-gesture-handler": "~2.20.2",
-    "react-native-paper": "^5.12.5",
     "react-native-reanimated": "~3.16.1",
     "react-native-svg": "^15.8.0"
   },

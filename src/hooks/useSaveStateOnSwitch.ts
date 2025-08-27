@@ -1,3 +1,4 @@
+import { runOnJS } from 'react-native-reanimated';
 import { DefaultDimensionState, EditorModes } from '../constants';
 import {
   getCropData,
@@ -37,12 +38,12 @@ export const useSaveStateOnSwitch = function () {
     activeEditor: EditorModes,
     shouldCrop = false
   ) {
-    if (activeEditor === EditorModes.ZOOM) return true;
+    if (activeEditor === EditorModes.ZOOM) return false;
 
     const rotateVal = rotate.get();
 
     if (activeEditor === EditorModes.ROTATE) {
-      if (!isRotate90(rotateVal)) return true;
+      if (!isRotate90(rotateVal)) return false;
 
       try {
         const { uri, width, height } = await rotateAndCropManipulator({
@@ -65,7 +66,7 @@ export const useSaveStateOnSwitch = function () {
         console.error('Error rotating image:', error);
       }
 
-      return true;
+      return false;
     }
 
     // activeEditor === Crop editor
@@ -78,13 +79,17 @@ export const useSaveStateOnSwitch = function () {
     const needsConfirmation = isChanged && !shouldCrop;
 
     if (needsConfirmation) {
-      return setDimensions((prev) => ({
+      const pos = boxPosition.get();
+      const scale = boxScale.get();
+
+      runOnJS(setDimensions)((prev) => ({
         ...prev,
-        savedInitialCropFramePosition: boxPosition.get(),
-        savedInitialCropFrameScale: boxScale.get(),
+        savedInitialCropFramePosition: pos,
+        savedInitialCropFrameScale: scale,
       }));
+      return true;
     }
-    if (!shouldCrop) return true;
+    if (!shouldCrop) return false;
 
     const cropData = getCropData({
       dimensions,
@@ -122,6 +127,6 @@ export const useSaveStateOnSwitch = function () {
     zoom.set(1);
     imagePosition.set({ x: 0, y: 0 });
 
-    return true;
+    return false;
   };
 };

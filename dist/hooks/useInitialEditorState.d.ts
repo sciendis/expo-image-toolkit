@@ -11,7 +11,7 @@ export declare const useInitialEditorState: () => {
     maxX: number;
     minY: number;
     maxY: number;
-    minWidth: 100;
-    minHeight: 100;
+    minWidth: number;
+    minHeight: number;
 };
 //# sourceMappingURL=useInitialEditorState.d.ts.map

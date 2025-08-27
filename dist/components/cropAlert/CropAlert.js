@@ -1,6 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Animated, Dimensions, StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
+import { DefaultLayoutState } from '../../constants';
 import { useImageEditorContext } from '../../hooks';
+import { calculateFontScale } from '../../utils';
 const { height } = Dimensions.get('screen');
 /**
  * @description This alert appears when users modify the CropFrame and try to switch editors.
@@ -14,6 +16,7 @@ const { height } = Dimensions.get('screen');
  */
 export const CropAlert = function ({ visible, handleAlertResponse }) {
     const { config: { labels, colors }, } = useImageEditorContext();
+    const [alertLayout, setAlertLayout] = useState(DefaultLayoutState);
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const scaleAnim = useRef(new Animated.Value(0.8)).current;
     useEffect(() => {
@@ -34,12 +37,13 @@ export const CropAlert = function ({ visible, handleAlertResponse }) {
             styles.container,
             {
                 opacity: fadeAnim,
-                transform: [{ translateY: -height / 16 }, { scale: scaleAnim }],
+                top: (height - alertLayout.height) / 2,
+                transform: [{ scale: scaleAnim }],
                 zIndex: visible ? 1000 : -20,
                 backgroundColor: colors.alertBg,
                 shadowColor: colors.alertShadow,
             },
-        ]}>
+        ]} onLayout={(e) => setAlertLayout(e.nativeEvent.layout)}>
       <View style={styles.messageContainer}>
         <Text style={[styles.message, { color: colors.alertMessage }]}>
           {labels.CROP_ALERT}
@@ -68,13 +72,10 @@ export const CropAlert = function ({ visible, handleAlertResponse }) {
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: '50%',
         left: '10%',
         width: '80%',
         borderRadius: 12,
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         shadowOffset: { width: 2, height: 4 },
         shadowOpacity: 0.6,
         shadowRadius: 30,
@@ -82,12 +83,12 @@ const styles = StyleSheet.create({
     messageContainer: {
         width: '100%',
         flex: 1,
-        paddingVertical: 6,
-        paddingHorizontal: 10,
+        paddingVertical: calculateFontScale(6),
+        paddingHorizontal: calculateFontScale(10),
     },
     message: {
         textAlign: 'justify',
-        fontSize: 15,
+        fontSize: calculateFontScale(16),
     },
     buttonsContainer: {
         flex: 1,
@@ -95,19 +96,20 @@ const styles = StyleSheet.create({
         flexWrap: 'nowrap',
         width: '100%',
         justifyContent: 'space-evenly',
-        marginTop: 18,
-        marginBottom: 12,
-        paddingHorizontal: 4,
+        marginTop: calculateFontScale(18),
+        marginBottom: calculateFontScale(12),
+        paddingHorizontal: calculateFontScale(4),
     },
     buttonsParent: {
         width: '40%',
     },
     button: {
-        padding: 4,
+        padding: calculateFontScale(4),
         borderRadius: 5,
     },
     buttonText: {
         textAlign: 'center',
+        fontSize: calculateFontScale(13),
     },
 });
 //# sourceMappingURL=CropAlert.js.map

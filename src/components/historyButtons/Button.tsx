@@ -1,6 +1,7 @@
 import { LucideIcon } from 'lucide-react-native';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
+import { calculateFontScale } from '../../utils';
 
 type Props = {
   onPress: () => void;
@@ -30,14 +31,18 @@ export const Button = function ({ onPress, disabled, Icon }: Props) {
       disabled={disabled}
       style={[styles.button, { backgroundColor: colors.headerTitleBg }]}
     >
-      <Icon color={disabled ? colors.historyDisabled : colors.historyEnabled} />
+      <Icon
+        size={calculateFontScale(20)}
+        color={disabled ? colors.historyDisabled : colors.historyEnabled}
+      />
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    padding: 4,
+    padding: calculateFontScale(4),
     borderRadius: 100,
+    opacity: 0.8,
   },
 });

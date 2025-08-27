@@ -1,1 +1,1 @@
-{"version":3,"file":"EditorModes.js","sourceRoot":"","sources":["../../src/constants/EditorModes.ts"],"names":[],"mappings":"AAAA,MAAM,CAAN,IAAY,WAIX;AAJD,WAAY,WAAW;IACrB,6CAAI,CAAA;IACJ,6CAAI,CAAA;IACJ,iDAAM,CAAA;AACR,CAAC,EAJW,WAAW,KAAX,WAAW,QAItB"}
+{"version":3,"file":"EditorModes.js","sourceRoot":"","sources":["../../src/constants/EditorModes.ts"],"names":[],"mappings":"AAAA,MAAM,CAAN,IAAY,WAIX;AAJD,WAAY,WAAW;IACrB,4BAAa,CAAA;IACb,4BAAa,CAAA;IACb,gCAAiB,CAAA;AACnB,CAAC,EAJW,WAAW,KAAX,WAAW,QAItB"}

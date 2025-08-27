@@ -8,17 +8,15 @@ import { LoadingIndicator } from '../loadingIndicator';
  *
  * @param props - An object containing:
  * - `activeEditor`: `EditorModes` – The currently active editor mode.
- * - `isLoading`: `boolean` – Indicates whether a loading indicator should be shown.
- * - `opacity`: `Animated.Value` – Opacity value used for the loading indicator.
  *
  * @returns The selected editor UI, with gesture support and mode-specific tools.
  */
-export const ContentWrapper = function ({ children, isLoading, opacity, }) {
-    const { config: { colors }, } = useImageEditorContext();
+export const ContentWrapper = function ({ children }) {
+    const { isLoading, config: { colors }, } = useImageEditorContext();
     const colorStylesContainer = { backgroundColor: colors.background };
     return (<Animated.View style={[styles.container, colorStylesContainer]}>
       <HistoryButtons />
-      {isLoading && <LoadingIndicator opacity={opacity}/>}
+      {isLoading && <LoadingIndicator />}
       {children}
     </Animated.View>);
 };

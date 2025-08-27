@@ -1,10 +1,10 @@
 import { ReactNode, useRef, useState } from 'react';
 import { useSharedValue } from 'react-native-reanimated';
 import { DefaultDimensionState, DefaultPositionState } from '../../constants';
-import { ImageEditorContext } from '../../hooks/useImageEditorContext/ImageEditorContext';
+import { useUndoRedoSnapshot } from '../../hooks';
 import { Dimensions, Position, UserConfig } from '../../types';
 import { getInitialEditor, setupConfig } from '../../utils';
-import { useUndoRedoSnapshot } from '../../hooks';
+import { ImageEditorContext } from './ImageEditorContext';
 
 type Props = {
   image: string;

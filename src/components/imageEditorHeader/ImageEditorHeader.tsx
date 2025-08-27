@@ -1,14 +1,12 @@
-import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
-import { Surface, Title } from 'react-native-paper';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
-import { getExpoConstants } from '../../utils';
+import { calculateFontScale, getExpoConstants } from '../../utils';
 import { CancelButton } from '../cancelButton';
 import { CropImageButton } from '../cropImageButton';
 import { ImageEditorProps } from '../imageEditor';
 
 type Props = {
   onCancel: () => void;
-  onLayout?: (event: LayoutChangeEvent) => void;
 } & Pick<ImageEditorProps, 'onCrop'>;
 
 /**
@@ -17,25 +15,17 @@ type Props = {
  * @param props - An object containing:
  * - `onCancel`: `() => void` – Callback triggered when the user presses the cancel button.
  * - `onCrop`: `() => void` – Callback triggered when the user presses the finish button.
- * - `onLayout`: `(event: LayoutChangeEvent) => void` (optional) – Used to pass layout changes to the parent.
  *
  * @returns A Surface component containing the editor header with cancel, title, and crop actions.
  */
-export const ImageEditorHeader = function ({
-  onCancel,
-  onCrop,
-  onLayout,
-}: Props) {
+export const ImageEditorHeader = function ({ onCancel, onCrop }: Props) {
   const { statusBarHeight } = getExpoConstants();
   const {
     config: { colors, labels },
   } = useImageEditorContext();
 
   return (
-    <Surface
-      onLayout={onLayout}
-      style={[styles.container, { marginTop: statusBarHeight }]}
-    >
+    <SafeAreaView style={[styles.container, { marginTop: statusBarHeight }]}>
       <View style={styles.headerItem}>
         <CancelButton onCancel={onCancel} />
       </View>
@@ -46,14 +36,14 @@ export const ImageEditorHeader = function ({
           { backgroundColor: colors.headerTitleBg },
         ]}
       >
-        <Title style={[styles.headerTitle, { color: colors.headerTitle }]}>
+        <Text style={[styles.headerTitle, { color: colors.headerTitle }]}>
           {labels.EDITOR_TITLE}
-        </Title>
+        </Text>
       </View>
       <View style={[styles.headerItem, styles.headerRight]}>
         <CropImageButton onCrop={onCrop} />
       </View>
-    </Surface>
+    </SafeAreaView>
   );
 };
 
@@ -62,10 +52,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: 'transparent',
+    marginBottom: calculateFontScale(6),
   },
   headerItem: {
-    marginHorizontal: 10,
+    marginHorizontal: calculateFontScale(10),
     flex: 1,
   },
   headerCenter: {
@@ -77,7 +67,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   headerTitle: {
-    fontSize: 21,
+    fontSize: calculateFontScale(21),
     fontWeight: '600',
     textAlign: 'center',
   },

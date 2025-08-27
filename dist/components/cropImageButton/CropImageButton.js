@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useCropImage, useImageEditorContext } from '../../hooks';
 import { LoadingIndicator } from '../loadingIndicator';
+import { calculateFontScale } from '../../utils';
 /**
  * @description The finish Button that appears on top-right corner of the editor modal header.
  * @param {() => void} onCrop - The function to call when the finish button is pressed.
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
     },
     title: {
-        fontSize: 14,
+        fontSize: calculateFontScale(14),
     },
 });
 //# sourceMappingURL=CropImageButton.js.map

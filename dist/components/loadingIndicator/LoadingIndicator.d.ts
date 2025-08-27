@@ -1,7 +1,6 @@
 /// <reference types="react" />
-import { Animated, StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 type Props = {
-    opacity?: Animated.Value;
     size?: number | 'small' | 'large';
     style?: StyleProp<ViewStyle>;
 };
@@ -14,11 +13,10 @@ type Props = {
  * This is the second reason for using a loading screen while switching between editors.
  *
  * @param props - An object containing:
- * - `opacity`: `Animated.Value` (optional) – Controls the opacity animation of the loading screen.
  * - `style`: `StyleProp<ViewStyle>` (optional) – Additional styles for customizing the loading container.
  *
  * @returns An animated loading screen with an ActivityIndicator.
  */
-export declare const LoadingIndicator: ({ opacity, size, style, }: Props) => import("react").JSX.Element;
+export declare const LoadingIndicator: ({ size, style }: Props) => import("react").JSX.Element;
 export {};
 //# sourceMappingURL=LoadingIndicator.d.ts.map

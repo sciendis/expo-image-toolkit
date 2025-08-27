@@ -8,6 +8,7 @@ import {
   useResizeFromTopLeft,
   useResizeFromTopRight,
 } from '../../hooks/useResizeCropFrame';
+import { calculateFontScale } from '../../utils';
 
 /**
  * @description The four corners of the borders of CropFrame with their event handlers.
@@ -18,6 +19,7 @@ import {
  */
 export const Corners = function () {
   const {
+    dimensions: { rotateScale },
     config: { colors },
   } = useImageEditorContext();
   const colorStyles = { borderColor: colors.cropFrameCorners };
@@ -27,19 +29,50 @@ export const Corners = function () {
   const bottomLeftCornerGesture = useResizeFromBottomLeft();
   const bottomRightCornerGesture = useResizeFromBottomRight();
 
+  const cornerSize = calculateFontScale(45) * rotateScale;
+  const cornerDimensions = { width: cornerSize, height: cornerSize };
+
   return (
     <>
       <GestureDetector gesture={topLeftCornerGesture}>
-        <View style={[styles.corner, styles.cornerTopLeft, colorStyles]} />
+        <View
+          style={[
+            styles.corner,
+            cornerDimensions,
+            styles.cornerTopLeft,
+            colorStyles,
+          ]}
+        />
       </GestureDetector>
       <GestureDetector gesture={topRightCornerGesture}>
-        <View style={[styles.corner, styles.cornerTopRight, colorStyles]} />
+        <View
+          style={[
+            styles.corner,
+            cornerDimensions,
+            styles.cornerTopRight,
+            colorStyles,
+          ]}
+        />
       </GestureDetector>
       <GestureDetector gesture={bottomLeftCornerGesture}>
-        <View style={[styles.corner, styles.cornerBottomLeft, colorStyles]} />
+        <View
+          style={[
+            styles.corner,
+            cornerDimensions,
+            styles.cornerBottomLeft,
+            colorStyles,
+          ]}
+        />
       </GestureDetector>
       <GestureDetector gesture={bottomRightCornerGesture}>
-        <View style={[styles.corner, styles.cornerBottomRight, colorStyles]} />
+        <View
+          style={[
+            styles.corner,
+            cornerDimensions,
+            styles.cornerBottomRight,
+            colorStyles,
+          ]}
+        />
       </GestureDetector>
     </>
   );
@@ -48,8 +81,6 @@ export const Corners = function () {
 const styles = StyleSheet.create({
   corner: {
     position: 'absolute',
-    height: 45,
-    width: 45,
   },
   cornerTopLeft: {
     top: -2,

@@ -9,6 +9,7 @@ import {
 } from 'react-native-reanimated';
 import { useImageEditorContext } from '../../hooks';
 import {
+  calculateFontScale,
   getNextLeftAngle,
   getNextRightAngle,
   resetZoomState,
@@ -75,16 +76,17 @@ export const RotateButtons = function () {
     resetZoomState(zoom, imagePosition);
     const nextRotate = nextAngle - previousRotate;
     rotate.set(withTiming(nextRotate));
+    saveHistoryState();
   };
 
   return (
     <View style={styles.container}>
       <Button onPress={rotateLeft} disabled={leftDisabled}>
-        <RotateCcw color={colors.rotateActions} />
+        <RotateCcw size={calculateFontScale(24)} color={colors.rotateActions} />
       </Button>
       <FlipButtons />
       <Button onPress={rotateRight} disabled={rightDisabled}>
-        <RotateCw color={colors.rotateActions} />
+        <RotateCw size={calculateFontScale(24)} color={colors.rotateActions} />
       </Button>
     </View>
   );
@@ -94,9 +96,9 @@ export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingHorizontal: 8,
+    paddingHorizontal: calculateFontScale(8),
     position: 'absolute',
-    bottom: 40,
+    bottom: calculateFontScale(20),
     left: 0,
     width: '100%',
     flexWrap: 'wrap',

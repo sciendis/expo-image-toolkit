@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Animated, StyleSheet } from 'react-native';
 import {
   GestureDetector,
   GestureHandlerRootView,
@@ -18,8 +17,6 @@ import { ContentWrapper } from './ContentWrapper';
 
 type Props = {
   activeEditor: EditorModes;
-  isLoading: boolean;
-  opacity: Animated.Value;
 };
 
 /**
@@ -28,18 +25,13 @@ type Props = {
  *
  * @param props - An object containing:
  * - `children`: `ReactNode` – The active editor contents to render inside the wrapper.
- * - `isLoading`: `boolean` – If true, displays the loading indicator.
- * - `opacity`: `Animated.Value` – Opacity value for animating the loading indicator.
  *
  * @returns The view of the active editor or loading screen.
  */
-export const ImageEditorContents = function ({
-  activeEditor,
-  isLoading,
-  opacity,
-}: Props) {
-  const { config } = useImageEditorContext();
-  const { labels, enableRotate, enableZoom } = config;
+export const ImageEditorContents = function ({ activeEditor }: Props) {
+  const {
+    config: { labels, enableRotate, enableZoom },
+  } = useImageEditorContext();
 
   const moveGesture = useMoveCropFrame();
   const zoomGesture = useZoomGesture();
@@ -47,54 +39,41 @@ export const ImageEditorContents = function ({
   const [rotateHintOpacity, setRotateHintOpacity] = useState<0 | 1>(1);
   const [zoomHintOpacity, setZoomHintOpacity] = useState<0 | 1>(1);
 
-  if (enableRotate && activeEditor === EditorModes.ROTATE) {
-    return (
-      <ContentWrapper isLoading={isLoading} opacity={opacity}>
-        <Hint
-          message={labels.ROTATE_HINT}
-          opacity={rotateHintOpacity}
-          setOpacity={setRotateHintOpacity}
-        />
-        <RenderActiveImage activeEditor={activeEditor} />
-        <RotateActions />
-      </ContentWrapper>
-    );
-  }
-
-  if (enableZoom && activeEditor === EditorModes.ZOOM) {
-    return (
-      <ContentWrapper isLoading={isLoading} opacity={opacity}>
-        <Hint
-          message={labels.ZOOM_HINT}
-          opacity={zoomHintOpacity}
-          setOpacity={setZoomHintOpacity}
-        />
-        <GestureHandlerRootView style={styles.gestureRootView}>
-          <GestureDetector gesture={zoomGesture}>
-            <RenderActiveImage activeEditor={activeEditor} />
-          </GestureDetector>
-        </GestureHandlerRootView>
-        <ZoomRange />
-      </ContentWrapper>
-    );
-  }
-
-  // Crop editor
   return (
     <GestureHandlerRootView>
-      <GestureDetector gesture={moveGesture}>
-        <ContentWrapper isLoading={isLoading} opacity={opacity}>
-          <RenderActiveImage activeEditor={activeEditor} />
-        </ContentWrapper>
-      </GestureDetector>
+      <ContentWrapper>
+        {enableRotate && activeEditor === EditorModes.ROTATE && (
+          <>
+            <Hint
+              id="rotate"
+              message={labels.ROTATE_HINT}
+              opacity={rotateHintOpacity}
+              setOpacity={setRotateHintOpacity}
+            />
+            <RenderActiveImage activeEditor={activeEditor} />
+            <RotateActions />
+          </>
+        )}
+        {enableZoom && activeEditor === EditorModes.ZOOM && (
+          <>
+            <Hint
+              id="zoom"
+              message={labels.ZOOM_HINT}
+              opacity={zoomHintOpacity}
+              setOpacity={setZoomHintOpacity}
+            />
+            <GestureDetector gesture={zoomGesture}>
+              <RenderActiveImage activeEditor={activeEditor} />
+            </GestureDetector>
+            <ZoomRange />
+          </>
+        )}
+        {activeEditor === EditorModes.CROP && (
+          <GestureDetector gesture={moveGesture}>
+            <RenderActiveImage activeEditor={activeEditor} />
+          </GestureDetector>
+        )}
+      </ContentWrapper>
     </GestureHandlerRootView>
   );
 };
-
-const styles = StyleSheet.create({
-  gestureRootView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

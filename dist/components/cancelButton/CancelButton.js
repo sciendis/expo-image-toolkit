@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
+import { calculateFontScale } from '../../utils';
 /**
  * @description The cancel Button that appears on top-left corner of the editor modal header.
  * @param {() => void} onCancel - The function to call when the cancel button is pressed.
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
     },
     title: {
-        fontSize: 14,
+        fontSize: calculateFontScale(14),
     },
 });
 //# sourceMappingURL=CancelButton.js.map

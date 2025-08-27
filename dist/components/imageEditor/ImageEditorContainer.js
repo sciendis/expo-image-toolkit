@@ -16,7 +16,7 @@ import { SwitchEditorButtons } from '../switchEditorButtons';
  * @returns The view that renders the editor components based on the active/selected editor or the loading screen while processing the image.
  */
 export const ImageEditorContainer = function ({ onCancel, onCrop, }) {
-    const { switchEditor, opacity, isLoading, activeEditor, showAlert, handleAlertResponse, } = useSwitchEditor();
+    const { switchEditor, activeEditor, showAlert, handleAlertResponse } = useSwitchEditor();
     const { isSaving, config: { colors }, } = useImageEditorContext();
     const colorStylesContainer = { backgroundColor: colors.background };
     useSetInitialDimensions();
@@ -27,8 +27,8 @@ export const ImageEditorContainer = function ({ onCancel, onCrop, }) {
     }
     return (<View style={[styles.container, colorStylesContainer]}>
       <ImageEditorHeader onCancel={onCancel} onCrop={onCrop}/>
-      <ImageEditorContents activeEditor={activeEditor} isLoading={isLoading} opacity={opacity}/>
-      <SwitchEditorButtons activeEditor={activeEditor} switchEditor={switchEditor} isLoading={isLoading}/>
+      <ImageEditorContents activeEditor={activeEditor}/>
+      <SwitchEditorButtons activeEditor={activeEditor} switchEditor={switchEditor}/>
       <CropAlert visible={showAlert} handleAlertResponse={handleAlertResponse}/>
     </View>);
 };

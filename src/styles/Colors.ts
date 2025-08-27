@@ -2,6 +2,7 @@ const DARK = '#222222';
 const BLACK = '#000000';
 const WHITE = '#ffffff';
 const GRAY = '#cccccc';
+const TRANSPARENT_GRAY = '#666666c9';
 const LIGHT_GRAY = '#cccccc33';
 const LIGHTEST_GRAY = '#383838';
 
@@ -21,7 +22,7 @@ export const Colors = {
   headerTitleBg: LIGHT_GRAY,
 
   hint: WHITE,
-  hintBg: LIGHTEST_GRAY,
+  hintBg: TRANSPARENT_GRAY,
 
   indicator: WHITE,
 

@@ -10,7 +10,7 @@ export declare const Colors: {
     readonly headerTitle: "#ffffff";
     readonly headerTitleBg: "#cccccc33";
     readonly hint: "#ffffff";
-    readonly hintBg: "#383838";
+    readonly hintBg: "#666666c9";
     readonly indicator: "#ffffff";
     readonly rotateActions: "#000000";
     readonly rotateActionsBg: "#ffffff";

@@ -1,1 +1,1 @@
-{"version":3,"file":"useSwitchEditor.d.ts","sourceRoot":"","sources":["../../src/hooks/useSwitchEditor.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,WAAW,EAAE,MAAM,cAAc,CAAC;AAK3C;;;GAGG;AACH,eAAO,MAAM,eAAe;yBAeQ,WAAW;;;;;sCAiBE,OAAO;CAmBvD,CAAC"}
+{"version":3,"file":"useSwitchEditor.d.ts","sourceRoot":"","sources":["../../src/hooks/useSwitchEditor.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,WAAW,EAAE,MAAM,cAAc,CAAC;AAK3C;;;GAGG;AACH,eAAO,MAAM,eAAe;yBAiBQ,WAAW;;;;sCAiBE,OAAO;CAkBvD,CAAC"}

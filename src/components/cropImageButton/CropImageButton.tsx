@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useCropImage, useImageEditorContext } from '../../hooks';
 import { ImageEditorProps } from '../imageEditor';
 import { LoadingIndicator } from '../loadingIndicator';
+import { calculateFontScale } from '../../utils';
 
 /**
  * @description The finish Button that appears on top-right corner of the editor modal header.
@@ -41,6 +42,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   title: {
-    fontSize: 14,
+    fontSize: calculateFontScale(14),
   },
 });

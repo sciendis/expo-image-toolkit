@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
+import { calculateFontScale } from '../../utils';
 /**
  * @description The main Button component for switching between editor modes (Rotate/Zoom/Crop).
  * Highlights the active editor and triggers `switchEditor` when pressed.
@@ -14,26 +15,27 @@ import { useImageEditorContext } from '../../hooks';
  *
  * @returns A styled TouchableOpacity for editor switching.
  */
-export const Button = function ({ activeEditor, editorName, switchEditor, children, disabled, }) {
-    const { config: { colors }, } = useImageEditorContext();
+export const Button = function ({ activeEditor, editorName, switchEditor, children, }) {
+    const { isLoading, config: { colors }, } = useImageEditorContext();
     return (<TouchableOpacity style={[
             styles.container,
             { backgroundColor: colors.switchEditorIconBg },
             activeEditor === editorName && {
                 backgroundColor: colors.switchEditorIconActive,
             },
-        ]} onPress={() => switchEditor(editorName)} disabled={disabled}>
+        ]} onPress={() => switchEditor(editorName)} disabled={isLoading}>
       {children}
     </TouchableOpacity>);
 };
 const styles = StyleSheet.create({
     container: {
         borderRadius: 100,
-        width: 55,
-        height: 55,
+        width: calculateFontScale(50),
+        height: calculateFontScale(50),
         aspectRatio: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        position: 'relative',
     },
 });
 //# sourceMappingURL=Button.js.map

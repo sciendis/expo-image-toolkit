@@ -45,9 +45,7 @@ export const useMoveRotateRangeBar = function ({
     return Math.round((currentPosition / totalWidth) * 360);
   };
 
-  const totalRotation = useDerivedValue(() => {
-    return previousRotate + rotate.get();
-  });
+  const totalRotation = useDerivedValue(() => previousRotate + rotate.get());
 
   useAnimatedReaction(
     () => totalRotation.get(),

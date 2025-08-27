@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { GestureDetector } from 'react-native-gesture-handler';
 import { useImageEditorContext } from '../../hooks';
 import { useResizeFromBottomLeft, useResizeFromBottomRight, useResizeFromTopLeft, useResizeFromTopRight, } from '../../hooks/useResizeCropFrame';
+import { calculateFontScale } from '../../utils';
 /**
  * @description The four corners of the borders of CropFrame with their event handlers.
  * The corners of the borders are a little bold compared to the rest of the borders. Here are the bold parts, not the borders.
@@ -11,32 +12,52 @@ import { useResizeFromBottomLeft, useResizeFromBottomRight, useResizeFromTopLeft
  * @returns Four gesture corners for resizing the CropFrame.
  */
 export const Corners = function () {
-    const { config: { colors }, } = useImageEditorContext();
+    const { dimensions: { rotateScale }, config: { colors }, } = useImageEditorContext();
     const colorStyles = { borderColor: colors.cropFrameCorners };
     const topLeftCornerGesture = useResizeFromTopLeft();
     const topRightCornerGesture = useResizeFromTopRight();
     const bottomLeftCornerGesture = useResizeFromBottomLeft();
     const bottomRightCornerGesture = useResizeFromBottomRight();
+    const cornerSize = calculateFontScale(45) * rotateScale;
+    const cornerDimensions = { width: cornerSize, height: cornerSize };
     return (<>
       <GestureDetector gesture={topLeftCornerGesture}>
-        <View style={[styles.corner, styles.cornerTopLeft, colorStyles]}/>
+        <View style={[
+            styles.corner,
+            cornerDimensions,
+            styles.cornerTopLeft,
+            colorStyles,
+        ]}/>
       </GestureDetector>
       <GestureDetector gesture={topRightCornerGesture}>
-        <View style={[styles.corner, styles.cornerTopRight, colorStyles]}/>
+        <View style={[
+            styles.corner,
+            cornerDimensions,
+            styles.cornerTopRight,
+            colorStyles,
+        ]}/>
       </GestureDetector>
       <GestureDetector gesture={bottomLeftCornerGesture}>
-        <View style={[styles.corner, styles.cornerBottomLeft, colorStyles]}/>
+        <View style={[
+            styles.corner,
+            cornerDimensions,
+            styles.cornerBottomLeft,
+            colorStyles,
+        ]}/>
       </GestureDetector>
       <GestureDetector gesture={bottomRightCornerGesture}>
-        <View style={[styles.corner, styles.cornerBottomRight, colorStyles]}/>
+        <View style={[
+            styles.corner,
+            cornerDimensions,
+            styles.cornerBottomRight,
+            colorStyles,
+        ]}/>
       </GestureDetector>
     </>);
 };
 const styles = StyleSheet.create({
     corner: {
         position: 'absolute',
-        height: 45,
-        width: 45,
     },
     cornerTopLeft: {
         top: -2,

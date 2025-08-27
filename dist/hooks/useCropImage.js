@@ -20,11 +20,10 @@ import { useImageEditorContext } from './useImageEditorContext';
  * @returns {() => Promise<void>} cropImage function
  */
 export const useCropImage = function ({ onCrop }) {
-    const { image, boxPosition, boxScale, zoom, rotate, flipX, flipY, setIsSaving, setIsLoading, focalPoint, imagePosition, dimensions, activeEditor, config: { quality, saveFormat }, } = useImageEditorContext();
+    const { image, boxPosition, boxScale, zoom, rotate, flipX, flipY, setIsSaving, focalPoint, imagePosition, dimensions, activeEditor, config: { quality, saveFormat }, } = useImageEditorContext();
     return function cropImage() {
         return __awaiter(this, void 0, void 0, function* () {
             setIsSaving(true);
-            setIsLoading(true);
             const cropData = getCropData({
                 dimensions,
                 boxScale,
@@ -37,7 +36,6 @@ export const useCropImage = function ({ onCrop }) {
             if (cropData.width < DefaultCropFrameState.minWidth ||
                 cropData.height < DefaultCropFrameState.minHeight) {
                 setIsSaving(false);
-                setIsLoading(false);
                 return;
             }
             try {

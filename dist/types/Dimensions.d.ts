@@ -1,7 +1,5 @@
 import { Position } from './Position';
 export type Dimensions = {
-    offsetX: number;
-    offsetY: number;
     scaleX: number;
     scaleY: number;
     centerX: number;
@@ -10,8 +8,6 @@ export type Dimensions = {
     displayedImageHeight: number;
     imageWidth: number;
     imageHeight: number;
-    layoutWidth: number;
-    layoutHeight: number;
     initialCropFramePosition: Position;
     initialCropFrameScale: Position;
     savedInitialCropFramePosition: Position;

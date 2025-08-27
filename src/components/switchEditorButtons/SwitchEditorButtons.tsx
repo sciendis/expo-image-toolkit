@@ -2,13 +2,13 @@ import { Crop, ZoomIn } from 'lucide-react-native';
 import { StyleSheet, View } from 'react-native';
 import { EditorModes } from '../../constants';
 import { useImageEditorContext } from '../../hooks';
+import { calculateFontScale } from '../../utils';
 import { Button } from './Button';
 import { RotateIcon } from './RotateIcon';
 
 type Props = {
   activeEditor: EditorModes;
   switchEditor: (mode: EditorModes) => Promise<void>;
-  isLoading: boolean;
 };
 
 /**
@@ -18,14 +18,12 @@ type Props = {
  * @param props - An object containing:
  * - `activeEditor`: `EditorModes` – The currently active editor mode.
  * - `switchEditor`: `(mode: EditorModes) => Promise<void>` – Function to handle switch editor modes.
- * - `isLoading`: `boolean` – Disables buttons while the image is processing.
  *
  * @returns A horizontal row of editor selection buttons.
  */
 export const SwitchEditorButtons = function ({
   activeEditor,
   switchEditor,
-  isLoading,
 }: Props) {
   const {
     config: { enableRotate, enableZoom, colors },
@@ -38,7 +36,6 @@ export const SwitchEditorButtons = function ({
           activeEditor={activeEditor}
           switchEditor={switchEditor}
           editorName={EditorModes.ROTATE}
-          disabled={isLoading}
         >
           <RotateIcon />
         </Button>
@@ -48,9 +45,11 @@ export const SwitchEditorButtons = function ({
           activeEditor={activeEditor}
           switchEditor={switchEditor}
           editorName={EditorModes.ZOOM}
-          disabled={isLoading}
         >
-          <ZoomIn color={colors.switchEditorIcon} />
+          <ZoomIn
+            size={calculateFontScale(24)}
+            color={colors.switchEditorIcon}
+          />
         </Button>
       )}
       {(enableRotate || enableZoom) && (
@@ -58,9 +57,8 @@ export const SwitchEditorButtons = function ({
           activeEditor={activeEditor}
           switchEditor={switchEditor}
           editorName={EditorModes.CROP}
-          disabled={isLoading}
         >
-          <Crop color={colors.switchEditorIcon} />
+          <Crop size={calculateFontScale(24)} color={colors.switchEditorIcon} />
         </Button>
       )}
     </View>
@@ -75,5 +73,6 @@ const stylesScreens = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-evenly',
     marginBottom: 20,
+    marginTop: 10,
   },
 });

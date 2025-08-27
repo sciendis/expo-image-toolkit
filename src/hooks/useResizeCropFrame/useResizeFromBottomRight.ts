@@ -13,7 +13,12 @@ import { useInitialEditorState } from '../useInitialEditorState';
  * - Only scale is updated; position remains fixed at top-left.
  */
 export const useResizeFromBottomRight = function () {
-  const { boxPosition, boxScale, saveHistoryState } = useImageEditorContext();
+  const {
+    boxPosition,
+    boxScale,
+    saveHistoryState,
+    dimensions: { rotateScale },
+  } = useImageEditorContext();
   const { minWidth, minHeight, maxX, maxY } = useInitialEditorState();
 
   const startScale = useSharedValue<Position>(DefaultPositionState);
@@ -26,8 +31,11 @@ export const useResizeFromBottomRight = function () {
       const startScaleVal = startScale.get();
       const boxPosVal = boxPosition.get();
 
-      const newWidth = startScaleVal.x + e.translationX;
-      const newHeight = startScaleVal.y + e.translationY;
+      const translationX = e.translationX * rotateScale;
+      const translationY = e.translationY * rotateScale;
+
+      const newWidth = startScaleVal.x + translationX;
+      const newHeight = startScaleVal.y + translationY;
 
       const boundedMinX = Math.max(newWidth, minWidth);
       const boundedMinY = Math.max(newHeight, minHeight);

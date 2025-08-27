@@ -1,3 +1,4 @@
+export { calculateFontScale } from './calculateFontScale';
 export { clamp } from './clamp';
 export { createPickImageLibrary } from './createPickImageLibrary';
 export { createSaveCroppedImage } from './createSaveCroppedImage';

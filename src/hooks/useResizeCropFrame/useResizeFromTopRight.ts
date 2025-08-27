@@ -14,7 +14,12 @@ import { useInitialEditorState } from '../useInitialEditorState';
  */
 
 export const useResizeFromTopRight = () => {
-  const { boxPosition, boxScale, saveHistoryState } = useImageEditorContext();
+  const {
+    boxPosition,
+    boxScale,
+    saveHistoryState,
+    dimensions: { rotateScale },
+  } = useImageEditorContext();
   const { minWidth, minHeight, minY, maxX } = useInitialEditorState();
 
   const startPosition = useSharedValue<Position>(DefaultPositionState);
@@ -30,9 +35,12 @@ export const useResizeFromTopRight = () => {
       const startScaleVal = startScale.get();
       const boxPosVal = boxPosition.get();
 
-      const newY = Math.max(startPosVal.y + event.translationY, minY);
+      const translationX = event.translationX * rotateScale;
+      const translationY = event.translationY * rotateScale;
+
+      const newY = Math.max(startPosVal.y + translationY, minY);
       const newWidth = Math.min(
-        Math.max(startScaleVal.x + event.translationX, minWidth),
+        Math.max(startScaleVal.x + translationX, minWidth),
         maxX - boxPosVal.x
       );
       const newHeight = Math.max(

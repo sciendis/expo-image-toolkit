@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
+import { calculateFontScale } from '../../utils';
 
 /**
  * @description A visual cross "+" placed at the center of the CropFrame, used for alignment or reference.
@@ -8,6 +9,7 @@ import { useImageEditorContext } from '../../hooks';
  */
 export const Aim = function () {
   const {
+    dimensions: { rotateScale },
     config: { colors },
   } = useImageEditorContext();
   const colorStyles = {
@@ -17,8 +19,21 @@ export const Aim = function () {
 
   return (
     <View style={styles.container}>
-      <View style={[styles.aim, styles.verticalLine, colorStyles]} />
-      <View style={[styles.aim, styles.horizontalLine, colorStyles]} />
+      <View
+        style={[
+          styles.aim,
+          styles.verticalLine,
+          { width: calculateFontScale(25) * rotateScale },
+          colorStyles,
+        ]}
+      />
+      <View
+        style={[
+          styles.aim,
+          { height: calculateFontScale(25) * rotateScale },
+          colorStyles,
+        ]}
+      />
     </View>
   );
 };
@@ -34,10 +49,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   verticalLine: {
-    width: 25,
     position: 'absolute',
-  },
-  horizontalLine: {
-    height: 25,
   },
 });
