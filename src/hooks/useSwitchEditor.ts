@@ -20,7 +20,7 @@ export const useSwitchEditor = function () {
   const performSwitch = async (mode: EditorModes) => {
     setActiveEditor(mode);
 
-    await fadeIn(100);
+    await fadeIn(300);
 
     setIsLoading(false);
   };

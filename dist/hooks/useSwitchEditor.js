@@ -24,7 +24,7 @@ export const useSwitchEditor = function () {
     const [showAlert, setShowAlert] = useState(false);
     const performSwitch = (mode) => __awaiter(this, void 0, void 0, function* () {
         setActiveEditor(mode);
-        yield fadeIn(100);
+        yield fadeIn(300);
         setIsLoading(false);
     });
     const switchEditor = (mode) => __awaiter(this, void 0, void 0, function* () {
