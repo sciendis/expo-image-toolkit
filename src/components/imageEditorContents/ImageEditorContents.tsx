@@ -14,9 +14,12 @@ import { RenderActiveImage } from '../renderActiveImage';
 import { RotateActions } from '../rotateActions';
 import { ZoomRange } from '../zoomRange';
 import { ContentWrapper } from './ContentWrapper';
+import { Animated, StyleSheet, View } from 'react-native';
 
 type Props = {
   activeEditor: EditorModes;
+  opacity: Animated.Value;
+  showOrientationHint?: boolean;
 };
 
 /**
@@ -28,7 +31,11 @@ type Props = {
  *
  * @returns The view of the active editor or loading screen.
  */
-export const ImageEditorContents = function ({ activeEditor }: Props) {
+export const ImageEditorContents = function ({
+  activeEditor,
+  opacity,
+  showOrientationHint = false,
+}: Props) {
   const {
     config: { labels, enableRotate, enableZoom },
   } = useImageEditorContext();
@@ -36,44 +43,86 @@ export const ImageEditorContents = function ({ activeEditor }: Props) {
   const moveGesture = useMoveCropFrame();
   const zoomGesture = useZoomGesture();
 
-  const [rotateHintOpacity, setRotateHintOpacity] = useState<0 | 1>(1);
-  const [zoomHintOpacity, setZoomHintOpacity] = useState<0 | 1>(1);
+  const [rotateHintVisible, setRotateHintVisible] = useState(true);
+  const [zoomHintVisible, setZoomHintVisible] = useState(true);
+  const [deviceRotatedHintVisible, setDeviceRotatedHintVisible] =
+    useState(true);
 
   return (
     <GestureHandlerRootView>
       <ContentWrapper>
-        {enableRotate && activeEditor === EditorModes.ROTATE && (
-          <>
-            <Hint
-              id="rotate"
-              message={labels.ROTATE_HINT}
-              opacity={rotateHintOpacity}
-              setOpacity={setRotateHintOpacity}
-            />
-            <RenderActiveImage activeEditor={activeEditor} />
-            <RotateActions />
-          </>
-        )}
-        {enableZoom && activeEditor === EditorModes.ZOOM && (
-          <>
-            <Hint
-              id="zoom"
-              message={labels.ZOOM_HINT}
-              opacity={zoomHintOpacity}
-              setOpacity={setZoomHintOpacity}
-            />
-            <GestureDetector gesture={zoomGesture}>
+        <Animated.View style={[styles.imageContainer, { opacity }]}>
+          <View style={styles.hintContainer}>
+            {showOrientationHint && (
+              <Hint
+                id="device-rotated"
+                message={labels.DEVICE_ROTATED_HINT}
+                visible={deviceRotatedHintVisible}
+                setVisible={setDeviceRotatedHintVisible}
+              />
+            )}
+            {enableRotate && activeEditor === EditorModes.ROTATE && (
+              <Hint
+                id="rotate"
+                message={labels.ROTATE_HINT}
+                visible={rotateHintVisible}
+                setVisible={setRotateHintVisible}
+              />
+            )}
+            {enableZoom && activeEditor === EditorModes.ZOOM && (
+              <Hint
+                id="zoom"
+                message={labels.ZOOM_HINT}
+                visible={zoomHintVisible}
+                setVisible={setZoomHintVisible}
+              />
+            )}
+          </View>
+          {enableRotate && activeEditor === EditorModes.ROTATE && (
+            <>
+              <RenderActiveImage activeEditor={activeEditor} />
+              <RotateActions />
+            </>
+          )}
+          {enableZoom && activeEditor === EditorModes.ZOOM && (
+            <>
+              <GestureDetector gesture={zoomGesture}>
+                <RenderActiveImage activeEditor={activeEditor} />
+              </GestureDetector>
+              <ZoomRange />
+            </>
+          )}
+          {activeEditor === EditorModes.CROP && (
+            <GestureDetector gesture={moveGesture}>
               <RenderActiveImage activeEditor={activeEditor} />
             </GestureDetector>
-            <ZoomRange />
-          </>
-        )}
-        {activeEditor === EditorModes.CROP && (
-          <GestureDetector gesture={moveGesture}>
-            <RenderActiveImage activeEditor={activeEditor} />
-          </GestureDetector>
-        )}
+          )}
+        </Animated.View>
       </ContentWrapper>
     </GestureHandlerRootView>
   );
 };
+
+const styles = StyleSheet.create({
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: '100%',
+    height: '100%',
+  },
+  hintContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: '5%',
+    alignItems: 'center',
+    zIndex: 10,
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    height: '100%',
+    pointerEvents: 'box-none',
+  },
+});

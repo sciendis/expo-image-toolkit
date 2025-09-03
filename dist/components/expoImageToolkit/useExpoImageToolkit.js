@@ -22,7 +22,6 @@ export const useExpoImageToolkit = function (userConfig) {
     const [savedImageDimensions, setSavedImageDimensions] = useState({
         width: 0,
         height: 0,
-        rotate: 0,
     });
     const { showEditor, hideEditor } = useExpoImageToolkitContext();
     const saveCroppedImage = createSaveCroppedImage({

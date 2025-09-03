@@ -24,10 +24,11 @@ export declare const Colors: {
     readonly alertBg: "#222222";
     readonly alertShadow: "#000000";
     readonly alertMessage: "#ffffff";
-    readonly alertNoBg: "#000000";
-    readonly alertNo: "#ffffff";
-    readonly alertYesBg: "#383838";
-    readonly alertYes: "#ffffff";
+    readonly alertCancelBg: "#000000";
+    readonly alertCancelText: "#ffffff";
+    readonly alertSubmitBg: "#383838";
+    readonly alertSubmitText: "#ffffff";
+    readonly historyBg: "#666666c9";
     readonly historyDisabled: "#cccccc33";
     readonly historyEnabled: "#ffffff";
 };

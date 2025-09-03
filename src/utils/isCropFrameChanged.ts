@@ -4,8 +4,7 @@ import { Dimensions, Position } from '../types';
 type Props = {
   boxScale: SharedValue<Position>;
   boxPosition: SharedValue<Position>;
-  dimensions: Dimensions;
-};
+} & Pick<Dimensions, 'initialCropFramePosition' | 'initialCropFrameScale'>;
 
 /**
  * Detect if the CropFrame has been changed by the user or not, by comparing the current CropFrame-Position/Scale
@@ -21,7 +20,8 @@ type Props = {
 export const isCropFrameChanged = function ({
   boxScale,
   boxPosition,
-  dimensions: { initialCropFramePosition, initialCropFrameScale },
+  initialCropFramePosition,
+  initialCropFrameScale,
 }: Props) {
   const initBoxScaleVal = initialCropFrameScale;
   const initBoxPosVal = initialCropFramePosition;

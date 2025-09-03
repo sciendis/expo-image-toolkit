@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
-import { runOnJS, SharedValue } from 'react-native-reanimated';
+import { useRef, useState } from 'react';
+import { runOnJS } from 'react-native-reanimated';
+import { ImageEditorContextType } from '../components/imageEditor/ImageEditorContext';
 import { EditorModes } from '../constants';
 import { Dimensions, Position } from '../types';
 import { maybeWithTiming } from '../utils';
@@ -19,25 +20,26 @@ type EditorStateSnapshot = {
   activeEditor: EditorModes;
 };
 
-type Props = {
-  image: string;
-  setImage: React.Dispatch<React.SetStateAction<string>>;
-  rotate: SharedValue<number>;
-  previousRotate: number;
-  setPreviousRotate: React.Dispatch<React.SetStateAction<number>>;
-  flipX: SharedValue<number>;
-  flipY: SharedValue<number>;
-  zoom: SharedValue<number>;
-  focalPoint: SharedValue<Position>;
-  imagePosition: SharedValue<Position>;
-  boxScale: SharedValue<Position>;
-  boxPosition: SharedValue<Position>;
-  dimensions: Dimensions;
-  setDimensions: React.Dispatch<React.SetStateAction<Dimensions>>;
-  activeEditor: EditorModes;
-  setActiveEditor: React.Dispatch<React.SetStateAction<EditorModes>>;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-};
+type Props = Pick<
+  ImageEditorContextType,
+  | 'image'
+  | 'setImage'
+  | 'rotate'
+  | 'previousRotate'
+  | 'setPreviousRotate'
+  | 'flipX'
+  | 'flipY'
+  | 'zoom'
+  | 'focalPoint'
+  | 'imagePosition'
+  | 'boxScale'
+  | 'boxPosition'
+  | 'dimensions'
+  | 'setDimensions'
+  | 'activeEditor'
+  | 'setActiveEditor'
+  | 'setIsLoading'
+>;
 
 /**
  * @description A custom hook that manages undo and redo functionality for the image editor,
@@ -100,6 +102,11 @@ export const useUndoRedoSnapshot = function ({
     setRedoStack([]); // clear redo stack
   };
 
+  const clearUndoRedoStack = () => {
+    setUndoStack([]);
+    setRedoStack([]);
+  };
+
   // save current state in undo stack
   const saveHistoryState = (snapshotValue?: Partial<EditorStateSnapshot>) => {
     'worklet';
@@ -127,7 +134,7 @@ export const useUndoRedoSnapshot = function ({
 
     const isImageChanged = state.image !== image;
     if (isImageChanged) {
-      setIsLoading(true);
+      setIsLoading('contents');
       setImage(state.image);
     }
 
@@ -151,7 +158,7 @@ export const useUndoRedoSnapshot = function ({
         maybeWithTiming({ ...state.boxPosition }, !isImageChanged)
       );
       isUndoRedoUpdated.current = false;
-      if (isImageChanged) setTimeout(() => setIsLoading(false), 200);
+      if (isImageChanged) setTimeout(() => setIsLoading('none'), 200);
     }, 100);
   };
 
@@ -220,5 +227,6 @@ export const useUndoRedoSnapshot = function ({
     redoStack,
     saveHistoryState,
     isUndoRedoUpdated,
+    clearUndoRedoStack,
   };
 };

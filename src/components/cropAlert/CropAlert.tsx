@@ -1,18 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import {
-  Animated,
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { DefaultLayoutState } from '../../constants';
 import { useImageEditorContext } from '../../hooks';
-import { LayoutDimensions } from '../../types';
-import { calculateFontScale } from '../../utils';
-
-const { height } = Dimensions.get('screen');
+import { Alert } from '../alert';
 
 type Props = {
   visible: boolean;
@@ -31,116 +18,17 @@ type Props = {
  */
 export const CropAlert = function ({ visible, handleAlertResponse }: Props) {
   const {
-    config: { labels, colors },
+    config: { labels },
   } = useImageEditorContext();
 
-  const [alertLayout, setAlertLayout] =
-    useState<LayoutDimensions>(DefaultLayoutState);
-
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const scaleAnim = useRef(new Animated.Value(0.8)).current;
-
-  useEffect(() => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: visible ? 1 : 0,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(scaleAnim, {
-        toValue: visible ? 1 : 0.8,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  }, [visible]); // eslint-disable-line react-hooks/exhaustive-deps
-
   return (
-    <Animated.View
-      style={[
-        styles.container,
-        {
-          opacity: fadeAnim,
-          top: (height - alertLayout.height) / 2,
-          transform: [{ scale: scaleAnim }],
-          zIndex: visible ? 1000 : -20,
-          backgroundColor: colors.alertBg,
-          shadowColor: colors.alertShadow,
-        },
-      ]}
-      onLayout={(e) => setAlertLayout(e.nativeEvent.layout)}
-    >
-      <View style={styles.messageContainer}>
-        <Text style={[styles.message, { color: colors.alertMessage }]}>
-          {labels.CROP_ALERT}
-        </Text>
-      </View>
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonsParent}>
-          <TouchableOpacity
-            style={[styles.button, { backgroundColor: colors.alertNoBg }]}
-            onPress={() => handleAlertResponse(false)} // No
-          >
-            <Text style={[styles.buttonText, { color: colors.alertNo }]}>
-              {labels.NO}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonsParent}>
-          <TouchableOpacity
-            style={[styles.button, { backgroundColor: colors.alertYesBg }]}
-            onPress={() => handleAlertResponse(true)} // Yes
-          >
-            <Text style={[styles.buttonText, { color: colors.alertYes }]}>
-              {labels.YES}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </Animated.View>
+    <Alert
+      alertText={labels.CROP_ALERT_TEXT}
+      submitLabel={labels.CROP_ALERT_YES}
+      cancelLabel={labels.CROP_ALERT_NO}
+      onSubmit={() => handleAlertResponse(true)} // YES
+      onCancel={() => handleAlertResponse(false)} // NO
+      visible={visible}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    left: '10%',
-    width: '80%',
-    borderRadius: 12,
-    flex: 1,
-    shadowOffset: { width: 2, height: 4 },
-    shadowOpacity: 0.6,
-    shadowRadius: 30,
-  },
-  messageContainer: {
-    width: '100%',
-    flex: 1,
-    paddingVertical: calculateFontScale(6),
-    paddingHorizontal: calculateFontScale(10),
-  },
-  message: {
-    textAlign: 'justify',
-    fontSize: calculateFontScale(16),
-  },
-  buttonsContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    width: '100%',
-    justifyContent: 'space-evenly',
-    marginTop: calculateFontScale(18),
-    marginBottom: calculateFontScale(12),
-    paddingHorizontal: calculateFontScale(4),
-  },
-  buttonsParent: {
-    width: '40%',
-  },
-  button: {
-    padding: calculateFontScale(4),
-    borderRadius: 5,
-  },
-  buttonText: {
-    textAlign: 'center',
-    fontSize: calculateFontScale(13),
-  },
-});

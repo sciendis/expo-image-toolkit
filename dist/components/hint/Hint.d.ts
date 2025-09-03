@@ -1,8 +1,8 @@
 import React from 'react';
 type Props = {
     message: string;
-    opacity: 0 | 1;
-    setOpacity: React.Dispatch<React.SetStateAction<0 | 1>>;
+    visible: boolean;
+    setVisible: React.Dispatch<React.SetStateAction<boolean>>;
     id: string;
 };
 /**
@@ -12,6 +12,6 @@ type Props = {
  * @param {string} message - The text to display in the hint box.
  * @returns A styled hint box with the given message.
  */
-export declare const Hint: ({ id, message, opacity, setOpacity }: Props) => React.JSX.Element;
+export declare const Hint: ({ id, message, visible, setVisible }: Props) => React.JSX.Element | null;
 export {};
 //# sourceMappingURL=Hint.d.ts.map

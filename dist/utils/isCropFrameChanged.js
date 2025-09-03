@@ -9,7 +9,7 @@
  *
  * @returns `boolean` – Returns `true` if the CropFrame has been changed by the user.
  */
-export const isCropFrameChanged = function ({ boxScale, boxPosition, dimensions: { initialCropFramePosition, initialCropFrameScale }, }) {
+export const isCropFrameChanged = function ({ boxScale, boxPosition, initialCropFramePosition, initialCropFrameScale, }) {
     const initBoxScaleVal = initialCropFrameScale;
     const initBoxPosVal = initialCropFramePosition;
     const boxScaleVal = boxScale.get();

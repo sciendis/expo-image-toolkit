@@ -1,10 +1,7 @@
 import { ImageManipulator } from 'expo-image-manipulator';
-import { useEffect } from 'react';
-import { Dimensions } from 'react-native';
+import { useEffect, useRef } from 'react';
 import { useImageEditorContext } from './useImageEditorContext';
-
-const { width: screenWidth, height: screenHeight } = Dimensions.get('screen');
-const isDeviceLandscapeMode = screenHeight < screenWidth;
+import { useUpdateDeviceOrientation } from './useUpdateDeviceOrientation';
 
 /**
  * @description This custom hook calculates the actual and displayed image dimensions, along with all necessary scales and offsets.
@@ -22,13 +19,24 @@ export const useSetInitialDimensions = function () {
     setIsLoading,
   } = useImageEditorContext();
 
+  const { isLandscapeMode, screenWidth, isDeviceRotated } =
+    useUpdateDeviceOrientation();
+
+  const prevDeviceOrientation = useRef(isLandscapeMode);
+
   useEffect(() => {
     if (!imageRef.current) return;
     if (isUndoRedoUpdated.current) return;
 
     const calcDimensions = async (image: string) => {
       if (!imageRef.current) return;
-      setIsLoading(true);
+
+      if (prevDeviceOrientation.current !== isLandscapeMode) {
+        prevDeviceOrientation.current = isLandscapeMode;
+        setIsLoading('full');
+      } else {
+        setIsLoading('contents');
+      }
 
       // calculate the actual image dimensions. using Image.getSize on android don't give us full image sizes when image is too large.
       const { width: imageWidth, height: imageHeight } =
@@ -39,14 +47,14 @@ export const useSetInitialDimensions = function () {
         const imageAspectRatio = imageWidth / imageHeight;
 
         // The image width is larger than it's height
-        let displayedImageWidth = isDeviceLandscapeMode
+        let displayedImageWidth = isLandscapeMode
           ? layoutHeight * imageAspectRatio
           : layoutWidth;
-        let displayedImageHeight = isDeviceLandscapeMode
+        let displayedImageHeight = isLandscapeMode
           ? layoutHeight
           : layoutWidth / imageAspectRatio;
 
-        let rotateScale = isDeviceLandscapeMode
+        let rotateScale = isLandscapeMode
           ? displayedImageWidth / layoutHeight
           : 1;
 
@@ -55,7 +63,7 @@ export const useSetInitialDimensions = function () {
           displayedImageWidth = layoutHeight * imageAspectRatio;
           displayedImageHeight = layoutHeight;
 
-          rotateScale = isDeviceLandscapeMode
+          rotateScale = isLandscapeMode
             ? 1
             : displayedImageHeight / screenWidth;
         }
@@ -93,8 +101,7 @@ export const useSetInitialDimensions = function () {
           initialCropFrameScale,
           rotateScale,
         }));
-        setIsLoading(false);
-        // setTimeout(() => setIsLoading(false), 200);
+        setIsLoading('none');
       });
     };
 
@@ -107,5 +114,9 @@ export const useSetInitialDimensions = function () {
     boxPosition,
     isUndoRedoUpdated,
     setIsLoading,
+    isLandscapeMode,
+    screenWidth,
   ]);
+
+  return { isDeviceRotated };
 };

@@ -2,7 +2,7 @@ import { createContext, Dispatch, RefObject, SetStateAction } from 'react';
 import { View } from 'react-native';
 import { SharedValue } from 'react-native-reanimated';
 import { EditorModes } from '../../constants';
-import { Config, Dimensions, Position } from '../../types';
+import { Config, Dimensions, LoadingState, Position } from '../../types';
 
 type EditorStateSnapshot = {
   image: string;
@@ -19,7 +19,7 @@ type EditorStateSnapshot = {
   activeEditor: EditorModes;
 };
 
-type ImageEditorContextType = {
+export type ImageEditorContextType = {
   config: Config;
 
   image: string;
@@ -43,8 +43,9 @@ type ImageEditorContextType = {
   activeEditor: EditorModes;
   setActiveEditor: Dispatch<SetStateAction<EditorModes>>;
 
-  isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  isLoading: LoadingState;
+  setIsLoading: Dispatch<SetStateAction<LoadingState>>;
+
   isSaving: boolean;
   setIsSaving: Dispatch<SetStateAction<boolean>>;
 
@@ -54,6 +55,7 @@ type ImageEditorContextType = {
   redoStack: EditorStateSnapshot[];
   saveHistoryState: (snapshotValue?: Partial<EditorStateSnapshot>) => void;
   isUndoRedoUpdated: React.MutableRefObject<boolean>;
+  clearUndoRedoStack: () => void;
 };
 
 export const ImageEditorContext = createContext<

@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { useImageEditorContext, useSetInitialDimensions, useSwitchEditor, } from '../../hooks';
 import { CropAlert } from '../cropAlert';
 import { ImageEditorContents } from '../imageEditorContents';
@@ -16,26 +16,28 @@ import { SwitchEditorButtons } from '../switchEditorButtons';
  * @returns The view that renders the editor components based on the active/selected editor or the loading screen while processing the image.
  */
 export const ImageEditorContainer = function ({ onCancel, onCrop, }) {
-    const { switchEditor, activeEditor, showAlert, handleAlertResponse } = useSwitchEditor();
-    const { isSaving, config: { colors }, } = useImageEditorContext();
+    const { switchEditor, activeEditor, showAlert, handleAlertResponse, opacity, } = useSwitchEditor();
+    const { isSaving, isLoading, config: { colors }, } = useImageEditorContext();
     const colorStylesContainer = { backgroundColor: colors.background };
-    useSetInitialDimensions();
+    const { isDeviceRotated } = useSetInitialDimensions();
     if (isSaving) {
         return (<View style={[styles.container, colorStylesContainer]}>
         <LoadingIndicator />
       </View>);
     }
-    return (<View style={[styles.container, colorStylesContainer]}>
+    return (<SafeAreaView style={[styles.container, colorStylesContainer]}>
       <ImageEditorHeader onCancel={onCancel} onCrop={onCrop}/>
-      <ImageEditorContents activeEditor={activeEditor}/>
+      <ImageEditorContents activeEditor={activeEditor} opacity={opacity} showOrientationHint={isDeviceRotated}/>
       <SwitchEditorButtons activeEditor={activeEditor} switchEditor={switchEditor}/>
       <CropAlert visible={showAlert} handleAlertResponse={handleAlertResponse}/>
-    </View>);
+      {isLoading === 'full' && <LoadingIndicator />}
+    </SafeAreaView>);
 };
 const styles = StyleSheet.create({
     container: {
         position: 'relative',
         flex: 1,
+        zIndex: 1,
     },
 });
 //# sourceMappingURL=ImageEditorContainer.js.map

@@ -7,9 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { runOnJS } from 'react-native-reanimated';
 import { DefaultDimensionState, EditorModes } from '../constants';
-import { getCropData, isCropFrameChanged, isRotate90, rotateAndCropManipulator, } from '../utils';
+import { getCropData, isRotate90, rotateAndCropManipulator } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
 /**
  * @description This hook returns the saveStateOnSwitch function, which saves the current state of the RotateEditor
@@ -51,18 +50,6 @@ export const useSaveStateOnSwitch = function () {
                 return false;
             }
             // activeEditor === Crop editor
-            const isChanged = isCropFrameChanged({
-                boxPosition,
-                boxScale,
-                dimensions,
-            });
-            const needsConfirmation = isChanged && !shouldCrop;
-            if (needsConfirmation) {
-                const pos = boxPosition.get();
-                const scale = boxScale.get();
-                runOnJS(setDimensions)((prev) => (Object.assign(Object.assign({}, prev), { savedInitialCropFramePosition: pos, savedInitialCropFrameScale: scale })));
-                return true;
-            }
             if (!shouldCrop)
                 return false;
             const cropData = getCropData({

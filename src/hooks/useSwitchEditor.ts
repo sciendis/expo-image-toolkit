@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { EditorModes } from '../constants';
 import { useFadeTransition } from './useFadeTransition';
+import { useHandleCropFrameChange } from './useHandleCropFrameChange';
 import { useImageEditorContext } from './useImageEditorContext';
 import { useSaveStateOnSwitch } from './useSaveStateOnSwitch';
 
@@ -17,25 +18,34 @@ export const useSwitchEditor = function () {
   const [pendingEditor, setPendingEditor] = useState<EditorModes | null>(null);
   const [showAlert, setShowAlert] = useState(false);
 
+  const handleCropFrameChange = useHandleCropFrameChange({
+    setPendingEditor,
+    setShowAlert,
+  });
+
   const performSwitch = async (mode: EditorModes) => {
     setActiveEditor(mode);
-
-    await fadeIn(300);
-
-    setIsLoading(false);
+    await fadeIn();
+    setIsLoading('none');
   };
 
   const switchEditor = async (mode: EditorModes) => {
     if (mode === activeEditor) return;
 
-    setIsLoading(true);
+    if (activeEditor === EditorModes.CROP) {
+      const isChanged = handleCropFrameChange(mode);
+      if (isChanged) return;
+    }
+
+    setIsLoading('contents');
     await fadeOut();
 
     const needAlert = await saveStateOnSwitch(activeEditor);
     if (needAlert && activeEditor === EditorModes.CROP) {
       setPendingEditor(mode);
       setShowAlert(true);
-      setIsLoading(false);
+      await fadeIn();
+      setIsLoading('none');
       return;
     }
 
@@ -46,7 +56,7 @@ export const useSwitchEditor = function () {
     setShowAlert(false);
 
     if (!pendingEditor) return;
-    setIsLoading(true);
+    setIsLoading('contents');
     await fadeOut();
     await saveStateOnSwitch(activeEditor, shouldCrop);
     await performSwitch(pendingEditor);

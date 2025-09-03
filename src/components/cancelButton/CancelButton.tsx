@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
-import { calculateFontScale } from '../../utils';
+import { FontSizes } from '../../styles';
 
 type Props = {
   onCancel: () => void;
@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   title: {
-    fontSize: calculateFontScale(14),
+    fontSize: FontSizes.s,
   },
 });

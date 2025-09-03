@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import Animated, { useSharedValue } from 'react-native-reanimated';
 import { useImageEditorContext, useMoveRotateRangeBar, useSetViewLayout, } from '../../hooks';
-import { calculateFontScale } from '../../utils';
+import { FontSizes, Spacing } from '../../styles';
 const AnimatedText = Animated.createAnimatedComponent(TextInput);
 /**
  * @description This component and the `useMoveRotateRangeBar` hook were originally used to render a range bar
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        bottom: 2,
+        bottom: '1%',
         left: 0,
         opacity: 0.8,
         pointerEvents: 'none',
@@ -46,9 +46,9 @@ const styles = StyleSheet.create({
     text: {
         borderRadius: 100,
         overflow: 'hidden',
-        width: calculateFontScale(40),
-        height: calculateFontScale(40),
-        fontSize: calculateFontScale(12),
+        width: Spacing.xl,
+        height: Spacing.xl,
+        fontSize: FontSizes.xs,
         textAlign: 'center',
     },
 });

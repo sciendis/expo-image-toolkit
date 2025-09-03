@@ -8,7 +8,7 @@ import {
   useResizeFromTopLeft,
   useResizeFromTopRight,
 } from '../../hooks/useResizeCropFrame';
-import { calculateFontScale } from '../../utils';
+import { Spacing } from '../../styles';
 
 /**
  * @description The four corners of the borders of CropFrame with their event handlers.
@@ -29,7 +29,7 @@ export const Corners = function () {
   const bottomLeftCornerGesture = useResizeFromBottomLeft();
   const bottomRightCornerGesture = useResizeFromBottomRight();
 
-  const cornerSize = calculateFontScale(45) * rotateScale;
+  const cornerSize = Spacing.xl * rotateScale;
   const cornerDimensions = { width: cornerSize, height: cornerSize };
 
   return (

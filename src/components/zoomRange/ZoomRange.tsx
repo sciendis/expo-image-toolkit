@@ -11,7 +11,7 @@ import {
   useSetInitialZoomAnimatedText,
   useSetViewLayout,
 } from '../../hooks';
-import { calculateFontScale } from '../../utils';
+import { FontSizes, Spacing } from '../../styles';
 
 const AnimatedText = Animated.createAnimatedComponent(TextInput);
 
@@ -72,7 +72,7 @@ export const ZoomRange = function () {
 const styles = StyleSheet.create({
   container: {
     width: '90%',
-    height: calculateFontScale(20),
+    height: Spacing.l,
     position: 'absolute',
     bottom: '2%',
     left: '5%',
@@ -83,21 +83,21 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    width: calculateFontScale(20),
-    height: calculateFontScale(20),
+    width: Spacing.l,
+    height: Spacing.l,
     borderRadius: 50,
     zIndex: 50,
   },
   text: {
     position: 'absolute',
-    bottom: calculateFontScale(25),
-    left: calculateFontScale(-25 + 10), // -25 because of text box width: 50 / 2. 10 is because of the pointer width: 20 / 2
+    bottom: Spacing.l + Spacing.xxs,
+    left: (-Spacing.xxl + Spacing.l) / 2, // -25 because of text box width: 50 / 2. 10 is because of the pointer width: 20 / 2
     borderRadius: 100,
     overflow: 'hidden',
     padding: 0,
-    width: calculateFontScale(50),
+    width: Spacing.xxl,
     aspectRatio: 1,
     textAlign: 'center',
-    fontSize: calculateFontScale(14),
+    fontSize: FontSizes.s,
   },
 });

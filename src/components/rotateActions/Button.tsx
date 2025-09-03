@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
-import { calculateFontScale } from '../../utils';
+import { Spacing } from '../../styles';
 
 type Props = {
   onPress: () => void;
@@ -40,8 +40,8 @@ export const Button = function ({ children, onPress, disabled }: Props) {
 export const styles = StyleSheet.create({
   item: {
     borderRadius: 100,
-    width: calculateFontScale(40),
-    height: calculateFontScale(40),
+    width: Spacing.xl,
+    height: Spacing.xl,
     justifyContent: 'center',
     alignItems: 'center',
     opacity: 0.7,

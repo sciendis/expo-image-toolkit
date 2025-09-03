@@ -42,6 +42,10 @@ export const useUndoRedoSnapshot = function ({ image, setImage, rotate, previous
         setUndoStack((p) => [...p, snapshot]);
         setRedoStack([]); // clear redo stack
     };
+    const clearUndoRedoStack = () => {
+        setUndoStack([]);
+        setRedoStack([]);
+    };
     // save current state in undo stack
     const saveHistoryState = (snapshotValue) => {
         'worklet';
@@ -65,7 +69,7 @@ export const useUndoRedoSnapshot = function ({ image, setImage, rotate, previous
         isUndoRedoUpdated.current = true;
         const isImageChanged = state.image !== image;
         if (isImageChanged) {
-            setIsLoading(true);
+            setIsLoading('contents');
             setImage(state.image);
         }
         if (state.activeEditor !== activeEditor)
@@ -83,7 +87,7 @@ export const useUndoRedoSnapshot = function ({ image, setImage, rotate, previous
             boxPosition.set(maybeWithTiming(Object.assign({}, state.boxPosition), !isImageChanged));
             isUndoRedoUpdated.current = false;
             if (isImageChanged)
-                setTimeout(() => setIsLoading(false), 200);
+                setTimeout(() => setIsLoading('none'), 200);
         }, 100);
     };
     const undo = () => {
@@ -143,6 +147,7 @@ export const useUndoRedoSnapshot = function ({ image, setImage, rotate, previous
         redoStack,
         saveHistoryState,
         isUndoRedoUpdated,
+        clearUndoRedoStack,
     };
 };
 //# sourceMappingURL=useUndoRedoSnapshot.js.map

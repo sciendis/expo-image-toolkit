@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { GestureDetector } from 'react-native-gesture-handler';
 import { useImageEditorContext } from '../../hooks';
 import { useResizeFromBottomLeft, useResizeFromBottomRight, useResizeFromTopLeft, useResizeFromTopRight, } from '../../hooks/useResizeCropFrame';
-import { calculateFontScale } from '../../utils';
+import { Spacing } from '../../styles';
 /**
  * @description The four corners of the borders of CropFrame with their event handlers.
  * The corners of the borders are a little bold compared to the rest of the borders. Here are the bold parts, not the borders.
@@ -18,7 +18,7 @@ export const Corners = function () {
     const topRightCornerGesture = useResizeFromTopRight();
     const bottomLeftCornerGesture = useResizeFromBottomLeft();
     const bottomRightCornerGesture = useResizeFromBottomRight();
-    const cornerSize = calculateFontScale(45) * rotateScale;
+    const cornerSize = Spacing.xl * rotateScale;
     const cornerDimensions = { width: cornerSize, height: cornerSize };
     return (<>
       <GestureDetector gesture={topLeftCornerGesture}>

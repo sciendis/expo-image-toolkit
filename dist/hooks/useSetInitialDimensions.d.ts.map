@@ -1,1 +1,1 @@
-{"version":3,"file":"useSetInitialDimensions.d.ts","sourceRoot":"","sources":["../../src/hooks/useSetInitialDimensions.ts"],"names":[],"mappings":"AAQA;;;;GAIG;AACH,eAAO,MAAM,uBAAuB,YAiGnC,CAAC"}
+{"version":3,"file":"useSetInitialDimensions.d.ts","sourceRoot":"","sources":["../../src/hooks/useSetInitialDimensions.ts"],"names":[],"mappings":"AAKA;;;;GAIG;AACH,eAAO,MAAM,uBAAuB;;CA+GnC,CAAC"}

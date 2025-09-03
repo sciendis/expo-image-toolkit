@@ -14,7 +14,7 @@ import { ImageEditorProvider } from './ImageEditorProvider';
  */
 export const ImageEditor = function ({ image, onCrop, onCancel, userConfig, }) {
     if (!image)
-        return <></>;
+        return null;
     return (<ImageEditorProvider image={image} userConfig={userConfig}>
       <ImageEditorContainer onCancel={onCancel} onCrop={onCrop}/>
     </ImageEditorProvider>);

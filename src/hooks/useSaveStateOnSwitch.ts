@@ -1,11 +1,5 @@
-import { runOnJS } from 'react-native-reanimated';
 import { DefaultDimensionState, EditorModes } from '../constants';
-import {
-  getCropData,
-  isCropFrameChanged,
-  isRotate90,
-  rotateAndCropManipulator,
-} from '../utils';
+import { getCropData, isRotate90, rotateAndCropManipulator } from '../utils';
 import { useImageEditorContext } from './useImageEditorContext';
 
 /**
@@ -70,25 +64,6 @@ export const useSaveStateOnSwitch = function () {
     }
 
     // activeEditor === Crop editor
-    const isChanged = isCropFrameChanged({
-      boxPosition,
-      boxScale,
-      dimensions,
-    });
-
-    const needsConfirmation = isChanged && !shouldCrop;
-
-    if (needsConfirmation) {
-      const pos = boxPosition.get();
-      const scale = boxScale.get();
-
-      runOnJS(setDimensions)((prev) => ({
-        ...prev,
-        savedInitialCropFramePosition: pos,
-        savedInitialCropFrameScale: scale,
-      }));
-      return true;
-    }
     if (!shouldCrop) return false;
 
     const cropData = getCropData({

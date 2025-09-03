@@ -33,7 +33,7 @@ export const createSaveCroppedImage = function ({
     const fileName = `cropped_image_${Date.now()}.png`;
     const newUri = `${FileSystem.documentDirectory}${fileName}`;
 
-    const { uri, width, height, rotate } = args;
+    const { uri, width, height } = args;
 
     await FileSystem.copyAsync({
       from: uri,
@@ -41,6 +41,6 @@ export const createSaveCroppedImage = function ({
     });
 
     onCrop(newUri);
-    setSavedImageDimensions({ width, height, rotate });
+    setSavedImageDimensions({ width, height });
   };
 };

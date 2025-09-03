@@ -1,4 +1,3 @@
-export { BASE_FONT_SCALE } from './BaseFontScale';
 export { CropFrameOffset } from './CropFrameOffset';
 export { DefaultConfig } from './DefaultConfig';
 export { DefaultCropFrameState } from './DefaultCropFrameState';

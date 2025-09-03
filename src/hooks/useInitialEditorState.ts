@@ -1,5 +1,5 @@
 import { CropFrameOffset, DefaultCropFrameState } from '../constants';
-import { calculateFontScale } from '../utils';
+import { getScale } from '../styles/getScale';
 import { useImageEditorContext } from './useImageEditorContext';
 
 /**
@@ -21,7 +21,7 @@ export const useInitialEditorState = function () {
     maxX: displayedImageWidth,
     minY: 0,
     maxY: displayedImageHeight + CropFrameOffset,
-    minWidth: calculateFontScale(minWidth) * rotateScale,
-    minHeight: calculateFontScale(minHeight) * rotateScale,
+    minWidth: getScale(minWidth) * rotateScale,
+    minHeight: getScale(minHeight) * rotateScale,
   };
 };

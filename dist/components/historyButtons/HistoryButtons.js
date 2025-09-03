@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         gap: 10,
+        zIndex: 10,
     },
 });
 //# sourceMappingURL=HistoryButtons.js.map

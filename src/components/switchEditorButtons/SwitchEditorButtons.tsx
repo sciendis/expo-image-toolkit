@@ -2,7 +2,7 @@ import { Crop, ZoomIn } from 'lucide-react-native';
 import { StyleSheet, View } from 'react-native';
 import { EditorModes } from '../../constants';
 import { useImageEditorContext } from '../../hooks';
-import { calculateFontScale } from '../../utils';
+import { FontSizes, Spacing } from '../../styles';
 import { Button } from './Button';
 import { RotateIcon } from './RotateIcon';
 
@@ -46,10 +46,7 @@ export const SwitchEditorButtons = function ({
           switchEditor={switchEditor}
           editorName={EditorModes.ZOOM}
         >
-          <ZoomIn
-            size={calculateFontScale(24)}
-            color={colors.switchEditorIcon}
-          />
+          <ZoomIn size={FontSizes.l} color={colors.switchEditorIcon} />
         </Button>
       )}
       {(enableRotate || enableZoom) && (
@@ -58,7 +55,7 @@ export const SwitchEditorButtons = function ({
           switchEditor={switchEditor}
           editorName={EditorModes.CROP}
         >
-          <Crop size={calculateFontScale(24)} color={colors.switchEditorIcon} />
+          <Crop size={FontSizes.l} color={colors.switchEditorIcon} />
         </Button>
       )}
     </View>
@@ -72,7 +69,6 @@ const stylesScreens = StyleSheet.create({
     position: 'relative',
     width: '100%',
     justifyContent: 'space-evenly',
-    marginBottom: 20,
-    marginTop: 10,
+    marginBottom: Spacing.xxs,
   },
 });

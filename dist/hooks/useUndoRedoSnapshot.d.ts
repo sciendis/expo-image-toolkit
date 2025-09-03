@@ -1,5 +1,5 @@
-import React from 'react';
-import { SharedValue } from 'react-native-reanimated';
+/// <reference types="react" />
+import { ImageEditorContextType } from '../components/imageEditor/ImageEditorContext';
 import { EditorModes } from '../constants';
 import { Dimensions, Position } from '../types';
 type EditorStateSnapshot = {
@@ -16,25 +16,7 @@ type EditorStateSnapshot = {
     dimensions: Dimensions;
     activeEditor: EditorModes;
 };
-type Props = {
-    image: string;
-    setImage: React.Dispatch<React.SetStateAction<string>>;
-    rotate: SharedValue<number>;
-    previousRotate: number;
-    setPreviousRotate: React.Dispatch<React.SetStateAction<number>>;
-    flipX: SharedValue<number>;
-    flipY: SharedValue<number>;
-    zoom: SharedValue<number>;
-    focalPoint: SharedValue<Position>;
-    imagePosition: SharedValue<Position>;
-    boxScale: SharedValue<Position>;
-    boxPosition: SharedValue<Position>;
-    dimensions: Dimensions;
-    setDimensions: React.Dispatch<React.SetStateAction<Dimensions>>;
-    activeEditor: EditorModes;
-    setActiveEditor: React.Dispatch<React.SetStateAction<EditorModes>>;
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-};
+type Props = Pick<ImageEditorContextType, 'image' | 'setImage' | 'rotate' | 'previousRotate' | 'setPreviousRotate' | 'flipX' | 'flipY' | 'zoom' | 'focalPoint' | 'imagePosition' | 'boxScale' | 'boxPosition' | 'dimensions' | 'setDimensions' | 'activeEditor' | 'setActiveEditor' | 'setIsLoading'>;
 /**
  * @description A custom hook that manages undo and redo functionality for the image editor,
  * maintaining a history of editor actions, including crop frame adjustments, image cropping, zooming, moving zoomed images, rotation, and flipping.
@@ -74,7 +56,8 @@ export declare const useUndoRedoSnapshot: ({ image, setImage, rotate, previousRo
     undoStack: EditorStateSnapshot[];
     redoStack: EditorStateSnapshot[];
     saveHistoryState: (snapshotValue?: Partial<EditorStateSnapshot>) => void;
-    isUndoRedoUpdated: React.MutableRefObject<boolean>;
+    isUndoRedoUpdated: import("react").MutableRefObject<boolean>;
+    clearUndoRedoStack: () => void;
 };
 export {};
 //# sourceMappingURL=useUndoRedoSnapshot.d.ts.map

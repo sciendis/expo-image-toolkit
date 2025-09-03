@@ -11,13 +11,13 @@ import { Animated } from 'react-native';
  * @returns { opacity, fadeOut, fadeIn }
  */
 export const useFadeTransition = function () {
-  const opacity = useRef(new Animated.Value(0)).current;
+  const opacity = useRef(new Animated.Value(1)).current;
 
   const fadeOut = useCallback(
     (duration = 0) => {
       return new Promise<void>((resolve) => {
         Animated.timing(opacity, {
-          toValue: 1,
+          toValue: 0,
           duration,
           useNativeDriver: true,
         }).start(() => resolve());
@@ -30,7 +30,7 @@ export const useFadeTransition = function () {
     (duration = 0) => {
       return new Promise<void>((resolve) => {
         Animated.timing(opacity, {
-          toValue: 0,
+          toValue: 1,
           duration,
           useNativeDriver: true,
         }).start(() => resolve());

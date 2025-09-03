@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { EditorModes } from '../../constants';
 import { useImageEditorContext } from '../../hooks';
-import { useImageAnimatedOverflow, useImageAnimatedTransform, } from '../../hooks/animatedStyles';
+import { useImageAnimatedOpacity, useImageAnimatedOverflow, useImageAnimatedTransform, } from '../../hooks/animatedStyles';
 import { CropFrame } from '../cropFrame';
 /**
  * @description Renders the currently edited image and displays applied transformations
@@ -21,10 +21,7 @@ export const RenderActiveImage = function ({ activeEditor }) {
     const { image, imageRef, dimensions: { displayedImageWidth, displayedImageHeight, rotateScale }, } = useImageEditorContext();
     const { animatedStyleContainer, animatedStyleImage } = useImageAnimatedTransform();
     const animatedOverflowStyle = useImageAnimatedOverflow(activeEditor);
-    const animatedStyleRotateScale = useAnimatedStyle(() => {
-        'worklet';
-        return { transform: [{ scale: 1 / rotateScale }] };
-    }, [rotateScale]);
+    const animatedOpacityStyle = useImageAnimatedOpacity();
     return (<Animated.View style={[
             styles.container,
             !!displayedImageWidth &&
@@ -33,9 +30,9 @@ export const RenderActiveImage = function ({ activeEditor }) {
                 height: displayedImageHeight,
             },
             animatedOverflowStyle,
-            animatedStyleRotateScale,
+            { transform: [{ scale: 1 / rotateScale }] },
         ]}>
-      <Animated.View ref={imageRef} style={styles.imageContainer}>
+      <Animated.View ref={imageRef} style={[styles.imageContainer, animatedOpacityStyle]}>
         {activeEditor === EditorModes.CROP && <CropFrame />}
         <Animated.View style={[styles.imageMovingContainer, animatedStyleContainer]}>
           <Animated.Image style={[styles.image, animatedStyleImage]} source={{ uri: image }}/>

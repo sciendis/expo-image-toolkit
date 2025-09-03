@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import {
   useImageEditorContext,
   useSetInitialDimensions,
@@ -25,15 +25,21 @@ export const ImageEditorContainer = function ({
   onCancel,
   onCrop,
 }: Pick<ImageEditorProps, 'onCrop' | 'onCancel'>) {
-  const { switchEditor, activeEditor, showAlert, handleAlertResponse } =
-    useSwitchEditor();
+  const {
+    switchEditor,
+    activeEditor,
+    showAlert,
+    handleAlertResponse,
+    opacity,
+  } = useSwitchEditor();
   const {
     isSaving,
+    isLoading,
     config: { colors },
   } = useImageEditorContext();
   const colorStylesContainer = { backgroundColor: colors.background };
 
-  useSetInitialDimensions();
+  const { isDeviceRotated } = useSetInitialDimensions();
 
   if (isSaving) {
     return (
@@ -44,9 +50,13 @@ export const ImageEditorContainer = function ({
   }
 
   return (
-    <View style={[styles.container, colorStylesContainer]}>
+    <SafeAreaView style={[styles.container, colorStylesContainer]}>
       <ImageEditorHeader onCancel={onCancel} onCrop={onCrop} />
-      <ImageEditorContents activeEditor={activeEditor} />
+      <ImageEditorContents
+        activeEditor={activeEditor}
+        opacity={opacity}
+        showOrientationHint={isDeviceRotated}
+      />
       <SwitchEditorButtons
         activeEditor={activeEditor}
         switchEditor={switchEditor}
@@ -55,7 +65,8 @@ export const ImageEditorContainer = function ({
         visible={showAlert}
         handleAlertResponse={handleAlertResponse}
       />
-    </View>
+      {isLoading === 'full' && <LoadingIndicator />}
+    </SafeAreaView>
   );
 };
 
@@ -63,5 +74,6 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
     flex: 1,
+    zIndex: 1,
   },
 });

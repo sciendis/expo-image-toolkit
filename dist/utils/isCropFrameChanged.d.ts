@@ -3,8 +3,7 @@ import { Dimensions, Position } from '../types';
 type Props = {
     boxScale: SharedValue<Position>;
     boxPosition: SharedValue<Position>;
-    dimensions: Dimensions;
-};
+} & Pick<Dimensions, 'initialCropFramePosition' | 'initialCropFrameScale'>;
 /**
  * Detect if the CropFrame has been changed by the user or not, by comparing the current CropFrame-Position/Scale
  * with the initial-Position/Scale, and checking if the scale or position has changed.
@@ -16,6 +15,6 @@ type Props = {
  *
  * @returns `boolean` – Returns `true` if the CropFrame has been changed by the user.
  */
-export declare const isCropFrameChanged: ({ boxScale, boxPosition, dimensions: { initialCropFramePosition, initialCropFrameScale }, }: Props) => boolean;
+export declare const isCropFrameChanged: ({ boxScale, boxPosition, initialCropFramePosition, initialCropFrameScale, }: Props) => boolean;
 export {};
 //# sourceMappingURL=isCropFrameChanged.d.ts.map

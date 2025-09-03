@@ -2,7 +2,7 @@ import { ReactNode, useRef, useState } from 'react';
 import { useSharedValue } from 'react-native-reanimated';
 import { DefaultDimensionState, DefaultPositionState } from '../../constants';
 import { useUndoRedoSnapshot } from '../../hooks';
-import { Dimensions, Position, UserConfig } from '../../types';
+import { Dimensions, LoadingState, Position, UserConfig } from '../../types';
 import { getInitialEditor, setupConfig } from '../../utils';
 import { ImageEditorContext } from './ImageEditorContext';
 
@@ -46,7 +46,7 @@ export const ImageEditorProvider = function ({
 
   const [activeEditor, setActiveEditor] = useState(defaultEditor);
   const [previousRotate, setPreviousRotate] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<LoadingState>('contents');
   const [isSaving, setIsSaving] = useState(false);
   const [dimensions, setDimensions] = useState<Dimensions>(
     DefaultDimensionState

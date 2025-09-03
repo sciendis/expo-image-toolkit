@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { EditorModes } from '../../constants';
 import { useImageEditorContext } from '../../hooks';
-import { calculateFontScale } from '../../utils';
+import { Spacing } from '../../styles';
 
 type Props = {
   activeEditor: EditorModes;
@@ -45,7 +45,7 @@ export const Button = function ({
         },
       ]}
       onPress={() => switchEditor(editorName)}
-      disabled={isLoading}
+      disabled={isLoading !== 'none'}
     >
       {children}
     </TouchableOpacity>
@@ -55,8 +55,8 @@ export const Button = function ({
 const styles = StyleSheet.create({
   container: {
     borderRadius: 100,
-    width: calculateFontScale(50),
-    height: calculateFontScale(50),
+    width: Spacing.xxl,
+    height: Spacing.xxl,
     aspectRatio: 1,
     justifyContent: 'center',
     alignItems: 'center',

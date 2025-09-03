@@ -1,7 +1,10 @@
 import React from 'react';
 import { EditorModes } from '../../constants';
+import { Animated } from 'react-native';
 type Props = {
     activeEditor: EditorModes;
+    opacity: Animated.Value;
+    showOrientationHint?: boolean;
 };
 /**
  * @description Renders the active editor contents (Zoom/Rotate/Crop) based on the currently selected mode
@@ -12,6 +15,6 @@ type Props = {
  *
  * @returns The view of the active editor or loading screen.
  */
-export declare const ImageEditorContents: ({ activeEditor }: Props) => React.JSX.Element;
+export declare const ImageEditorContents: ({ activeEditor, opacity, showOrientationHint, }: Props) => React.JSX.Element;
 export {};
 //# sourceMappingURL=ImageEditorContents.d.ts.map

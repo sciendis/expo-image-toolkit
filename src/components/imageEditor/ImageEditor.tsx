@@ -27,7 +27,7 @@ export const ImageEditor = function ({
   onCancel,
   userConfig,
 }: ImageEditorProps) {
-  if (!image) return <></>;
+  if (!image) return null;
   return (
     <ImageEditorProvider image={image} userConfig={userConfig}>
       <ImageEditorContainer onCancel={onCancel} onCrop={onCrop} />

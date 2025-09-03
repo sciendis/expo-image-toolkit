@@ -26,7 +26,7 @@ export const ContentWrapper = function ({ children }: Props) {
   return (
     <Animated.View style={[styles.container, colorStylesContainer]}>
       <HistoryButtons />
-      {isLoading && <LoadingIndicator />}
+      {isLoading === 'contents' && <LoadingIndicator />}
       {children}
     </Animated.View>
   );
@@ -35,8 +35,5 @@ export const ContentWrapper = function ({ children }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
   },
 });

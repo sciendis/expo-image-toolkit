@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/hooks/animatedStyles/index.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,yBAAyB,EAAE,MAAM,6BAA6B,CAAC;AACxE,OAAO,EAAE,wBAAwB,EAAE,MAAM,4BAA4B,CAAC;AACtE,OAAO,EAAE,yBAAyB,EAAE,MAAM,6BAA6B,CAAC"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/hooks/animatedStyles/index.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,yBAAyB,EAAE,MAAM,6BAA6B,CAAC;AACxE,OAAO,EAAE,uBAAuB,EAAE,MAAM,2BAA2B,CAAC;AACpE,OAAO,EAAE,wBAAwB,EAAE,MAAM,4BAA4B,CAAC;AACtE,OAAO,EAAE,yBAAyB,EAAE,MAAM,6BAA6B,CAAC"}

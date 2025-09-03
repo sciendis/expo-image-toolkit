@@ -17,5 +17,5 @@ export type ImageEditorProps = {
  *
  * @returns The image editor component or null if no image is selected.
  */
-export declare const ImageEditor: ({ image, onCrop, onCancel, userConfig, }: ImageEditorProps) => React.JSX.Element;
+export declare const ImageEditor: ({ image, onCrop, onCancel, userConfig, }: ImageEditorProps) => React.JSX.Element | null;
 //# sourceMappingURL=ImageEditor.d.ts.map

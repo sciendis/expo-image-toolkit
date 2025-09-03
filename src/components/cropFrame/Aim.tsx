@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
-import { calculateFontScale } from '../../utils';
+import { Spacing } from '../../styles';
 
 /**
  * @description A visual cross "+" placed at the center of the CropFrame, used for alignment or reference.
@@ -23,16 +23,12 @@ export const Aim = function () {
         style={[
           styles.aim,
           styles.verticalLine,
-          { width: calculateFontScale(25) * rotateScale },
+          { width: Spacing.l * rotateScale },
           colorStyles,
         ]}
       />
       <View
-        style={[
-          styles.aim,
-          { height: calculateFontScale(25) * rotateScale },
-          colorStyles,
-        ]}
+        style={[styles.aim, { height: Spacing.l * rotateScale }, colorStyles]}
       />
     </View>
   );

@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
-import { calculateFontScale } from '../../utils';
+import { FontSizes, Spacing } from '../../styles';
 /**
  * @description A reusable button component for the history buttons, rendering an icon with customizable styling and disabled state.
  *
@@ -14,15 +14,14 @@ import { calculateFontScale } from '../../utils';
  */
 export const Button = function ({ onPress, disabled, Icon }) {
     const { config: { colors }, } = useImageEditorContext();
-    return (<TouchableOpacity onPress={onPress} disabled={disabled} style={[styles.button, { backgroundColor: colors.headerTitleBg }]}>
-      <Icon size={calculateFontScale(20)} color={disabled ? colors.historyDisabled : colors.historyEnabled}/>
+    return (<TouchableOpacity onPress={onPress} disabled={disabled} style={[styles.button, { backgroundColor: colors.historyBg }]}>
+      <Icon size={FontSizes.l} color={disabled ? colors.historyDisabled : colors.historyEnabled}/>
     </TouchableOpacity>);
 };
 const styles = StyleSheet.create({
     button: {
-        padding: calculateFontScale(4),
+        padding: Spacing.xxs,
         borderRadius: 100,
-        opacity: 0.8,
     },
 });
 //# sourceMappingURL=Button.js.map

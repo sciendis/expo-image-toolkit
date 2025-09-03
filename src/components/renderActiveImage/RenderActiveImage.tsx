@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { EditorModes } from '../../constants';
 import { useImageEditorContext } from '../../hooks';
 import {
+  useImageAnimatedOpacity,
   useImageAnimatedOverflow,
   useImageAnimatedTransform,
 } from '../../hooks/animatedStyles';
@@ -37,11 +38,7 @@ export const RenderActiveImage = function ({ activeEditor }: Props) {
 
   const animatedOverflowStyle = useImageAnimatedOverflow(activeEditor);
 
-  const animatedStyleRotateScale = useAnimatedStyle(() => {
-    'worklet';
-
-    return { transform: [{ scale: 1 / rotateScale }] };
-  }, [rotateScale]);
+  const animatedOpacityStyle = useImageAnimatedOpacity();
 
   return (
     <Animated.View
@@ -53,10 +50,13 @@ export const RenderActiveImage = function ({ activeEditor }: Props) {
             height: displayedImageHeight,
           },
         animatedOverflowStyle,
-        animatedStyleRotateScale,
+        { transform: [{ scale: 1 / rotateScale }] },
       ]}
     >
-      <Animated.View ref={imageRef} style={styles.imageContainer}>
+      <Animated.View
+        ref={imageRef}
+        style={[styles.imageContainer, animatedOpacityStyle]}
+      >
         {activeEditor === EditorModes.CROP && <CropFrame />}
         <Animated.View
           style={[styles.imageMovingContainer, animatedStyleContainer]}

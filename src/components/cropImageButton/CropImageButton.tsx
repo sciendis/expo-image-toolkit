@@ -1,8 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useCropImage, useImageEditorContext } from '../../hooks';
+import { FontSizes } from '../../styles';
 import { ImageEditorProps } from '../imageEditor';
 import { LoadingIndicator } from '../loadingIndicator';
-import { calculateFontScale } from '../../utils';
 
 /**
  * @description The finish Button that appears on top-right corner of the editor modal header.
@@ -23,9 +23,9 @@ export const CropImageButton = function ({
     <TouchableOpacity
       onPress={cropImage}
       style={styles.container}
-      disabled={isSaving || isLoading}
+      disabled={isSaving || isLoading !== 'none'}
     >
-      {isSaving || isLoading ? (
+      {isSaving || isLoading !== 'none' ? (
         <LoadingIndicator size="small" style={{ left: -20 }} />
       ) : (
         <Text style={[styles.title, { color: colors.headerButtons }]}>
@@ -42,6 +42,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   title: {
-    fontSize: calculateFontScale(14),
+    fontSize: FontSizes.s,
   },
 });

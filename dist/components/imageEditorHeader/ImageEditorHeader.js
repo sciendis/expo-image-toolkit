@@ -1,6 +1,6 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
-import { calculateFontScale, getExpoConstants } from '../../utils';
+import { FontSizes, Spacing } from '../../styles';
 import { CancelButton } from '../cancelButton';
 import { CropImageButton } from '../cropImageButton';
 /**
@@ -13,9 +13,8 @@ import { CropImageButton } from '../cropImageButton';
  * @returns A Surface component containing the editor header with cancel, title, and crop actions.
  */
 export const ImageEditorHeader = function ({ onCancel, onCrop }) {
-    const { statusBarHeight } = getExpoConstants();
     const { config: { colors, labels }, } = useImageEditorContext();
-    return (<SafeAreaView style={[styles.container, { marginTop: statusBarHeight }]}>
+    return (<View style={styles.container}>
       <View style={styles.headerItem}>
         <CancelButton onCancel={onCancel}/>
       </View>
@@ -31,29 +30,31 @@ export const ImageEditorHeader = function ({ onCancel, onCrop }) {
       <View style={[styles.headerItem, styles.headerRight]}>
         <CropImageButton onCrop={onCrop}/>
       </View>
-    </SafeAreaView>);
+    </View>);
 };
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
-        marginBottom: calculateFontScale(6),
+        marginBottom: Spacing.xxs,
+        position: 'relative',
+        zIndex: 1,
     },
     headerItem: {
-        marginHorizontal: calculateFontScale(10),
+        marginHorizontal: Spacing.xs,
         flex: 1,
     },
     headerCenter: {
         paddingVertical: 0,
+        paddingHorizontal: Spacing.xs,
         borderRadius: 20,
-        flex: 1.5,
     },
     headerRight: {
         alignItems: 'flex-end',
     },
     headerTitle: {
-        fontSize: calculateFontScale(21),
+        fontSize: FontSizes.l,
         fontWeight: '600',
         textAlign: 'center',
     },

@@ -28,13 +28,13 @@ export const createSaveCroppedImage = function ({ setSavedImageDimensions, onCro
             }
             const fileName = `cropped_image_${Date.now()}.png`;
             const newUri = `${FileSystem.documentDirectory}${fileName}`;
-            const { uri, width, height, rotate } = args;
+            const { uri, width, height } = args;
             yield FileSystem.copyAsync({
                 from: uri,
                 to: newUri,
             });
             onCrop(newUri);
-            setSavedImageDimensions({ width, height, rotate });
+            setSavedImageDimensions({ width, height });
         });
     };
 };

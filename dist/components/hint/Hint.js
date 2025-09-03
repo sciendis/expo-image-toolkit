@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { X } from 'lucide-react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useImageEditorContext } from '../../hooks';
-import { calculateFontScale } from '../../utils';
-import { getHintAlert } from './getHintAlert';
+import { FontSizes, Spacing } from '../../styles';
+import { Alert } from '../alert';
 /**
  * @description This Hint component is used in two places: the Rotate editor and the Zoom editor.
  * These hints help users to work more effectively with the app.
@@ -21,56 +21,65 @@ import { getHintAlert } from './getHintAlert';
  * @param {string} message - The text to display in the hint box.
  * @returns A styled hint box with the given message.
  */
-export const Hint = ({ id, message, opacity, setOpacity }) => {
+export const Hint = ({ id, message, visible, setVisible }) => {
     const { config: { colors, labels }, } = useImageEditorContext();
+    const [showAlert, setShowAlert] = useState(false);
     const hintId = `image_editor_hint_${id}`;
     useEffect(() => {
         const checkHintStatus = () => __awaiter(void 0, void 0, void 0, function* () {
             const stored = yield AsyncStorage.getItem(hintId);
             if (stored !== 'true')
                 return;
-            setOpacity(0);
+            setVisible(false);
         });
         checkHintStatus();
-    }, [setOpacity, hintId]);
-    const handleClose = () => getHintAlert({ hintId, setOpacity, labels });
-    return (<View style={[
+    }, [setVisible, hintId]);
+    const handleClose = () => setShowAlert(true);
+    if (!visible)
+        return null;
+    return (<>
+      <View style={[
             styles.container,
-            { backgroundColor: colors.hintBg },
-            { opacity, zIndex: opacity === 0 ? -1 : 1 },
+            {
+                backgroundColor: colors.hintBg,
+                zIndex: 1,
+            },
         ]}>
-      <TouchableOpacity style={[styles.closeIcon]} onPress={handleClose}>
-        <X color={colors.hint} size={calculateFontScale(14)}/>
-      </TouchableOpacity>
-      <Text style={[styles.message, { color: colors.hint }]}>{message}</Text>
-    </View>);
+        <TouchableOpacity style={[styles.closeIcon]} onPress={handleClose}>
+          <X color={colors.hint} size={FontSizes.m}/>
+        </TouchableOpacity>
+        <Text style={[styles.message, { color: colors.hint }]}>{message}</Text>
+      </View>
+      <Alert alertText={labels.HINT_ALERT_MESSAGE} submitLabel={labels.HINT_ALERT_DONT_SHOW_AGAIN} cancelLabel={labels.HINT_ALERT_CLOSE_ONLY} onSubmit={() => {
+            AsyncStorage.setItem(hintId, 'true');
+            setShowAlert(false);
+            setVisible(false);
+        }} onCancel={() => {
+            setShowAlert(false);
+            setVisible(false);
+        }} visible={showAlert}/>
+    </>);
 };
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
-        left: '10%',
-        right: '10%',
-        top: calculateFontScale(35),
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 10,
-        padding: calculateFontScale(4),
+        paddingVertical: Spacing.xxs,
+        paddingHorizontal: Spacing.l,
         borderRadius: 5,
-        maxWidth: '80%',
+        marginBottom: Spacing.xs,
+        pointerEvents: 'auto',
+        maxWidth: '90%',
     },
     message: {
-        fontSize: calculateFontScale(14),
+        fontSize: FontSizes.s,
         textAlign: 'auto',
         pointerEvents: 'none',
         userSelect: 'none',
-        lineHeight: calculateFontScale(16),
+        lineHeight: Spacing.m,
     },
     closeIcon: {
         position: 'absolute',
-        top: calculateFontScale(-10),
-        right: calculateFontScale(-10),
-        padding: calculateFontScale(4),
+        top: 0,
+        right: 0,
     },
 });
 //# sourceMappingURL=Hint.js.map

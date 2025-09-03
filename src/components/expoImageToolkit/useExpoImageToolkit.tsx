@@ -29,7 +29,6 @@ export const useExpoImageToolkit = function (userConfig?: UserConfig) {
     useState<SavedImageDimensions>({
       width: 0,
       height: 0,
-      rotate: 0,
     });
 
   const { showEditor, hideEditor } = useExpoImageToolkitContext();

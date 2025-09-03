@@ -12,7 +12,7 @@ export declare const styles: {
         justifyContent: "space-around";
         paddingHorizontal: number;
         position: "absolute";
-        bottom: number;
+        bottom: "4%";
         left: number;
         width: "100%";
         flexWrap: "wrap";

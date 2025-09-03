@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useCropImage, useImageEditorContext } from '../../hooks';
+import { FontSizes } from '../../styles';
 import { LoadingIndicator } from '../loadingIndicator';
-import { calculateFontScale } from '../../utils';
 /**
  * @description The finish Button that appears on top-right corner of the editor modal header.
  * @param {() => void} onCrop - The function to call when the finish button is pressed.
@@ -10,8 +10,8 @@ import { calculateFontScale } from '../../utils';
 export const CropImageButton = function ({ onCrop, }) {
     const cropImage = useCropImage({ onCrop });
     const { isLoading, isSaving, config: { labels, colors }, } = useImageEditorContext();
-    return (<TouchableOpacity onPress={cropImage} style={styles.container} disabled={isSaving || isLoading}>
-      {isSaving || isLoading ? (<LoadingIndicator size="small" style={{ left: -20 }}/>) : (<Text style={[styles.title, { color: colors.headerButtons }]}>
+    return (<TouchableOpacity onPress={cropImage} style={styles.container} disabled={isSaving || isLoading !== 'none'}>
+      {isSaving || isLoading !== 'none' ? (<LoadingIndicator size="small" style={{ left: -20 }}/>) : (<Text style={[styles.title, { color: colors.headerButtons }]}>
           {labels.SET}
         </Text>)}
     </TouchableOpacity>);
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
     },
     title: {
-        fontSize: calculateFontScale(14),
+        fontSize: FontSizes.s,
     },
 });
 //# sourceMappingURL=CropImageButton.js.map
