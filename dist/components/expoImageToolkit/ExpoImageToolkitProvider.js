@@ -50,6 +50,6 @@ export const ExpoImageToolkitProvider = function ({ children }) {
     </ExpoImageToolkitContext.Provider>);
 };
 const styles = StyleSheet.create({
-    modal: Object.assign(Object.assign({}, StyleSheet.absoluteFillObject), { width: '100%', height: '100%', zIndex: 1000, elevation: 1000, paddingTop: 0, paddingBottom: 0 }),
+    modal: Object.assign(Object.assign({}, StyleSheet.absoluteFillObject), { width: '100%', height: '100%', zIndex: 1000, paddingTop: 0, paddingBottom: 0 }),
 });
 //# sourceMappingURL=ExpoImageToolkitProvider.js.map

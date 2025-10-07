@@ -1,7 +1,7 @@
 {
   "name": "@sciendis/expo-image-toolkit",
   "author": "sciendis",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "A reusable Image Editor for React Native projects",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
