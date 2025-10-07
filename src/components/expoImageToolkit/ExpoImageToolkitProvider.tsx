@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     zIndex: 1000,
-    elevation: 1000,
     paddingTop: 0,
     paddingBottom: 0,
   },
