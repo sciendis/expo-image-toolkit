@@ -7,7 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as FileSystem from 'expo-file-system';
 /**
  * @description Creates a function to save the cropped image on the device's file system.
  * It stores the image in the app's document directory, calls the callback with the `editedImageUri` and updates the saved image dimensions.
@@ -26,14 +25,8 @@ export const createSaveCroppedImage = function ({ setSavedImageDimensions, onCro
                 onCrop();
                 return;
             }
-            const fileName = `cropped_image_${Date.now()}.png`;
-            const newUri = `${FileSystem.documentDirectory}${fileName}`;
             const { uri, width, height } = args;
-            yield FileSystem.copyAsync({
-                from: uri,
-                to: newUri,
-            });
-            onCrop(newUri);
+            onCrop(uri);
             setSavedImageDimensions({ width, height });
         });
     };

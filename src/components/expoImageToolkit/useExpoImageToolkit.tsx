@@ -31,13 +31,12 @@ export const useExpoImageToolkit = function (userConfig?: UserConfig) {
       height: 0,
     });
 
-  const { showEditor, hideEditor } = useExpoImageToolkitContext();
+  const { showEditor } = useExpoImageToolkitContext();
 
   const saveCroppedImage = createSaveCroppedImage({
     setSavedImageDimensions,
     onCrop: (editedUri) => {
       if (editedUri) setEditedImageUri(editedUri);
-      hideEditor();
     },
   });
 

@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { useBackButtonCustomModalHandler } from '../../hooks';
 import { ImageEditor } from '../imageEditor';
 import { ExpoImageToolkitContext } from './ExpoImageToolkitContext';
+import { cleanupOldCroppedImages } from '../../utils/cleanupOldCroppedImages';
 /**
  * @description This provider renders the editor modal in fullscreen mode at the root level.
  * To use `expo-image-toolkit`, you must wrap your entire app in this provider.
@@ -27,12 +28,14 @@ export const ExpoImageToolkitProvider = function ({ children }) {
     };
     const hideEditor = () => {
         setEditorState((prev) => (Object.assign(Object.assign({}, prev), { visible: false, selectedImage: null })));
+        cleanupOldCroppedImages();
     };
     const onCrop = (args) => {
         var _a, _b, _c;
         (_a = editorState.onCrop) === null || _a === void 0 ? void 0 : _a.call(editorState, args);
         if (args === null || args === void 0 ? void 0 : args.uri)
             (_c = (_b = editorState.userConfig) === null || _b === void 0 ? void 0 : _b.onSubmit) === null || _c === void 0 ? void 0 : _c.call(_b, args.uri);
+        hideEditor();
     };
     const onCancel = () => {
         var _a, _b;

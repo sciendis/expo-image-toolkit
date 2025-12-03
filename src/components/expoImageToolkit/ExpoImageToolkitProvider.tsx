@@ -4,6 +4,7 @@ import { useBackButtonCustomModalHandler } from '../../hooks';
 import { OnSaveProps, ToolkitProviderState, UserConfig } from '../../types';
 import { ImageEditor } from '../imageEditor';
 import { ExpoImageToolkitContext } from './ExpoImageToolkitContext';
+import { cleanupOldCroppedImages } from '../../utils/cleanupOldCroppedImages';
 
 type Props = {
   children: React.ReactNode;
@@ -43,11 +44,13 @@ export const ExpoImageToolkitProvider = function ({ children }: Props) {
       visible: false,
       selectedImage: null,
     }));
+    cleanupOldCroppedImages();
   };
 
   const onCrop = (args?: OnSaveProps) => {
     editorState.onCrop?.(args);
     if (args?.uri) editorState.userConfig?.onSubmit?.(args.uri);
+    hideEditor();
   };
 
   const onCancel = () => {

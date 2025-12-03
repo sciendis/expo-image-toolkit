@@ -1,4 +1,3 @@
-import * as FileSystem from 'expo-file-system';
 import { Dispatch, SetStateAction } from 'react';
 import { OnSaveProps, SavedImageDimensions } from '../types';
 
@@ -30,17 +29,9 @@ export const createSaveCroppedImage = function ({
       return;
     }
 
-    const fileName = `cropped_image_${Date.now()}.png`;
-    const newUri = `${FileSystem.documentDirectory}${fileName}`;
-
     const { uri, width, height } = args;
 
-    await FileSystem.copyAsync({
-      from: uri,
-      to: newUri,
-    });
-
-    onCrop(newUri);
+    onCrop(uri);
     setSavedImageDimensions({ width, height });
   };
 };
